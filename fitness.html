@@ -1,0 +1,702 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>L.O.A.D. | Life On A Deadline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+  <style>
+h1, h2 {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: #483D8B;
+  margin-top: 2rem;
+}
+
+#workout-timer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.timer-box {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #6A5ACD;
+}
+
+.timer-buttons button {
+  padding: 10px 20px;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #6A5ACD;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+.timer-buttons button:hover {
+  background-color: #483D8B;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+#progress-logger {
+  padding: 2rem;
+  background: #f7f9fc;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+#progressForm label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+#progressForm input,
+#progressForm textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#logList {
+  margin-top: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+#logList li {
+  background: #fff;
+  border-left: 4px solid #6A5ACD;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+#fitness-challenge {
+  padding: 2rem;
+  background: #e7f5ff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.days-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.day-box {
+  width: 40px;
+  height: 40px;
+  background: #d3d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+}
+
+.day-box.completed {
+  background: #6A5ACD;
+  color: white;
+}
+.delete-btn{
+  background-color: rgb(226, 58, 58);
+}
+/* ----------- Responsive Adjustments ----------- */
+
+@media (max-width: 480px) {
+  .timer-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .timer-buttons button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 1rem;
+    background-position: top;
+  }
+}
+
+
+
+  </style>
+  <script type="module" src="firebase-config.js"></script>
+
+</head>
+<body>
+
+   <!-- Navigation Bar -->
+<nav>
+    <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Study</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      
+      <li><a href="contact.html">Feedback</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+<div class="header-spacer"></div> 
+  <!-- Sidebar for Mobile -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html" onclick="toggleSidebar()">Home</a>
+    <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+    <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+    <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+    <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+    <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+    <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+    <a href="dashboard.html"onclick="toggleSidebar()">Dashboard</a>
+
+    <div id="mobileAuthArea"></div>
+    <!-- Inside your nav -->
+<li id="navUser"></li>
+
+
+
+  </div>
+
+  <header>
+    <img src="workout.png" style="width: 100%;">
+  </header>
+  <h1 style="font-family: Lucida Console, Courier New, monospace;">Strong Body, Sharper Mind</h1>
+  <p>
+    Staying active boosts more than just your body—it strengthens your focus, energy, and confidence too. This section offers simple, customizable tools to help you plan, track, and stay motivated on your fitness journey.
+  </p>
+  
+ <!---- <h1>🏋️ Workout Planner</h1>
+  
+<p class="center-text">Drag and drop your plan for each day.Cause as we all know<b> Failing to plan is planning to fail.</b></p>
+
+  
+  <div class="custom-input">
+    <input type="text" id="customWorkout" placeholder="Workout name...">
+    <input type="number" id="customDuration" placeholder="Minutes" min="1">
+    <button onclick="addWorkout()">+ Add to List</button>
+  </div>
+
+  <div class="workout-list" id="workoutList">
+    <div class="workout-item" draggable="true">Push Ups - 10 min</div>
+    <div class="workout-item" draggable="true">Sit Ups - 8 min</div>
+    <div class="workout-item" draggable="true">Yoga - 20 min</div>
+    <div class="workout-item" draggable="true">Squats - 10 min</div>
+    <div class="workout-item" draggable="true">Running - 30 min</div>
+  </div>
+
+  <div class="container">
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Monday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Tuesday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Wednesday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Thursday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Friday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Saturday</h3>
+    </div>
+    <div class="day-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Sunday</h3>
+    </div>
+  </div>-->
+  <section id="workout-timer">
+    <div class="timer-box">
+      <h2>⏱ Workout Timer</h2>
+      <div class="timer-display" id="workoutDisplay">00:00</div>
+      <div class="timer-buttons">
+        <button onclick="startWorkoutTimer()">Start</button>
+        <button onclick="pauseWorkoutTimer()">Pause</button>
+        <button onclick="resetWorkoutTimer()">Reset</button>
+      </div>
+      <p class="note">Time your sets, sprints, or stretches!</p>
+      
+    </div>
+  </section>
+  <section id="progress-logger" class="tool-section">
+    <div class="tool-container">
+      <h2>📈 Progress Logger</h2>
+      <p>Track your workout progress and wins over time.</p>
+  
+      <form id="progressForm">
+        <label for="logDate">Date:</label>
+        <input type="date" id="logDate" required>
+  
+        <label for="workoutNote">Progress Note:</label>
+        <textarea id="workoutNote" rows="4" placeholder="What did you achieve today?" required></textarea>
+  
+        <button type="submit">Log Progress</button>
+        
+      </form>
+  
+      <h3>📋 Your Progress</h3>
+      <ul id="logList"></ul>
+    </div>
+  </section>
+  <section id="fitness-challenge" class="tool-section">
+    <div class="tool-container">
+      <h2>🏁 Fitness Challenge Tracker</h2>
+      <p>Set your challenge and stay accountable day by day.</p>
+  
+      <form id="challengeForm">
+        <label for="challengeName">Challenge Name:</label>
+        <input type="text" id="challengeName" required>
+  
+        <label for="challengeDays">Duration (days):</label>
+        <input type="number" id="challengeDays" required>
+  
+        <button type="submit">Start Challenge</button>
+      </form>
+  
+      <div id="challengeTracker" style="display:none;">
+        <h3 id="challengeTitle"></h3>
+        <div id="daysContainer" class="days-grid"></div>
+        <p><strong>Completed: <span id="completedCount">0</span> days</strong></p>
+      </div>
+      <button id="resetChallenge">🔄 Reset Challenge</button>
+
+    </div>
+  </section>
+  
+  
+
+  
+  <script>
+  // ------------- DRAG AND DROP HANDLERS -------------
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData('text');
+  const dropZone = e.target.closest('.day-column');
+
+  // Convert HTML string to element
+  const temp = document.createElement('div');
+  temp.innerHTML = data;
+  const workoutItem = temp.firstElementChild;
+
+  // Add delete button to dropped item
+  const deleteBtn = document.createElement('button');
+  deleteBtn.innerHTML = "🗑️";
+  deleteBtn.className = "delete-btn";
+  deleteBtn.onclick = () => workoutItem.remove();
+
+  workoutItem.appendChild(deleteBtn);
+  workoutItem.classList.add("dropped");
+
+  dropZone.appendChild(workoutItem);
+}
+
+document.querySelectorAll('.workout-item').forEach(item => {
+  item.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', e.target.outerHTML);
+  });
+});
+
+function addWorkout() {
+  const workoutInput = document.getElementById('customWorkout');
+  const durationInput = document.getElementById('customDuration');
+  const workout = workoutInput.value.trim();
+  const duration = durationInput.value.trim();
+
+  if (workout && duration) {
+    const div = document.createElement('div');
+    div.className = 'workout-item';
+    div.textContent = `${workout} - ${duration} min`;
+    div.setAttribute('draggable', 'true');
+    div.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', e.target.outerHTML);
+    });
+
+    document.getElementById('workoutList').appendChild(div);
+    workoutInput.value = '';
+    durationInput.value = '';
+  }
+}
+
+// ------------- TIMER HANDLERS -------------
+let workoutSeconds = 0;
+let workoutInterval = null;
+
+function updateWorkoutDisplay() {
+  const minutes = String(Math.floor(workoutSeconds / 60)).padStart(2, '0');
+  const seconds = String(workoutSeconds % 60).padStart(2, '0');
+  document.getElementById('workoutDisplay').textContent = `${minutes}:${seconds}`;
+}
+
+function startWorkoutTimer() {
+  if (workoutInterval) return;
+  workoutInterval = setInterval(() => {
+    workoutSeconds++;
+    updateWorkoutDisplay();
+  }, 1000);
+}
+
+function pauseWorkoutTimer() {
+  clearInterval(workoutInterval);
+  workoutInterval = null;
+}
+
+function resetWorkoutTimer() {
+  clearInterval(workoutInterval);
+  workoutInterval = null;
+  workoutSeconds = 0;
+  updateWorkoutDisplay();
+}
+
+//Progress Form 
+const progressForm = document.getElementById('progressForm');
+const logList = document.getElementById('logList');
+
+progressForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const date = document.getElementById('logDate').value;
+  const note = document.getElementById('workoutNote').value;
+
+  if (!date || !note) return;
+
+  const entry = { date, note };
+  let logs = JSON.parse(localStorage.getItem('progressLogs') || '[]');
+  logs.unshift(entry);
+  localStorage.setItem('progressLogs', JSON.stringify(logs));
+
+  renderLogs();
+  progressForm.reset();
+});
+
+function renderLogs() {
+  const logs = JSON.parse(localStorage.getItem('progressLogs') || '[]');
+  logList.innerHTML = '';
+  logs.forEach(log => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${log.date}</strong><br>${log.note}`;
+    logList.appendChild(li);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderLogs);
+// Challenge
+const challengeForm = document.getElementById('challengeForm');
+const challengeNameInput = document.getElementById('challengeName');
+const challengeDaysInput = document.getElementById('challengeDays');
+const challengeTracker = document.getElementById('challengeTracker');
+const challengeTitle = document.getElementById('challengeTitle');
+const daysContainer = document.getElementById('daysContainer');
+const completedCount = document.getElementById('completedCount');
+
+challengeForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = challengeNameInput.value.trim();
+  const days = parseInt(challengeDaysInput.value);
+
+  if (!name || isNaN(days)) return;
+
+  const challenge = {
+    name,
+    days,
+    completed: Array(days).fill(false)
+  };
+
+  localStorage.setItem('fitnessChallenge', JSON.stringify(challenge));
+  renderChallenge();
+});
+
+function renderChallenge() {
+  const saved = JSON.parse(localStorage.getItem('fitnessChallenge'));
+  if (!saved) return;
+
+  challengeForm.style.display = 'none';
+  challengeTracker.style.display = 'block';
+  challengeTitle.textContent = saved.name;
+  daysContainer.innerHTML = '';
+
+  saved.completed.forEach((done, i) => {
+    const day = document.createElement('div');
+    day.classList.add('day-box');
+    day.textContent = i + 1;
+    if (done) day.classList.add('completed');
+
+    day.addEventListener('click', () => {
+      saved.completed[i] = !saved.completed[i];
+      localStorage.setItem('fitnessChallenge', JSON.stringify(saved));
+      renderChallenge();
+    });
+
+    daysContainer.appendChild(day);
+  });
+
+  const totalDone = saved.completed.filter(Boolean).length;
+  completedCount.textContent = totalDone;
+}
+
+document.addEventListener('DOMContentLoaded', renderChallenge);
+document.getElementById('resetChallenge').addEventListener('click', () => {
+  if (confirm('Are you sure you want to reset the challenge? This will erase all progress.')) {
+    localStorage.removeItem('fitnessChallenge');
+    location.reload(); // Reloads the page to refresh UI
+  }
+});
+//Nav
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+  }
+
+
+  
+  </script>
+ <script type="module">
+  // Import ALL necessary Firebase services from your config file
+  import { auth, db } from './firebase-config.js'; 
+  // No need to import app or analytics here unless you're specifically using them in this script block.
+  // getAnalytics is already called in firebase-config.js.
+
+  // Import specific Firestore functions needed for operations
+  import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  // Import onAuthStateChanged for authentication state listening
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  onAuthStateChanged(auth, async (user) => { // Make the callback async
+    if (user) {
+      console.log("Logged in as:", user.email);
+      // User is signed in, so let's check if their profile exists in Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        // If the user document doesn't exist, create it (e.g., for a new signup)
+        try {
+          await setDoc(userDocRef, {
+            email: user.email,
+            joinedAt: new Date(),
+            // Add any other default user profile data here
+          });
+          console.log("New user profile created in Firestore for:", user.email);
+        } catch (e) {
+          console.error("Error creating user profile in Firestore:", e);
+        }
+      } else {
+        console.log("User profile already exists in Firestore.");
+        // You can also update 'lastLoggedIn' here if needed
+        // await updateDoc(userDocRef, { lastLoggedIn: new Date() });
+      }
+
+    } else {
+      console.log("No user logged in");
+      // Handle logged out state, e.g., redirect to login page
+    }
+  });
+
+  // You can now use `auth` and `db` to interact with Firebase for other purposes too
+  // For example, if you wanted to fetch some data from Firestore when the page loads
+  async function fetchSomeData() {
+    // Example: get a specific document from a collection named 'appInfo'
+    const appInfoDocRef = doc(db, "appInfo", "general");
+    const appInfoSnap = await getDoc(appInfoDocRef);
+
+    if (appInfoSnap.exists()) {
+      console.log("App Info:", appInfoSnap.data());
+    } else {
+      console.log("No app info document found!");
+    }
+  }
+
+  // You could call this function when the page loads or based on some user interaction
+  // fetchSomeData();
+
+</script>
+<script type="module">
+  import { auth, db } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+  const navUser = document.getElementById("navUser");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      let displayName = user.email.split("@")[0];
+
+      // Try to get user data from Firestore
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, { email: user.email, name: displayName, joinedAt: new Date() });
+        } else {
+          displayName = userDocSnap.data().name || displayName;
+        }
+      } catch (err) {
+        console.error("Firestore fetch error:", err);
+      }
+
+      // Update UI
+      authArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+      navUser.textContent = displayName;
+
+      // Logout buttons
+      document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+      document.getElementById("mobileLogoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+    } 
+    else {
+      // Guest View
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+      navUser.textContent = "";
+    }
+  });
+</script>
+
+<!-- NoForm AI Chat Widget -->
+<script src="https://cdn.noform.ai/widget.js"></script>
+<script>
+  noform.init({
+    botId: "68784504a7db80ae996e5ef3",
+    welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+    theme: {
+      primaryColor: "#8B5E3C", // You can change this to another shade of purple or gold
+      buttonTextColor: "#fff",
+      backgroundColor: "#fff"
+    }
+  });
+</script>
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+   background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  cursor: pointer;
+">
+  💬 Chat with<br>L.O.A.D Ai
+</button>
+
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatScriptLoaded = false;
+
+  onAuthStateChanged(auth, (user) => {
+    chatBtn.onclick = () => {
+      if (user) {
+        if (!chatScriptLoaded) {
+          // Load Chatbase config
+          window.chatbaseConfig = {
+            chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+            welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+            theme: {
+              buttonBackgroundColor: "#6A0DAD",
+              buttonTextColor: "#ffffff"
+            }
+          };
+
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.defer = true;
+          document.body.appendChild(script);
+
+          chatScriptLoaded = true;
+
+          // Hide button after 1 second
+          setTimeout(() => {
+            chatBtn.style.display = 'none';
+          }, 1000);
+        } else {
+          // Toggle chat if already loaded
+          const bubble = document.querySelector('.chatbase-bubble');
+          if (bubble) bubble.click();
+        }
+      } else {
+        // User is not logged in
+        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+      }
+    };
+  });
+</script>
+
+
+</body>
+<footer>
+    &copy; 2025 Life On A Deadline. Built with action.
+  </footer>
+</html>

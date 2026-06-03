@@ -1,0 +1,1057 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutoring | Life On A Deadline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 10px 0;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-sizing: border-box;
+    }
+
+    nav .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0.8rem;
+      transition: color 0.3s ease;
+    }
+
+    .menu-icon {
+      display: none;
+    }
+
+    @media(max-width: 991px) {
+      .menu-icon {
+        display: block;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+
+    .header-spacer {
+      height: 80px;
+    }
+
+    .header {
+      margin-top: 40px;
+    }
+
+    .header {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .header h1 span {
+      background: linear-gradient(to right, #6c63ff, #00c9a7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .muted {
+      color: #788294;
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+#coursesContainer {
+  display: block;
+  width: 100%;
+}
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #6c63ff, #00c9a7);
+      color: #fff;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #f0f0ff;
+      margin: auto;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .course-section {
+      margin-bottom: 50px;
+    }
+
+    .course-title {
+      font-size: 1.6em;
+      font-weight: 600;
+      border-left: 5px solid #6c63ff;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tutor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    #bacAssistantButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #bacAssistantButton button {
+      background: linear-gradient(135deg, #c2f1ee, #247cf0, #4a90ff);
+      border: none;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    #bacAssistantButton button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: #000;
+      padding: 2rem 1rem;
+      transition: right 0.3s ease;
+      z-index: 9999;
+    }
+
+    .sidebar.active {
+      display: block;
+      right: 0;
+    }
+
+
+    .sidebar a {
+      display: block;
+      color: white;
+      margin-bottom: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    @media(max-width: 991px) {
+      nav ul {
+        display: none;
+      }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background: #000;
+      color: white;
+    }
+  
+/* ===== L.O.A.D. MODAL (CLEAN & PROFESSIONAL) ===== */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  padding: 10px;
+}
+
+.modal-content {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  margin: 5vh auto;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Typography */
+.modal-content h3 {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.modal-content .muted {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* Form layout */
+.modal-content label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 12px;
+  display: block;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.modal-content textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* Focus state */
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.15);
+}
+
+/* Agreement checkboxes */
+.checkbox {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.checkbox input {
+  margin-top: 2px;
+}
+
+/* Submit button */
+.modal-content .btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  font-size: 15px;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Study</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+  <div class="header-spacer"></div>
+
+
+  <!-- MOBILE SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <a onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html">Home</a>
+    <a href="productivity.html">Study</a>
+    <a href="lifestyle.html">Lifestyle</a>
+    <a href="fitness.html">Fitness</a>
+    <a href="budget.html">Budget</a>
+    <a href="aboutme.html">About Me</a>
+    <a href="contact.html">Feedback</a>
+    <a href="dashboard.html">Dashboard</a>
+    <div id="mobileAuthArea"></div>
+    <li id="navUser"></li>
+  </div>
+
+
+
+  <div class="container">
+
+    <div class="header text-center">
+      <h1>Find Your <span>Perfect Student Tutor In BAC</span></h1>
+      <p class="muted">From certified high-achievers across all schools in BAC.</p>
+    </div>
+
+    <!-- INFO CARDS (NOW 4 CARDS) -->
+    <div class="grid grid-4" style="margin-bottom:40px;">
+      <div class="card text-center">
+        <h3>🎓 Qualified Tutors</h3>
+        <p class="muted">Every tutor has a minimum 70% average.</p>
+      </div>
+
+      <div class="card text-center">
+        <h3>⭐ Rated By Students</h3>
+        <p class="muted">Reviews coming soon.</p>
+      </div>
+
+        <div class="card text-center">
+  <h3>💼 Tutoring Packages</h3>
+  <p class="muted">
+    Choose from 1-on-1, Group Sessions, or the Load Bundle — designed to fit your budget and study goals.
+  </p>
+  <p style="font-weight:600; margin:8px 0;">From P65</p>
+  <button class="btn" onclick="openPackageModal()">View Packages</button>
+</div>
+
+      <div class="card text-center">
+        <h3>⏰ Flexible Scheduling</h3>
+        <p class="muted">Choose tutors available on your time.</p>
+      </div>
+
+      <div class="card text-center">
+        <h3>📄 Tutor Terms & Conditions</h3>
+        <p class="muted">Read the official rules for tutors.</p>
+        <a class="btn" href="T&Cs.docx" download>
+          Download
+        </a>
+
+      </div>
+</div>
+      <center>
+        <h3>Learn and Earn — Become a High-Achieving Tutor</h3>
+        <h3>Help Me, Help You, Help Us Be Great</h3>
+        <p class="muted">
+  Rates shown are indicative and may vary based on subject complexity and session format.
+</p>
+
+      </center>
+
+      <!-- SEARCH BAR -->
+      <div class="card search-bar">
+        <input type="text" id="searchInput" placeholder="Search tutors..." />
+        <button class="btn" onclick="searchTutors()">Search</button>
+      </div>
+
+
+      <!-- TUTOR LIST -->
+      <div id="coursesContainer"></div>
+
+      <!-- BOTTOM SECTION -->
+      <div class="grid grid-2" style="margin-top:60px;">
+        <div class="card">
+          <h3>📘 How It Works</h3>
+          <ul class="muted">
+            <li>Find your school</li>
+            <li>Select a tutor</li>
+            <li>Contact them directly</li>
+            <li>Schedule your session</li>
+          </ul>
+        </div>
+<div class="card">
+  <h3>👩‍🏫 Become a Tutor</h3>
+  <p class="muted">Have 70%+? Apply and start earning.</p>
+  <a href="https://forms.gle/QeLohXNY5Mkw1BmUA"
+     target="_blank"
+     class="btn">
+     Apply Now
+  </a>
+</div>
+<p style="font-size: 15px; color: #777; margin-top: 8px;">
+  Applications are all reviewed.
+</p>
+
+    </div>
+   <div id="bacAssistantButton">
+  <button onclick="openBACAI()">
+    🤖 Ask BACAI
+  </button>
+</div>
+
+
+</div>
+    <footer>&copy; 2025 Life On A Deadline.</footer>
+</div>
+<!-- CONNECT MODAL -->
+<div id="connectModal" class="modal">
+  <div class="modal-content">
+
+   <span class="close" onclick="closeModal()">×</span>
+
+    <h3>Request Academic Support</h3>
+    <p class="muted">
+      Fill in the details below and we’ll match you with the right tutor.
+    </p>
+
+    <!-- GOOGLE FORM EMBED -->
+   <iframe
+  id="tutorFormFrame"
+  src=""
+  width="100%"
+  height="1400"
+  frameborder="0"
+  marginheight="0"
+  marginwidth="0">
+  Loading…
+</iframe>
+
+
+  </div>
+</div>
+
+<!-- PACKAGE MODAL -->
+<div id="packageModal" class="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closePackageModal()">&times;</span>
+
+    <h3>💼 Tutoring Packages</h3>
+    <p class="muted">Choose the plan that fits your goals.</p>
+
+    <!-- 1-on-1 -->
+    <div class="card" style="margin-bottom:15px;">
+      <h4>🧑‍🏫 1-on-1 Session</h4>
+      <p class="muted">P65 / session • Personal attention</p>
+<p class="muted" style="margin-top:8px;">
+  Book this package by selecting a tutor and clicking Connect.
+</p>
+
+
+    </div>
+
+    <!-- Group -->
+    <div class="card" style="margin-bottom:15px;">
+      <h4>👥 Group Session</h4>
+      <p class="muted">P160 / session • Learn with peers• P40 per person (4 per group) </p>
+ <p class="muted" style="margin-top:8px;">
+  Book this package by selecting a tutor and clicking Connect.
+</p>
+
+    </div>
+
+    <!-- Bundle -->
+    <div class="card">
+      <h4>🚀 Load Bundle ⭐</h4>
+      <p class="muted">P400 / 9 Sessions • Best Value</p>
+      <p class="muted" style="margin-top:8px;">
+  Book this package by selecting a tutor and clicking Connect.
+</p>
+
+  </div>
+<div class="card" style="margin-top:15px;">
+  <h4>🤝 Not Sure?</h4>
+  <p class="muted">Let us guide you.</p>
+  <h4>Email</h4>
+  <p>thelifeonadeadline@gmail.com</p>
+</div>
+
+  </div>
+</div>
+<script>
+
+function openPackageModal() {
+  document.getElementById("packageModal").style.display = "block";
+}
+
+function closePackageModal() {
+  document.getElementById("packageModal").style.display = "none";
+}
+
+function selectPackage(packageName) {
+  // Save choice
+  localStorage.setItem("selectedPackage", packageName);
+
+  // Go to contact page
+  window.location.href = "contact.html";
+}
+
+// Close when clicking outside
+window.onclick = function (event) {
+  const modal = document.getElementById("packageModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+</script>
+
+</body>
+    <script>
+
+
+  // ===== BAC Schools + 4 Tutors Each (Clean Version) =====
+const tutors = [
+
+
+  // School of Computing & Information Systems
+
+
+ {
+  school: "School of Computing & Information Systems",
+  name: "Maipelo Sabone",
+  gender: "male",
+  subjects: ["CMS", "Introduction to Java", "OOAD"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 1.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Tshiamo Sebate",
+  gender: "female",
+  subjects: ["Web & Multimedia Development", "HTML & CSS"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 2.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Neelo Mimi Pilane",
+  gender: "male",
+  subjects: ["OOAD", "CSIM", "DDD", "CMS"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 3.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Brent Tshekane",
+  gender: "male",
+  subjects: ["Intelligent systems", "Big Data Analytics"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 5.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Joseph Mokoko",
+  gender: "female",
+  subjects: ["Python Programming"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 4.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Portia Maja",
+  gender: "female",
+  subjects: ["System Development (SD)"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 6.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Maatla Bowelo",
+  gender: "female",
+  subjects: ["CSIM", "CT"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "boy.jpeg"
+},
+{
+  school: "School of Computing & Information Systems",
+  name: "Dave Game Kgati",
+  gender: "female",
+  subjects: ["Data Warehousing", "IDA"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 19.jpeg"
+},
+ // School of Finance & Professional Studies
+  {
+  school: "School of Finance & Professional Studies",
+  name: "Thato Tebogo",
+  gender: "female",
+  subjects: ["Financial Accounting 1 & 2"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 7.jpeg"
+},
+{
+  school: "School of Finance & Professional Studies",
+  name: "Jethro Mabaya ",
+  gender: "male",
+  subjects: ["CIMA BA2", "BA4"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 8.jpeg"
+},
+{
+  school: "School of Finance & Professional Studies",
+  name: "Olorato Mogibelo",
+  gender: "female",
+  subjects: ["CIMA( All levels) ", " AAT ( All levels) "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 9.jpeg"
+},
+{
+  school: "School of Finance & Professional Studies",
+  name: "Constance Moswete ",
+  gender: "male",
+  subjects: ["CIMA P1 ", "BA3"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 10.jpeg"
+},
+{
+  school: "School of Finance & Professional Studies",
+  name: "Derrick Ntshana",
+  gender: "female",
+  subjects: ["ACCA(FIA)", "Mathematics "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 20.jpeg"
+},
+{
+  school: "School of Finance & Professional Studies",
+  name: "Thobo Andrew Sopejame",
+  gender: "male",
+  subjects: ["Procurement and Supply Operations ( Level 2 & 3)"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 23.jpeg"
+},
+// School of Business & Leisure
+{
+  school: "School of Business & Leisure",
+  name: "Barati Goitsemang",
+  gender: "male",
+  subjects: ["Business Mathematics "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 12.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Angel Mokhai ",
+  gender: "female",
+  subjects: ["ICT", "Venture Creation"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 11.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Mpho Candice Phili",
+  gender: "male",
+  subjects: ["Financial Accounting 1"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 13.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Pearl Kenaope",
+  gender: "female",
+  subjects: ["Financial & Cost Accounting "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 14.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Katlego Fani",
+  gender: "female",
+  subjects: ["Business Economic ", "Accounting", "ICT", "Business Mathematics"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 15.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "One Moloi",
+  gender: "female",
+  subjects: ["Financial Accounting ", "Business Mathematics", "Business Communication "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 17.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Muthuri Kathurima",
+  gender: "female",
+  subjects: ["Economics", "Credit Analysis ", "Investment Banking "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 18.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Larona Othapile",
+  gender: "female",
+  subjects: ["Credit Analysis ", " Investment Principles"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 21.jpeg"
+},
+{
+  school: "School of Business & Leisure",
+  name: "Florence Rangana",
+  gender: "female",
+  subjects: ["Academic Skills", " Referencing & Academic Writing "],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "Tutor 22.jpeg"
+},
+
+// School of Postgraduate Studies
+{
+  school: "School of Postgraduate Studies",
+  name: "Tutor 1",
+  gender: "male",
+  subjects: ["Research Methods"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "boy.jpeg"
+},
+{
+  school: "School of Postgraduate Studies",
+  name: "Tutor 2",
+  gender: "female",
+  subjects: ["Quantitative Methods"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "girl.jpeg"
+},
+{
+  school: "School of Postgraduate Studies",
+  name: "Tutor 4",
+  gender: "male",
+  subjects: ["Advanced Statistics"],
+  review: "Pending",
+  rate: "Tutoring Plans from P65",
+  image: "boy.jpeg"
+},
+
+
+];
+
+   function groupTutors(list) {
+  const grouped = {};
+  list.forEach(t => {
+    if (!grouped[t.school]) grouped[t.school] = [];
+    grouped[t.school].push(t);
+  });
+  return grouped;
+}
+
+function display(list) {
+  const container = document.getElementById("coursesContainer");
+  container.innerHTML = "";
+
+  const groups = groupTutors(list);
+
+  for (const school in groups) {
+    const section = document.createElement("div");
+    section.className = "course-section";
+
+    section.innerHTML = `<div class="course-title">${school}</div>`;
+// "Match Me" card
+const matchCard = document.createElement("div");
+matchCard.className = "card text-center";
+
+matchCard.innerHTML = `
+  <div class="avatar">
+    <img src="boy.jpeg" alt="Match Me">
+  </div>
+
+  <strong style="font-size:18px;">Match Me With a Tutor</strong><br>
+
+  <span class="muted">
+    Not sure who to choose? We’ll match you.
+  </span><br>
+
+  <div class="price">Best available tutor</div>
+
+  <button class="btn" style="margin-top:12px;"
+    onclick="openModal('Match me with a tutor')">
+    Connect
+  </button>
+`;
+
+    const grid = document.createElement("div");
+    grid.className = "tutor-grid";
+    grid.appendChild(matchCard);
+
+    groups[school].forEach(t => {
+      grid.innerHTML += `
+        <div class="card text-center">
+          <div class="avatar">
+            <img src="${t.image}" alt="${t.name}">
+          </div>
+
+          <strong style="font-size:18px;">${t.name}</strong><br>
+
+          <span class="muted">${t.subjects.join(", ")}</span><br>
+
+          <span class="muted">
+            Review Status: <strong>${t.review || "Pending"}</strong>
+          </span><br>
+
+          <div class="price">${t.rate}</div>
+
+         <button class="btn" style="margin-top:12px;"
+  onclick="openModal('${t.name}')">
+  Connect
+</button>
+       </div>
+      `;
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  }
+}
+
+// Initial render
+display(tutors);
+
+// Search
+function searchTutors() {
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  const filtered = tutors.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    t.school.toLowerCase().includes(q) ||
+    t.subjects.some(s => s.toLowerCase().includes(q))
+  );
+  display(filtered);
+}
+//Tutor System functionality 
+function openModal(tutorName) {
+
+  const selectedPackage = localStorage.getItem("selectedPackage") || "Not Selected";
+
+  const baseFormURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScuNuMJ8HU8XEVRVi-OwSF4kZLpr3EWeLKGXk73q2Dumi8dxQ/viewform?embedded=true";
+
+  const tutorField = "entry.1229337950";
+  const packageField = "entry.1068398438";
+
+  const finalURL =
+    baseFormURL +
+    "&" + tutorField + "=" + encodeURIComponent(tutorName) +
+    "&" + packageField + "=" + encodeURIComponent(selectedPackage);
+
+  document.getElementById("tutorFormFrame").src = finalURL;
+
+  document.getElementById("connectModal").style.display = "block";
+
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  const modal = document.getElementById("connectModal");
+  const iframe = document.getElementById("tutorFormFrame");
+
+  modal.style.display = "none";
+
+  // VERY IMPORTANT: clear iframe so it resets
+  iframe.src = "";
+
+  // Restore scroll (mobile safety)
+  document.body.style.overflow = "auto";
+}
+
+
+
+//Button for Submit 
+function submitForm() {
+  // Let Google Forms receive data
+  setTimeout(() => {
+    const successOverlay = document.createElement("div");
+    successOverlay.style.position = "fixed";
+    successOverlay.style.inset = "0";
+    successOverlay.style.background = "rgba(0,0,0,0.6)";
+    successOverlay.style.zIndex = "1000";
+    successOverlay.innerHTML = `
+      <div class="modal-content" style="text-align:center; margin-top:20vh;">
+        <h3>✅ Request Sent</h3>
+        <p class="muted" style="margin-top:10px;">
+          Thank you for your request.<br>
+          We’ll review it and get back to you shortly.
+        </p>
+        <button class="btn" style="margin-top:16px;" onclick="this.parentElement.parentElement.remove()">
+          Close
+        </button>
+      </div>
+    `;
+
+    document.getElementById("connectModal").style.display = "none";
+    successOverlay.onclick = (e) => {
+  if (e.target === successOverlay) successOverlay.remove();
+};
+
+document.body.appendChild(successOverlay);
+  }, 800);
+document.querySelector("#connectModal form").reset();
+
+  return true; // VERY IMPORTANT
+}
+
+    </script>
+   <!-- BAC AI -->
+<script>
+function openBACAI() {
+  if (window.chatbase) {
+    window.chatbase("open");
+  }
+}
+
+(function(){
+if(!window.chatbase || window.chatbase("getState") !== "initialized") {
+
+window.chatbase = (...arguments) => {
+if(!window.chatbase.q) {
+window.chatbase.q = [];
+}
+window.chatbase.q.push(arguments);
+};
+
+window.chatbase = new Proxy(window.chatbase, {
+get(target, prop) {
+if(prop === "q") {
+return target.q;
+}
+return (...args) => target(prop, ...args);
+}
+});
+}
+
+const onLoad = function() {
+const script = document.createElement("script");
+script.src = "https://www.chatbase.co/embed.min.js";
+script.id = "3ySpdT9fSze59Lg_MGvur";
+script.domain = "www.chatbase.co";
+document.body.appendChild(script);
+};
+
+if(document.readyState === "complete") {
+onLoad();
+} else {
+window.addEventListener("load", onLoad);
+}
+})();
+</script>
+
+</body>
+
+</html>

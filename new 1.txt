@@ -1,0 +1,643 @@
+<body> 
+
+    <!-- Navigation Bar -->
+<header class="w3-top">
+   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:  #0000b3;">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="index.html">Discover Paradise</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+           <a class="nav-link; color: white;" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link; color: white; " href="Place.html">Book Now</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link; color: white;" href="packages.html">Packages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link; color: white;" href="travel.html">Travel Guide</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link; color: white " href="feedback.html">Feedback</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link; color: white " href="contactme.html">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <!-- Hero Image -->
+    <div class="hero">
+         <div class="blog-post">
+           <video width="100%" autoplay loop muted>                                                       v
+    <source src="BooK Now.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+
+
+	   </div>
+    </div>
+
+     
+
+
+   
+	 <!-- Blog Section -->
+    <div class="blog-container">
+        <div class="blog-post">
+          <h1> Explore the world through a click of your finger tips</h1> 
+		  <p>Discover Paradise, in partnership with Booking.com, brings you the best travel deals—perfect for you, your friends, or your family. Whether you're planning a solo escape or a group adventure, we make booking simple, secure, and unforgettable.</p>
+
+
+	   </div>
+    </div>
+<!-- Packages -->
+<div class="container mt-5">
+  <h2 class="text-center">Places to travel to:</h2>
+  <div class="row">
+
+    <!-- Place 1 -->
+    <div class="col-md-3 d-flex">
+      <div class="card h-100 w-100">
+        <img src="images\botswana.jpeg" class="card-img-top" alt="Italy">
+        <div class="card-body text-center">
+          <h4 class="card-title">Africa</h4>
+         
+        </div>
+      </div>
+    </div>
+
+    <!-- Place 2 -->
+    <div class="col-md-3 d-flex">
+      <div class="card h-100 w-100">
+        <img src="images\paris.jpeg" class="card-img-top" alt="Paris, France">
+        <div class="card-body text-center">
+          <h4 class="card-title">Europe</h4>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Place 3 -->
+    <div class="col-md-3 d-flex">
+      <div class="card h-100 w-100">
+        <img src="images\asia.jpg" class="card-img-top" alt="China" style="height:180px">
+        <div class="card-body text-center">
+          <h4 class="card-title">Asia</h4>
+         
+        </div>
+      </div>
+    </div>
+
+    <!-- Place 4 -->
+    <div class="col-md-3 d-flex">
+      <div class="card h-100 w-100">
+        <img src="images\canada.jpg" class="card-img-top" alt="Brazil">
+        <div class="card-body text-center">
+          <h4 class="card-title">North America</h4>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center">Africa</h2>
+    <div class="row">
+        <!-- Place 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\newzealand.jpg" class="card-img-top" alt="Bali, Indonesia">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Johannesburg</h4>
+                    <p class="card-text">Experience stunning beaches, lush jungles, and vibrant culture in Bali.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&dest_id=-1240261&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 2 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\capetown.jpeg" class="card-img-top" alt="Paris, France">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Capetown</h4>
+                    <p class="card-text">Explore the City of Love with its iconic Eiffel Tower and rich history.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&dest_id=-1217214&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 3 -->
+        <div class="col-md-4">
+            <div class="card" style="height:442">
+                <img src="images\pyramid.jpg" class="card-img-top" alt="Dubai, UAE"style="height:280px;">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Egypt</h4>
+                    <p class="card-text">Discover luxury, adventure, and innovation in the dazzling city of Dubai.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=Egypt&ssne=Johannesburg&ssne_untouched=Johannesburg&efdco=1&label=gen173nr-1FCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQH4AQyIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIG4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=city&dest_id=63&dest_type=country&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=47ef5a37f24f0647&ac_meta=GhA0N2VmNWEzN2YyNGYwNjQ3IAAoATICZW46AmVnQABKAFAA&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure&sb_lp=1" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	 <h2 class="text-center">Europe</h2>
+	<div class="row">
+        <!-- Place 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\tower.jpg" class="card-img-top" alt="Bali, Indonesia">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Paris,France</h4>
+                    <p class="card-text">Experience stunning beaches, lush jungles, and vibrant culture in Bali.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=Paris%2CFrance&ssne=Rodrigues+Island+&ssne_untouched=Rodrigues+Island+&efdco=1&label=gen173nr-1FCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQH4AQyIAgGoAgO4ApHkxsEGwAIB0gIkYTVmNTRmNmYtNDM3OS00NTcxLWFkZDItZWNmZDhiOTZmZGMw2AIG4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=searchresults&dest_id=-1456928&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=af3054e86a43008b&ac_meta=GhBhZjMwNTRlODZhNDMwMDhiIAAoATICZW46DFBhcmlzLEZyYW5jZUAASgBQAA%3D%3D&group_adults=2&no_rooms=1&group_children=0"target="_blank" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 2 -->
+        <div class="col-md-4">
+            <div class="card"style="height:442;">
+                <img src="images\barcelona.webp" class="card-img-top" alt="Paris, France">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Barcelona, Spain</h4>
+                    <p class="card-text">Explore the beauty in Bostwana's wild life. </p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=Barcelona%2C+Spain&ssne=China&ssne_untouched=China&efdco=1&label=gen173nr-1FCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQH4AQyIAgGoAgO4ApHkxsEGwAIB0gIkYTVmNTRmNmYtNDM3OS00NTcxLWFkZDItZWNmZDhiOTZmZGMw2AIG4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=searchresults&dest_id=-372490&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=5ac1551cdcc20317&ac_meta=GhA1YWMxNTUxY2RjYzIwMzE3IAAoATICZW46EEJhcmNlbG9uYSwgU3BhaW5AAEoAUAA%3D&group_adults=2&no_rooms=1&group_children=0"target="_blank" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\rome.webp" class="card-img-top" alt="Dubai, UAE">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Rome, Italy  </h4>
+                    <p class="card-text">Discover luxury, adventure, and innovation in the dazzling city of Dubai.</p>
+                    <a href="https://www.booking.com/hotel/cn/feel-so-pei-su.en-gb.html?aid=304142&label=gen173nr-1FCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQH4AQyIAgGoAgO4ApHkxsEGwAIB0gIkYTVmNTRmNmYtNDM3OS00NTcxLWFkZDItZWNmZDhiOTZmZGMw2AIG4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&dest_id=44&dest_type=country&dist=0&group_adults=2&group_children=0&hapos=2&hpos=2&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1748088393&srpvid=5ac1551cdcc20317&type=total&ucfs=1&"class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	 <h2 class="text-center">Asia</h2>
+	<div class="row">
+        <!-- Place 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\bali.webp" class="card-img-top" alt="Bali, Indonesia">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Bali, Indonesia</h4>
+                    <p class="card-text">Experience stunning beaches, lush jungles, and vibrant culture in Bali.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=Bali%2C+Indonesia&ssne=Cape+Town&ssne_untouched=Cape+Town&efdco=1&label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=searchresults&dest_id=835&dest_type=region&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=b425458e91080850&ac_meta=GhBiNDI1NDU4ZTkxMDgwODUwIAAoATICZW46D0JhbGksIEluZG9uZXNpYUAASgBQAA%3D%3D&group_adults=2&no_rooms=1&group_children=0" target="_blank" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 2 -->
+        <div class="col-md-4">
+            <div class="card"style="height:442;">
+                <img src="images\thailand.avif" class="card-img-top" alt="Paris, France">
+                <div class="card-body text-center">
+                    <h4 class="card-title"> Thailand </h4>
+                    <p class="card-text">Explore the beauty in Bostwana's wild life. </p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=Thailand&ssne=Bali&ssne_untouched=Bali&efdco=1&label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=searchresults&dest_id=209&dest_type=country&ac_position=1&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=d2b9154068f700c4&ac_meta=GhBkMmI5MTU0MDY4ZjcwMGM0IAEoATICZW46A3RoYUAASgBQAA%3D%3D&group_adults=2&no_rooms=1&group_children=0#" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\singapore.avif" class="card-img-top" alt="Dubai, UAE">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Singapore </h4>
+                    <p class="card-text">Discover luxury, adventure, and innovation in the dazzling city of Dubai.</p>
+                    <a href="1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	 <h2 class="text-center">North America</h2>
+	<div class="row">
+        <!-- Place 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\newyork.jpg" class="card-img-top" alt="Bali, Indonesia">
+                <div class="card-body text-center">
+                    <h4 class="card-title">New York</h4>
+                    <p class="card-text">Experience stunning beaches, lush jungles, and vibrant culture in Bali.</p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=New+York%2C+New+York%2C+United+States&ssne=Canada&ssne_untouched=Canada&highlighted_hotels=495714&efdco=1&label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=searchresults&dest_id=20088325&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=706e1698e03d0138&ac_meta=GhA3MDZlMTY5OGUwM2QwMTM4IAAoATICZW46CG5ldyB5b3JrQABKAFAA&group_adults=2&no_rooms=1&group_children=0" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 2 -->
+        <div class="col-md-4">
+            <div class="card"style="height:442;">
+                <img src="images\cana.avif" class="card-img-top" alt="Paris, France">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Canada </h4>
+                    <p class="card-text">Explore the beauty in Bostwana's wild life. </p>
+                    <a href="https://www.booking.com/searchresults.en-gb.html?ss=canada&ssne=Johannesburg&ssne_untouched=Johannesburg&highlighted_hotels=495714&label=gen173nr-1BCAEoggI46AdIM1gEaCSIAQGYAQm4ARfIAQzYAQHoAQGIAgGoAgO4AunU8cAGwAIB0gIkN2FlNDVhMTEtOWE1MS00NmU5LTg5NzQtNDIxOGI4YWVmNjE12AIF4AIB&sid=f254abb0e59fb1f8fddd8d851753f321&aid=304142&lang=en-gb&sb=1&src_elem=sb&src=hotel&dest_id=38&dest_type=country&ac_position=0&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=e9e05b3614970763&ac_meta=GhBlOWUwNWIzNjE0OTcwNzYzIAAoATICZW46BmNhbmFkYUAASgBQAA%3D%3D&group_adults=2&no_rooms=1&group_children=0" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="images\orlando.jpg" class="card-img-top" alt="Dubai, UAE">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Orlando</h4>
+                    <p class="card-text">Discover luxury, adventure, and innovation in the dazzling city of Dubai.</p>
+                    <a href="#" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+    <!-- Footer -->
+    <footer>
+	 
+        <p>&copy; 2025 Discover Paradise. All rights reserved.</p>
+		<p> Follow Us On </p> 
+		<p> instagram facebook twitter</p>
+		<p> @dicoverparadise</p> 
+		<p><a class="nav-link; color: white " href="contactme.html">Contact Us</a> </p> 
+		<p> +267 71 690 670 / +27 787 31 6650
+
+    </footer>
+
+ 
+</html>
+
+
+
+console.log("Sleep Tracker script is running!");
+
+// ---------------- TIMER ----------------
+let focusTime = 25 * 60;
+let breakTime = 5 * 60;
+let time = focusTime;
+let timer;
+let isRunning = false;
+let isFocus = true;
+
+function updateDisplay() {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  document.getElementById("timer").textContent =
+    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  document.getElementById("mode").textContent = isFocus ? "Focus Time" : "Break Time";
+}
+
+function startTimer() {
+  if (!isRunning) {
+    isRunning = true;
+
+    timer = setInterval(() => {
+      if (time > 0) {
+        time--;
+        updateDisplay();
+      } else {
+        clearInterval(timer);
+        isRunning = false;
+
+        if (isFocus) {
+          alert("Great job! Time for a short break ☕");
+          isFocus = false;
+          time = breakTime;
+          updateDisplay();
+          startTimer(); // auto-start break
+        } else {
+          alert("Break over! Let’s get back to work 💪🏽");
+          isFocus = true;
+          time = focusTime;
+          updateDisplay();
+        }
+      }
+    }, 1000);
+  }
+}
+
+function pauseTimer() {
+  clearInterval(timer);
+  isRunning = false;
+}
+
+function resetTimer() {
+  pauseTimer();
+  const customFocus = parseInt(document.getElementById("focusMinutes").value);
+  const customBreak = parseInt(document.getElementById("breakMinutes").value);
+
+  focusTime = customFocus * 60;
+  breakTime = customBreak * 60;
+  isFocus = true;
+  time = focusTime;
+  updateDisplay();
+}
+
+resetTimer(); // Initialize
+
+// ---------------- SELF-CARE ROUTINE ----------------
+function addSelfCareTask() {
+  const time = document.getElementById("timeOfDay").value;
+  const type = document.getElementById("careType").value;
+  const task = document.getElementById("customTask").value.trim();
+
+  if (task) {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${time.charAt(0).toUpperCase() + time.slice(1)} - ${type.charAt(0).toUpperCase() + type.slice(1)}: ${task}`;
+    document.getElementById("routineList").appendChild(listItem);
+    document.getElementById("customTask").value = "";
+  }
+}
+
+function downloadRoutine() {
+  let content = "Self-Care Routine:\n";
+  document.querySelectorAll("#routineList li").forEach(item => {
+    content += `- ${item.textContent}\n`;
+  });
+
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "self_care_routine.txt";
+  link.click();
+}
+
+// ---------------- STUDY TOPIC PLANNER ----------------
+const form = document.getElementById('topicForm');
+const topicList = document.getElementById('topicList');
+const totalTimeDisplay = document.getElementById('totalTimeDisplay');
+let topics = JSON.parse(localStorage.getItem('topics')) || [];
+
+function saveTopics() {
+  localStorage.setItem('topics', JSON.stringify(topics));
+}
+
+function renderTopics() {
+  topicList.innerHTML = '';
+  let totalTime = 0;
+
+  topics.forEach((t, index) => {
+    totalTime += t.time;
+
+    const div = document.createElement('div');
+    div.className = 'topic-card';
+    div.innerHTML = `
+      <strong>${t.topic}</strong><br>
+      Study Time: ${t.time} min | Marks: ${t.marks}
+      <br><br>
+      <button onclick="editTopic(${index})">✏️ Edit</button>
+      <button onclick="deleteTopic(${index})">❌ Delete</button>
+    `;
+    topicList.appendChild(div);
+  });
+
+  totalTimeDisplay.textContent = `Total Study Time Planned: ${totalTime} minutes`;
+  saveTopics();
+}
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const topic = document.getElementById('topic').value;
+  const time = parseInt(document.getElementById('time').value);
+  const marks = parseInt(document.getElementById('marks').value);
+
+  topics.push({ topic, time, marks });
+  topics.sort((a, b) => b.marks - a.marks);
+
+  renderTopics();
+  form.reset();
+});
+
+function editTopic(index) {
+  const topic = topics[index];
+  const newTopic = prompt("Edit Topic Name:", topic.topic);
+  const newTime = prompt("Edit Study Time (minutes):", topic.time);
+  const newMarks = prompt("Edit Marks:", topic.marks);
+
+  if (newTopic && newTime && newMarks) {
+    topics[index] = {
+      topic: newTopic,
+      time: parseInt(newTime),
+      marks: parseInt(newMarks)
+    };
+    topics.sort((a, b) => b.marks - a.marks);
+    renderTopics();
+  }
+}
+
+function deleteTopic(index) {
+  if (confirm("Are you sure you want to delete this topic?")) {
+    topics.splice(index, 1);
+    renderTopics();
+  }
+}
+
+window.onload = renderTopics;
+
+// ---------------- EXAM COUNTDOWN ----------------
+document.getElementById('examDate').addEventListener('change', () => {
+  const examDate = new Date(document.getElementById('examDate').value);
+  const today = new Date();
+  const timeDiff = examDate - today;
+  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+  const daysLeftDisplay = document.getElementById('daysLeft');
+  const message = document.getElementById('message');
+
+  if (daysLeft < 0) {
+    daysLeftDisplay.textContent = "📚 Exam already passed!";
+    message.textContent = "";
+  } else {
+    daysLeftDisplay.textContent = `📅 ${daysLeft} day(s) left until your exam`;
+    if (daysLeft >= 30) {
+      message.textContent = "Plenty of time. Let’s plan wisely!";
+    } else if (daysLeft >= 7) {
+      message.textContent = "Stay focused. You got this!";
+    } else if (daysLeft > 0) {
+      message.textContent = "Lock in. Final stretch!";
+    } else {
+      message.textContent = "Today is the day. Believe in yourself!";
+    }
+  }
+});
+
+// ---------------- TASK PLANNER ----------------
+document.getElementById("taskForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("taskName").value.trim();
+  const priority = document.getElementById("priority").value;
+
+  if (!name) return;
+
+  const taskCard = document.createElement("div");
+  taskCard.className = `task-card priority-${priority}`;
+  taskCard.innerHTML = `<span>${name}</span> <button>Done</button>`;
+
+  taskCard.querySelector("button").addEventListener("click", () => {
+    taskCard.classList.toggle("completed");
+  });
+
+  document.getElementById("taskList").appendChild(taskCard);
+  document.getElementById("taskForm").reset();
+});
+
+// ---------------- TIME BLOCKING ----------------
+document.getElementById("timeBlockForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const task = document.getElementById("blockTask").value.trim();
+  const start = document.getElementById("startTime").value;
+  const end = document.getElementById("endTime").value;
+
+  if (!task || !start || !end || start >= end) {
+    alert("Please enter valid task times.");
+    return;
+  }
+
+  const block = document.createElement("div");
+  block.className = "block";
+  block.innerHTML = `<span>${task}</span><small>${start} - ${end}</small>`;
+
+  document.getElementById("schedule").appendChild(block);
+  this.reset();
+});
+
+// ---------------- MEAL PLANNER ----------------
+document.getElementById('mealForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const meal = document.getElementById('meal').value;
+  const time = document.getElementById('time').value;
+
+  const div = document.createElement('div');
+  div.className = 'meal-item';
+  div.innerHTML = `<strong>${time}</strong>: ${meal}`;
+  document.getElementById('mealList').appendChild(div);
+  mealForm.reset();
+});
+
+// ---------------- SLEEP TRACKER ----------------
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sleepForm = document.getElementById('sleepForm');
+  const sleepTimeInput = document.getElementById('sleepTime');
+  const wakeTimeInput = document.getElementById('wakeTime');
+  const logList = document.getElementById('logList');
+
+  function calculateSleepHours(sleepTime, wakeTime) {
+    const [sleepH, sleepM] = sleepTime.split(':').map(Number);
+    const [wakeH, wakeM] = wakeTime.split(':').map(Number);
+
+    const sleepDate = new Date();
+    sleepDate.setHours(sleepH, sleepM);
+
+    const wakeDate = new Date();
+    wakeDate.setHours(wakeH, wakeM);
+
+    if (wakeDate <= sleepDate) {
+      wakeDate.setDate(wakeDate.getDate() + 1);
+    }
+
+    const diffMs = wakeDate - sleepDate;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+    return `${hours}h ${minutes}m`;
+  }
+
+  sleepForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const sleepTime = sleepTimeInput.value;
+    const wakeTime = wakeTimeInput.value;
+
+    if (!sleepTime || !wakeTime) {
+      alert("Please enter both sleep and wake times.");
+      return;
+    }
+
+    const sleepDuration = calculateSleepHours(sleepTime, wakeTime);
+    const logItem = document.createElement('li');
+    logItem.textContent = `😴 Slept from ${sleepTime} to ${wakeTime} (${sleepDuration})`;
+
+    logList.appendChild(logItem);
+    sleepForm.reset();
+  });
+});
+
+
+// ---------------- GRATITUDE JOURNAL ----------------
+function saveEntry() {
+  const entry = document.getElementById('entry').value.trim();
+  const status = document.getElementById('status');
+  const todayKey = 'gratitude-' + new Date().toISOString().split('T')[0];
+
+  if (!entry) {
+    status.textContent = "Please write something you're grateful for.";
+    status.style.color = 'red';
+    return;
+  }
+
+  if (localStorage.getItem(todayKey)) {
+    status.textContent = "You've already written a gratitude entry for today. Come back tomorrow!";
+    status.style.color = 'orange';
+    return;
+  }
+
+  localStorage.setItem(todayKey, entry);
+  status.textContent = "Your gratitude has been saved for today. 💛";
+  status.style.color = 'green';
+  document.getElementById('entry').value = '';
+}
+ // Drag and Drop Handlers
+ document.querySelectorAll('.workout-item').forEach(item => {
+  item.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', e.target.outerHTML);
+  });
+});
+
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData('text');
+  e.target.closest('.day-column').insertAdjacentHTML('beforeend', data);
+}
+
+function addWorkout() {
+  const workoutInput = document.getElementById('customWorkout');
+  const durationInput = document.getElementById('customDuration');
+  const workout = workoutInput.value.trim();
+  const duration = durationInput.value.trim();
+
+  if (workout && duration) {
+    const div = document.createElement('div');
+    div.className = 'workout-item';
+    div.textContent = `${workout} - ${duration} min`;
+    div.setAttribute('draggable', 'true');
+    div.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', e.target.outerHTML);
+    });
+    document.getElementById('workoutList').appendChild(div);
+    workoutInput.value = '';
+    durationInput.value = '';
+  }
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>L.O.A.D. — Dashboard</title>
+
+  <!-- Fonts + Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Your firebase-config.js must export `auth`, `db`, `storage` -->
+  <script type="module" src="firebase-config.js"></script>
+
+  <style>
+    :root{
+      --purple-1:#c28aff;
+      --purple-2:#6a0dad;
+      --accent:#4f4fff;
+      --bg:#f3f2ff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      display:flex;
+      color:#111;
+    }
+
+    /* Layout */
+    .sidebar{
+      width:240px;
+      background:#000;
+      height:100vh;
+      padding:2rem 1.3rem;
+      color:#fff;
+      position:fixed;
+      left:0;
+      top:0;
+      display:flex;
+      flex-direction:column;
+      z-index:20;
+    }
+    .sidebar h2{margin:0 0 1.4rem 0;font-size:1.4rem;}
+    .menu a{display:block;color:#fff;text-decoration:none;padding:.75rem;border-radius:10px;margin-bottom:.45rem; transition: .15s;}
+    .menu a:hover, .menu .active{background:var(--purple-2)}
+    .logout-btn{margin-top:auto;background:var(--accent);padding:.75rem;border-radius:8px;text-align:center;cursor:pointer;color:#fff}
+
+    .mobile-header{display:none;width:100%;position:fixed;top:0;left:0;background:#000;color:#fff;padding:.85rem 1rem;z-index:30;align-items:center;justify-content:space-between}
+    .mobile-header .hamburger{font-size:1.8rem;cursor:pointer}
+
+    .mobile-sidebar{
+      position:fixed;top:0;left:-260px;width:240px;height:100vh;background:#000;padding:2rem 1.3rem;z-index:40;transition:left .28s ease;
+    }
+    .mobile-sidebar.active{left:0}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}
+    .overlay.show{display:block}
+
+    .main{margin-left:260px;padding:2rem;width:100%}
+
+    .header{
+      background:linear-gradient(90deg,var(--purple-1),var(--purple-2));
+      padding:2rem;border-radius:16px;color:#fff;display:flex;
+      align-items:center;justify-content:space-between;flex-wrap:wrap;
+      gap:1rem;margin-bottom:1rem;
+    }
+    .header-text h1{font-size:2rem;margin:0;font-weight:700}
+    .header-text p{margin:6px 0 0 0;opacity:.95}
+    .profile-banner-img{width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid #fff;cursor:pointer}
+
+    .streak-card{
+      background:linear-gradient(90deg,#ffefc7,#ffd1a8);
+      border-radius:14px;
+      padding:1.3rem 1.5rem;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      display:flex;
+      justify-content:space-between;
+      margin-top:1rem;
+      gap:1rem;
+    }
+    .streak-left h2{margin:0;font-size:1.6rem}
+    .streak-left p{margin:.4rem 0 0 0;color:#333}
+    .streak-right{font-weight:800;font-size:1.8rem;color:var(--purple-2)}
+
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-top:1.25rem}
+    .card{background:#fff;padding:1.2rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .card h3{margin:0 0 .5rem 0;font-size:1rem}
+
+    .analytics-section{margin-top:1.5rem;background:#fff;padding:1.6rem;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06);min-height:380px;display:flex;flex-direction:column}
+    #activityChart{width:100%!important;height:320px!important}
+
+    @media(max-width:900px){
+      .sidebar{display:none}
+      .mobile-header{display:flex}
+      .main{margin-left:0;margin-top:70px;padding:1rem}
+      .streak-card{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <span class="hamburger" onclick="openSidebar()">☰</span>
+    <strong>L.O.A.D.</strong>
+  </div>
+
+  <!-- MOBILE SIDEBAR -->
+  <div id="mobileSidebar" class="mobile-sidebar">
+    <h2>L.O.A.D.</h2>
+    <div class="menu">
+      <a class="active">Dashboard</a>
+      <a href="productivity.html">Study Tools</a>
+      <a href="lifestyle.html">Lifestyle</a>
+      <a href="fitness.html">Fitness</a>
+      <a href="budget.html">Budget</a>
+      <a href="profile.html">Profile Settings</a>
+    </div>
+    <div class="logout-btn" onclick="logoutUser()">Logout</div>
+  </div>
+
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <!-- DESKTOP SIDEBAR -->
+  <aside class="sidebar">
+    <h2>L.O.A.D.</h2>
+    <div class="menu">
+      <a class="active">Dashboard</a>
+      <a href="productivity.html">Study Tools</a>
+      <a href="lifestyle.html">Lifestyle</a>
+      <a href="fitness.html">Fitness</a>
+      <a href="budget.html">Budget</a>
+      <a href="profile.html">Profile Settings</a>
+    </div>
+    <div class="logout-btn" onclick="logoutUser()">Logout</div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- Header -->
+    <section class="header">
+      <div class="header-text">
+        <h1 id="hiUser">Hi, User ✨</h1>
+        <p>Your journey matters. Keep going.</p>
+      </div>
+
+      <label>
+  <img id="profilePhoto" class="profile-banner-img" src="default-user.png" alt="profile" />
+  <input id="photoUpload" type="file" accept="image/*" style="display:none">
+</label>
+
+    </section>
+
+    <!-- STREAK CARD -->
+    <div class="streak-card">
+      <div class="streak-left">
+        <h2 id="streakTitle">🔥 0-Day Streak!</h2>
+        <p id="streakSubtitle">Use at least *two* tools today to build your streak.</p>
+      </div>
+      <div class="streak-right" id="streakNumber">0 days</div>
+    </div>
+
+    <!-- QUICK STATS -->
+    <section class="stats-grid">
+      <div class="card">
+        <h3>📚 Study</h3>
+        <div id="studyStats">0 sessions</div>
+      </div>
+      <div class="card">
+        <h3>🌱 Lifestyle</h3>
+        <div id="lifeStats">0 routines</div>
+      </div>
+      <div class="card">
+        <h3>💪 Fitness</h3>
+        <div id="fitStats">0 workouts</div>
+      </div>
+      <div class="card">
+        <h3>💰 Budget</h3>
+        <div id="budgetStats">0 entries</div>
+      </div>
+      <div class="card">
+        <h3>🔥 Productivity Score</h3>
+        <div id="prodScore">0 pts</div>
+      </div>
+    </section>
+
+    <!-- PIE CHART -->
+    <section class="analytics-section">
+      <h2>Where You Spend Your Time</h2>
+      <canvas id="activityChart"></canvas>
+    </section>
+
+  </main>
+
+  <script>
+    function openSidebar(){ document.getElementById("mobileSidebar").classList.add("active"); document.getElementById("overlay").classList.add("show"); }
+    function closeSidebar(){ document.getElementById("mobileSidebar").classList.remove("active"); document.getElementById("overlay").classList.remove("show"); }
+  </script>
+
+  <!-- FIREBASE + STREAK SYSTEM -->
+  <script type="module">
+    import { auth, db, storage } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+    import { doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+    import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
+
+    // streak.js provides getUserStreakSummary()
+    import { getUserStreakSummary } from "./streak.js";
+
+    const hiUser = document.getElementById("hiUser");
+    const profilePhoto = document.getElementById("profilePhoto");
+    const photoUpload = document.getElementById("photoUpload");
+    const prodScore = document.getElementById("prodScore");
+    const streakTitle = document.getElementById("streakTitle");
+    const streakNumber = document.getElementById("streakNumber");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return (window.location = "login.html");
+      const uid = user.uid;
+      const userRef = doc(db, "users", uid);
+      let snap = await getDoc(userRef);
+
+      // create a minimal user doc if it doesn't exist (structure you confirmed)
+      if (!snap.exists()) {
+        await setDoc(userRef, {
+          email: user.email,
+          study: 0, lifestyle: 0, fitness: 0, budget: 0,
+          profilePhoto: null, streak: 0, lastValidDay: null, productivityScore: 0
+        });
+        snap = await getDoc(userRef);
+      }
+      const data = snap.data();
+
+      hiUser.textContent = `Hi, ${user.email.split("@")[0]} ✨`;
+
+      // show stored profile photo (if present), else keep default local image path
+      if (data.profilePhoto) profilePhoto.src = data.profilePhoto;
+
+      // stash counters (fall back to 0)
+      const study = Number(data.study) || 0;
+      const lifestyle = Number(data.lifestyle) || 0;
+      const fitness = Number(data.fitness) || 0;
+      const budget = Number(data.budget) || 0;
+
+      // fetch streak summary via streak.js (authoritative)
+      try {
+        const summary = await getUserStreakSummary(uid);
+        streakTitle.textContent = `🔥 ${summary.streak}-Day Streak!`;
+        streakNumber.textContent = `${summary.streak} days`;
+        prodScore.textContent = `${summary.productivityScore} pts`;
+      } catch (err) {
+        console.error("Failed to get streak summary:", err);
+      }
+
+      // update UI quick stats
+      document.getElementById('studyStats').textContent = `${study} sessions`;
+      document.getElementById('lifeStats').textContent = `${lifestyle} routines`;
+      document.getElementById('fitStats').textContent = `${fitness} workouts`;
+      document.getElementById('budgetStats').textContent = `${budget} entries`;
+
+      // draw pie chart with up-to-date data
+      drawActivityChart(study, lifestyle, fitness, budget);
+
+      // profile upload handler
+      photoUpload.addEventListener('change', async (ev) => {
+        const file = ev.target.files[0];
+        if (!file) return;
+        const sRef = ref(storage, `profilePhotos/${uid}.jpg`);
+        await uploadBytes(sRef, file);
+        const url = await getDownloadURL(sRef);
+        await updateDoc(userRef, { profilePhoto: url });
+        profilePhoto.src = url;
+      });
+
+      // expose logout function for sidebar buttons
+      window.logoutUser = () => signOut(auth);
+    });
+
+    // Chart drawer
+    function drawActivityChart(study, lifestyle, fitness, budget) {
+      const canvas = document.getElementById("activityChart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (window.activityChart) window.activityChart.destroy();
+
+      // If all zeros, show tiny non-zero slice to avoid Chart.js showing empty chart
+      const dataValues = [study, lifestyle, fitness, budget].map(v => Number(v) || 0);
+      const total = dataValues.reduce((a,b)=>a+b,0);
+      if (total === 0) {
+        // show placeholder values (1,1,1,1) with muted labels
+        window.activityChart = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: ["Study", "Lifestyle", "Fitness", "Budget"],
+            datasets: [{ data: [1,1,1,1], backgroundColor: ["#6a0dad","#c28aff","#5cb85c","#f0ad4e"] }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom' },
+              tooltip: { callbacks: {
+                label: (ctx) => `${ctx.label}: 0`
+              }},
+            }
+          }
+        });
+        return;
+      }
+
+      setTimeout(() => {
+        window.activityChart = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: ["Study", "Lifestyle", "Fitness", "Budget"],
+            datasets: [{
+              data: dataValues,
+              backgroundColor: ["#6a0dad","#c28aff","#5cb85c","#f0ad4e"]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' } }
+          }
+        });
+      }, 120);
+    }
+    photoUpload.addEventListener('change', async (ev) => {
+  const file = ev.target.files[0];
+  if (!file) return;
+
+  const sRef = ref(storage, `profilePhotos/${uid}.jpg`);
+  await uploadBytes(sRef, file);
+  const url = await getDownloadURL(sRef);
+
+  await updateDoc(userRef, { profilePhoto: url });
+  profilePhoto.src = url;
+});
+
+  </script>
+
+</body>
+</html>

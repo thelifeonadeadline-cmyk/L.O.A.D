@@ -1,0 +1,442 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>L.O.A.D. | Life On A Deadline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+  <style>
+   
+
+/* Ensure image looks good on small screens */
+@media (max-width: 600px) {
+  .hero {
+    padding: 1rem;
+    background-position: center top;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
+/* --- Sleep Tracker Section --- */
+
+.tool-section {
+  background-color: #fff;
+  padding: 2rem 1rem;
+}
+
+.tool-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.sleep-flex {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Stacks on smaller screens */
+}
+
+.sleep-tool {
+  flex: 1 1 55%;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.sleep-text {
+  flex: 1 1 40%;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+
+.sleep-tool form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sleep-tool label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.sleep-tool input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.sleep-tool button {
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+}
+
+#sleepLog ul {
+  padding-left: 1rem;
+}
+
+
+
+  </style>
+  <script type="module" src="firebase-config.js"></script>
+
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+<nav>
+    <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Study</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      
+      <li><a href="contact.html">Feedback</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+<div class="header-spacer"></div> 
+  <!-- Sidebar for Mobile -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html" onclick="toggleSidebar()">Home</a>
+    <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+    <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+    <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+    <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+    <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+    <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+    <a href="dashboard.html"onclick="toggleSidebar()">Dashboard</a>
+
+    <div id="mobileAuthArea"></div>
+    <!-- Inside your nav -->
+<li id="navUser"></li>
+
+
+
+  </div>
+
+  <header>
+ <img src="lifestylebanner.png" style=width:100% >
+  </header>
+  <h1 style="font-family: Lucida Console, Courier New, monospace;">Balance Is a Form of Strength</h1>
+  <p>
+    Life isn’t just about deadlines—it’s also about balance. This section helps you care for yourself with intention, build meaningful routines, and create space for reflection and joy in everyday moments.
+  </p>
+  
+ 
+  </p>
+  <div class="planner">
+    <h1>🍽️ Meal & Snack Planner</h1>
+    <p>Create a custom daily self-care routine with personalized tasks for physical, emotional, mental, or social well-being. Keep your wellness a priority.
+  
+    <form id="mealForm">
+      <label for="meal">Meal or Snack:</label>
+      <input type="text" id="meal" placeholder="e.g. Breakfast - Oats and banana" required>
+
+      <label for="time">Planned Time:</label>
+      <input type="text" id="time" placeholder="e.g. 8:00 AM" required>
+
+      <button type="submit">Add to Planner</button>
+    </form>
+
+    <div class="meal-list" id="mealList"></div>
+  </div>
+  <hr style="border: none; height: 2px; background-color: #ccc;">
+
+
+  <section class="tool-section" id="sleep-tracker">
+    <div class="tool-container">
+      <h2>😴 Plan Your Sleep</h2>
+  
+      <div class="sleep-flex">
+        <!-- Left: Sleep Tool -->
+        <div class="sleep-tool">
+          <p>Track your rest and build better sleep habits.</p>
+  
+          <form id="sleepForm">
+            <label>Sleep Time:
+              <input type="time" id="sleepTime" required>
+            </label>
+            <label>Wake Time:
+              <input type="time" id="wakeTime" required>
+            </label>
+            <button type="submit">Log Sleep</button>
+          </form>
+  
+          <div id="sleepLog">
+            <h3>Sleep Log</h3>
+            <ul id="logList"></ul>
+          </div>
+        </div>
+  
+        <!-- Right: Description Text -->
+        <div class="sleep-text">
+          <p>
+            Progress requires rest. This tool helps you plan your sleep and bedtime routine
+            so you can recharge and stay efficient. Prioritize rest as part of your productivity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <hr style="border: none; height: 2px; background-color: #ccc;">
+  <section class="self-care-builder">
+    <h2>🧴 Self-Care Routine Builder</h2>
+    <p>Create a personalized self-care routine that fits your lifestyle.</p>
+  
+    <form id="selfCareForm">
+      <label for="timeOfDay">Time of Day:</label>
+      <select id="timeOfDay">
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="evening">Evening</option>
+      </select>
+  
+      <label for="careType">Type of Self-Care:</label>
+      <select id="careType">
+        <option value="physical">Physical</option>
+        <option value="emotional">Emotional</option>
+        <option value="mental">Mental</option>
+        <option value="spiritual">Spiritual</option>
+        <option value="social">Social</option>
+      </select>
+  
+      <label for="customTask">Custom Task:</label>
+      <input type="text" id="customTask" placeholder="e.g., Journal for 10 min" />
+  
+      <button type="button" onclick="addSelfCareTask()">Add to Routine</button>
+    </form>
+  
+    <div id="routineDisplay">
+      <h3>Your Routine:</h3>
+      <ul id="routineList"></ul>
+      <button onclick="downloadRoutine()">Download Routine</button>
+    </div>
+  </section>
+  <hr style="border: none; height: 2px; background-color: #ccc;">
+  <div class="journal-container">
+    <h1>🙏 Gratitude Journal</h1>
+    <p>Write one thing you're grateful for today:</p>
+    <textarea id="entry" rows="5" placeholder="Today, I’m grateful for..."></textarea>
+    <button onclick="saveEntry()">Save Entry</button>
+    <p class="entry-status" id="status"></p>
+  </div>
+  
+  <footer>
+    &copy; 2025 Life On A Deadline. Built with action.
+  </footer>
+  <script>
+   
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+  }
+
+  </script>
+   <script src="function.js"></script>
+  <script type="module">
+  // Import ALL necessary Firebase services from your config file
+  import { auth, db } from './firebase-config.js'; 
+  // No need to import app or analytics here unless you're specifically using them in this script block.
+  // getAnalytics is already called in firebase-config.js.
+
+  // Import specific Firestore functions needed for operations
+  import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  // Import onAuthStateChanged for authentication state listening
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  onAuthStateChanged(auth, async (user) => { // Make the callback async
+    if (user) {
+      console.log("Logged in as:", user.email);
+      // User is signed in, so let's check if their profile exists in Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        // If the user document doesn't exist, create it (e.g., for a new signup)
+        try {
+          await setDoc(userDocRef, {
+            email: user.email,
+            joinedAt: new Date(),
+            // Add any other default user profile data here
+          });
+          console.log("New user profile created in Firestore for:", user.email);
+        } catch (e) {
+          console.error("Error creating user profile in Firestore:", e);
+        }
+      } else {
+        console.log("User profile already exists in Firestore.");
+        // You can also update 'lastLoggedIn' here if needed
+        // await updateDoc(userDocRef, { lastLoggedIn: new Date() });
+      }
+
+    } else {
+      console.log("No user logged in");
+      // Handle logged out state, e.g., redirect to login page
+    }
+  });
+
+  // You can now use `auth` and `db` to interact with Firebase for other purposes too
+  // For example, if you wanted to fetch some data from Firestore when the page loads
+  async function fetchSomeData() {
+    // Example: get a specific document from a collection named 'appInfo'
+    const appInfoDocRef = doc(db, "appInfo", "general");
+    const appInfoSnap = await getDoc(appInfoDocRef);
+
+    if (appInfoSnap.exists()) {
+      console.log("App Info:", appInfoSnap.data());
+    } else {
+      console.log("No app info document found!");
+    }
+  }
+
+  // You could call this function when the page loads or based on some user interaction
+  // fetchSomeData();
+
+</script>
+<script type="module">
+  import { auth, db } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+  const navUser = document.getElementById("navUser");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      let displayName = user.email.split("@")[0];
+
+      // Try to get user data from Firestore
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, { email: user.email, name: displayName, joinedAt: new Date() });
+        } else {
+          displayName = userDocSnap.data().name || displayName;
+        }
+      } catch (err) {
+        console.error("Firestore fetch error:", err);
+      }
+
+      // Update UI
+      authArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+      navUser.textContent = displayName;
+
+      // Logout buttons
+      document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+      document.getElementById("mobileLogoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+    } 
+    else {
+      // Guest View
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+      navUser.textContent = "";
+    }
+  });
+</script>
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+   background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  cursor: pointer;
+">
+  💬 Chat with<br>L.O.A.D Ai
+</button>
+
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatScriptLoaded = false;
+
+  onAuthStateChanged(auth, (user) => {
+    chatBtn.onclick = () => {
+      if (user) {
+        if (!chatScriptLoaded) {
+          // Load Chatbase config
+          window.chatbaseConfig = {
+            chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+            welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+            theme: {
+              buttonBackgroundColor: "#6A0DAD",
+              buttonTextColor: "#ffffff"
+            }
+          };
+
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.defer = true;
+          document.body.appendChild(script);
+
+          chatScriptLoaded = true;
+
+          // Hide button after 1 second
+          setTimeout(() => {
+            chatBtn.style.display = 'none';
+          }, 1000);
+        } else {
+          // Toggle chat if already loaded
+          const bubble = document.querySelector('.chatbase-bubble');
+          if (bubble) bubble.click();
+        }
+      } else {
+        // User is not logged in
+        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+      }
+    };
+  });
+</script>
+
+</body>
+</html>
+
+ 
+

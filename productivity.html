@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>L.O.A.D. | Life On A Deadline</title>
+
+  <!-- Fonts + Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Hero video */
+    .hero video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Peer tutor layout */
+    .peer-tutor-wrapper {
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+    }
+
+    .side-nav {
+      flex: 0 0 220px;
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .side-nav h2 {
+      color: #4b0082;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .side-nav ul li a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .peer-tutor-content {
+      flex: 1;
+    }
+
+    .peer-dropdown-wrapper {
+      display: none;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .peer-dropdown {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    /* Tool containers */
+    /* Timer & Tools styles */
+    .timer-container,
+    .topic-container {
+      flex: 1 1 450px;
+      background: linear-gradient(135deg, #d5fdee, #e7d7f9);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .mode-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .mode-buttons button {
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 9999px;
+      background: #f1f5f9;
+      color: #333;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mode-buttons button.active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    }
+
+    .timer-circle {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      margin: 0 auto 2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #ac8df5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0px rgba(99, 102, 241, 0.7); }
+      50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.9); }
+      100% { box-shadow: 0 0 0px rgba(99, 102, 241, 0.7); }
+    }
+
+    .mode-display {
+      font-size: 1.2rem;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .timer-display {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons button {
+      padding: 0.7rem 1.6rem;
+      border: none;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, #6366f1, #bca0fe);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .buttons button:hover { opacity: 0.85; }
+    .buttons button:nth-child(2) { background: #f1f5f9; color: #333; border: 1px solid #d1d5db; }
+
+    form {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, select { width: 100%; padding: 0.6rem; margin-top: 0.3rem; border: 1px solid #ccc; border-radius: 8px; }
+
+    h1, h2 { text-align: center; color: #000; }
+
+    .topic-list, .task-list, .schedule { max-width: 600px; margin: 2rem auto; }
+    .summary { text-align: center; font-weight: bold; margin-top: 1rem; color: #444; }
+
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Mobile nav */
+    nav ul {
+      display: flex;
+    }
+
+    .menu-icon {
+      display: none;
+    }
+
+    @media (max-width: 991px) {
+      .peer-tutor-wrapper {
+        display: block;
+      }
+      .side-nav {
+        display: none;
+      }
+      .peer-dropdown-wrapper {
+        display: block;
+      }
+      .buttons {
+        flex-direction: column;
+      }
+      .buttons button {
+        width: 80%;
+        margin: 0 auto;
+      }
+      nav ul {
+        display: none;
+        flex-direction: column;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-icon {
+        display: block;
+      }
+    }
+  </style>
+
+  <script type="module" src="firebase-config.js"></script>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">L.O.A.D.</div>
+  <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="productivity.html">Study</a></li>
+    <li><a href="lifestyle.html">Lifestyle</a></li>
+    <li><a href="fitness.html">Fitness</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="aboutme.html">About Me</a></li>
+    <li><a href="contact.html">Feedback</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li id="authArea"></li>
+  </ul>
+</nav>
+<div class="header-spacer"></div> 
+<!-- MOBILE SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <a onclick="toggleSidebar()">✕ Close</a>
+  <a href="index.html">Home</a>
+  <a href="productivity.html">Study</a>
+  <a href="lifestyle.html">Lifestyle</a>
+  <a href="fitness.html">Fitness</a>
+  <a href="budget.html">Budget</a>
+  <a href="aboutme.html">About Me</a>
+  <a href="contact.html">Feedback</a>
+  <a href="dashboard.html">Dashboard</a>
+  <div id="mobileAuthArea"></div>
+  <li id="navUser"></li>
+</div>
+
+<!-- HERO -->
+  <header>
+    <img src="Study.png"style="width: 100%;">
+</header>
+
+<!-- PEER TUTOR SECTION -->
+<section class="peer-tutor-wrapper">
+  <aside class="side-nav">
+    <h2>Find Your Perfect Peer Tutor</h2>
+    <ul>
+      <li><a href="Tutoring.html">Botswana Accountancy College (BAC)</a></li>
+      <li><a href="#">University of Botswana (UB)</a></li>
+      <li><a href="#">BUIST</a></li>
+    </ul>
+  </aside>
+
+  <div class="peer-tutor-content">
+    <div class="peer-dropdown-wrapper">
+      <h2 style="color:#4b0082;">Find Your Perfect Peer Tutor</h2>
+      <select class="peer-dropdown" onchange="location=this.value;">
+        <option>Select University</option>
+        <option value="Tutoring.html">Botswana Accountancy College (BAC)</option>
+      </select>
+    </div>
+  </div>
+
+
+<!-- TOOLS -->
+<section id="tools">
+  <h2>Effective study methods include more than just tips — they require tools that help you take action.</h2>
+  <p><b>I created these tools because I was tired of just hearing advice — I wanted something that actually helps.</b></p>
+
+  <!-- REVISION COUNTDOWN -->
+  <h1>Revision Countdown</h1>
+  <input type="date" id="examDate" />
+  <div id="daysLeft">Enter your exam date ⏳</div>
+  <div id="message"></div>
+
+  <!-- TIMER TOOL -->
+  <div class="timer-container">
+    <h1>🕒 Focus Session Timer</h1>
+    <p>Work with focus. Rest with intention.</p>
+
+    <div class="mode-buttons">
+      <button id="focusModeBtn" class="active">Focus</button>
+      <button id="breakModeBtn">Break</button>
+    </div>
+
+    <div class="timer-circle">
+      <div class="mode-display" id="mode">Focus Time</div>
+      <div class="timer-display" id="timer">25:00</div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="startTimer()">▶ Start</button>
+      <button onclick="pauseTimer()">⏸ Pause</button>
+      <button onclick="resetTimer()">⟲ Reset</button>
+    </div>
+
+    <div class="inputs">
+      <label>Focus Time (minutes):
+        <input type="number" id="focusMinutes" value="25" min="1" />
+      </label>
+      <label>Break Time (minutes):
+        <input type="number" id="breakMinutes" value="5" min="1" />
+      </label>
+    </div>
+  </div>
+
+  <audio id="alarmSound"
+    src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"
+    preload="auto"></audio>
+
+  <!-- PRIORITY TASK LIST -->
+  <h1>Priority Task List</h1>
+  <form id="taskForm">
+    <label>Task Name:</label>
+    <input type="text" id="taskName" required>
+
+    <label>Priority:</label>
+    <select id="priority">
+      <option value="high">🔴 High</option>
+      <option value="medium">🟡 Medium</option>
+      <option value="low">🟢 Low</option>
+    </select>
+
+    <button type="submit">Add Task</button>
+  </form>
+  <div id="taskList"></div>
+
+  <!-- TOPIC ALLOCATOR -->
+  <div class="topic-container">
+    <h1>Topic Allocator</h1>
+    <form id="topicForm">
+      <label>Topic Name:</label>
+      <input type="text" id="topic" required>
+
+      <label>Time to Study (minutes):</label>
+      <input type="number" id="time" required>
+
+      <label>Marks in Exam:</label>
+      <input type="number" id="marks" required>
+
+      <button type="submit">Add Topic</button>
+    </form>
+
+    <div id="topicList"></div>
+    <p id="totalTimeDisplay" class="summary"></p>
+  </div>
+
+  <!-- TIME BLOCK SCHEDULER -->
+  <h1>Time Block Scheduler</h1>
+  <form id="timeBlockForm">
+    <label>Task:</label>
+    <input type="text" id="blockTask" required>
+
+    <label>Start Time:</label>
+    <input type="time" id="startTime" required>
+
+    <label>End Time:</label>
+    <input type="time" id="endTime" required>
+
+    <button type="submit">Add Block</button>
+  </form>
+
+  <div id="schedule"></div>
+</section>
+</section>
+<footer>© 2025 Life On A Deadline. Built with action.</footer>
+
+<!-- MAKE SURE THIS STAYS HERE -->
+<script type="module" src="javascript.js"></script>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('active');
+}
+</script>
+
+
+<!-- FIREBASE AUTH + UI -->
+<script type="module">
+import { auth, db } from './firebase-config.js';
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+const authArea = document.getElementById("authArea");
+const navUser = document.getElementById("navUser");
+const mobileAuthArea = document.getElementById("mobileAuthArea");
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    let displayName = user.email.split("@")[0];
+
+    // Load or create Firestore profile
+    try {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          email: user.email,
+          name: displayName,
+          joinedAt: new Date(),
+        });
+      } else {
+        displayName = snap.data().name || displayName;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    authArea.innerHTML = `<span>${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
+    mobileAuthArea.innerHTML = `<span>${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+    navUser.textContent = displayName;
+
+    document.getElementById("logoutBtn").onclick = async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+    };
+
+    document.getElementById("mobileLogoutBtn").onclick = async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+    };
+
+  } else {
+    authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+    mobileAuthArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+    navUser.textContent = "";
+  }
+});
+</script>
+
+<!-- CHATBASE -->
+<button id="customChatBtn" style="
+  position: fixed; bottom: 20px; right: 20px;
+  background: linear-gradient(135deg,#6a0dad,#c74aac);
+  color:white; border:none; padding:12px 20px;
+  border-radius:30px; font-size:14px; cursor:pointer; z-index:9999;">
+  💬 Chat with<br>L.O.A.D AI
+</button>
+
+<script type="module">
+import { auth } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+let loaded = false;
+const btn = document.getElementById("customChatBtn");
+
+onAuthStateChanged(auth, (user) => {
+  btn.onclick = () => {
+    if (!user) {
+      alert("Please log in to use the L.O.A.D AI Assistant 💜");
+      return;
+    }
+
+    if (!loaded) {
+      window.chatbaseConfig = {
+        chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+        welcomeMessage: "Welcome to L.O.A.D! How can I help you today?"
+      };
+
+      const s = document.createElement("script");
+      s.src = "https://www.chatbase.co/embed.min.js";
+      s.defer = true;
+      document.body.appendChild(s);
+
+      loaded = true;
+      setTimeout(() => btn.style.display = "none", 1000);
+
+    } else {
+      const bubble = document.querySelector(".chatbase-bubble");
+      if (bubble) bubble.click();
+    }
+  };
+});
+</script>
+
+</body>
+</html>

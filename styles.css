@@ -1,0 +1,640 @@
+/* === Reset & Base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #222;
+}
+
+/* === Navigation === */
+nav {
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 94;
+}
+
+nav .logo {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+nav .menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Add spacing for the fixed navbar */
+.header-spacer {
+  height: 70px; /* Match or slightly exceed the navbar height */
+}
+
+/* Optional: adjust spacing on smaller screens if navbar is taller */
+@media (max-width: 768px) {
+  .header-spacer {
+    height: 80px;
+  }
+}
+
+
+/* Sidebar menu for mobile */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  width: 250px;
+  background-color: #111;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  transition: right 0.3s ease-in-out;
+  z-index: 95;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+  color: #80c6ff;
+}
+
+/* Desktop navigation */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color:  #80c6ff;
+}
+
+/* Hide desktop nav on small screens */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+
+  nav .menu-icon {
+    display: block;
+  }
+}
+
+/* === Hero === */
+.hero img {
+  width: 100%;
+  height: auto;
+}
+
+/* === Typography === */
+h1 {
+  text-align: center;
+  color: #fdfdfd;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 1rem 0;
+  color:#ffffff;
+}
+
+.subtext {
+  font-size: 1rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+/* === Buttons === */
+button,
+.cta-button,
+.card-btn {
+  background-color: #6A5ACD;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover,
+.cta-button:hover,
+.card-btn:hover {
+  background-color: #483D8B;
+}
+
+.cta-button {
+  border-radius: 30px;
+  padding: 1rem 2rem;
+}
+
+.card-btn {
+  font-weight: bold;
+}
+
+/* === Sections === */
+section#tools {
+  padding: 3rem 1rem 2rem;
+  text-align: center;
+}
+
+section#tools p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #666;
+}
+
+/* === Grid & Cards === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.card p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+/* === Countdown Timer === */
+.countdown {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3a393f;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 1rem auto 0.5rem;
+  display: inline-block;
+}
+
+#examDate {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+}
+
+.message {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #888;
+}
+
+/* === Task Management === */
+.task-list {
+  max-width: 500px;
+  margin: 1.5rem auto;
+}
+
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-left: 6px solid #6A5ACD;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.task-card.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.priority-high {
+  border-left-color: red;
+}
+
+.priority-medium {
+  border-left-color: orange;
+}
+
+.priority-low {
+  border-left-color: green;
+}
+
+/* === Tool Row Layout === */
+.tool-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  max-width: 1100px;
+}
+
+.timer-container,
+.topic-container {
+  flex: 1 1 450px;
+ background: linear-gradient(135deg, #d5fdee, #f3e8ff); 
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* === Schedule Blocks === */
+.schedule {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fffaf0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.block {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #e6e6fa;
+  border-left: 6px solid #6A5ACD;
+  border-radius: 6px;
+  position: relative;
+}
+
+.block span {
+  display: block;
+  font-weight: bold;
+}
+
+.block small {
+  color: #555;
+}
+
+/* === Sleep Tracker === */
+#sleep-tracker .tool-container {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+#sleep-tracker form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+#sleep-tracker input,
+#sleep-tracker button {
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+#sleep-tracker button {
+  background-color: #5c6ac4;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#sleep-tracker ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+
+/* === Self-Care Builder === */
+.self-care-builder {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #f7f9fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.self-care-builder h2 {
+  text-align: center;
+  color: #000000;
+}
+
+.self-care-builder label,
+.self-care-builder input,
+.self-care-builder select,
+.self-care-builder button {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+}
+
+.self-care-builder button {
+  background-color: #3de174;
+}
+
+.self-care-builder button:hover {
+  background-color: #1c9401;
+}
+
+#routineDisplay {
+  margin-top: 2rem;
+}
+
+#routineList li {
+  background-color: #fff;
+  margin: 0.3rem 0;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border-left: 4px solid #8b5e3c;
+}
+
+/* === Gratitude Journal === */
+.journal-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.entry-status {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #008000;
+}
+/* === Workout === */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.custom-input {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#customWorkout, #customDuration {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin: 0.2rem;
+}
+
+#customWorkout {
+  width: 60%;
+  max-width: 300px;
+}
+
+#customDuration {
+  width: 80px;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1a242f;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.day-column {
+  flex: 1 1 120px;
+  min-width: 140px;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-column h3 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.workout-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.workout-item {
+  padding: 0.4rem 0.6rem;
+  margin: 0.3rem;
+  background-color: #6A5ACD;
+  color: white;
+  border-radius: 6px;
+  cursor: grab;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .day-column {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #customWorkout, #customDuration {
+    width: 80%;
+    max-width: 100%;
+  }
+
+  button {
+    width: 80%;
+    margin-top: 0.5rem;
+  }
+}
+/*Meal & Snack Planner*/
+.planner {
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.meal-list {
+  margin-top: 2rem;
+}
+
+.meal-item {
+  background-color: #eaffea;
+  padding: 1rem;
+  border-left: 6px solid #4CAF50;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+/*Chatbox*/
+
+  #customChatBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+#customChatBtn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  #customChatBtn {
+    font-size: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+
+
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  background-color: #333;
+}
+.center-text {
+  text-align: center;
+}
+

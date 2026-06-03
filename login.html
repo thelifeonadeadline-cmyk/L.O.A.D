@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Life On A Deadline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4B0082, #8B5E3C);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      color: #333;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #4B0082;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.7rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #4B0082;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #6A5ACD;
+    }
+
+    .google-btn {
+      background: #fff;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      margin-top: 0.8rem;
+    }
+
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .forgot-link,
+    .signup-link {
+      display: block;
+      margin-top: 1rem;
+      color: #4B0082;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .forgot-link:hover,
+    .signup-link:hover {
+      text-decoration: underline;
+    }
+
+    #msg {
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    #nameContainer {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      border: 2px solid #4B0082;
+    }
+
+    #nameContainer h3 {
+      margin: 0 0 1rem 0;
+      color: #4B0082;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+    <h2>Welcome Back!</h2>
+
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
+
+    <div id="nameContainer">
+      <h3>Complete Your Profile</h3>
+      <input type="text" id="nameInput" placeholder="Enter your full name" required>
+      <button id="saveNameBtn">Save & Continue</button>
+    </div>
+
+    <button id="googleLogin" class="google-btn">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+      Sign in with Google
+    </button>
+
+    <a href="#" id="forgotPassword" class="forgot-link">Forgot Password?</a>
+    <a href="signup.html" class="signup-link">Don’t have an account? Sign Up</a>
+
+    <div id="msg"></div>
+  </div>
+
+  <script type="module">
+    import { auth, db } from './firebase-config.js';
+    import {
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      sendPasswordResetEmail,
+      GoogleAuthProvider,
+      signInWithPopup,
+      confirmPasswordReset
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+    import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const msg = document.getElementById('msg');
+    const forgotLink = document.getElementById('forgotPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    const googleBtn = document.getElementById('googleLogin');
+
+    const nameContainer = document.getElementById('nameContainer');
+    const nameInput = document.getElementById('nameInput');
+    const saveNameBtn = document.getElementById('saveNameBtn');
+
+    function showMsg(text, color = 'green') {
+      msg.style.color = color;
+      msg.textContent = text;
+    }
+
+    // Handle password reset from email link
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    const oobCode = urlParams.get('oobCode');
+    if (mode === 'resetPassword' && oobCode) {
+      const newPassword = prompt("Enter your new password:");
+      if (newPassword) {
+        confirmPasswordReset(auth, oobCode, newPassword)
+          .then(() => {
+            alert("✅ Password updated! Please log in with new password.");
+            window.location.href = 'login.html';
+          })
+          .catch(err => {
+            console.error(err);
+            alert("Error updating password. Try the link again.");
+          });
+      }
+    }
+
+    // Auto redirect if already logged in
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        setTimeout(() => window.location.href = 'index.html', 100);
+      }
+    });
+
+    // Login with email/password
+    loginForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      showMsg('');
+      loginBtn.disabled = true;
+      try {
+        const credential = await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+        await handleUser(credential.user);
+      } catch (err) {
+        let text = err.message;
+        if (err.code === 'auth/wrong-password') text = 'Incorrect password.';
+        if (err.code === 'auth/user-not-found') text = 'No account found with that email.';
+        showMsg(text, 'red');
+      } finally {
+        loginBtn.disabled = false;
+      }
+    });
+
+    // Google login
+    googleBtn.addEventListener('click', async () => {
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        await handleUser(result.user);
+      } catch (err) {
+        console.error(err);
+        showMsg(err.message, 'red');
+      }
+    });
+
+    // Forgot password
+    forgotLink.addEventListener('click', async e => {
+      e.preventDefault();
+      let email = emailInput.value.trim();
+      if (!email) email = prompt('Enter your account email:');
+      if (!email) return;
+      try {
+        await sendPasswordResetEmail(auth, email, {
+          url: 'https://thelifeonadeadline-cmyk.github.io/lifeonadeadline/login.html'
+        });
+        showMsg('✅ Password reset email sent. Check your inbox.', 'green');
+      } catch (err) {
+        let friendly = err.message;
+        if (err.code === 'auth/user-not-found') friendly = 'No account with that email.';
+        showMsg(friendly, 'red');
+      }
+    });
+
+    // Handle Firestore user and name
+    async function handleUser(user) {
+      const ref = doc(db, 'users', user.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()) {
+        // New user - check if they have a display name
+        if (user.displayName) {
+          // Google users usually have display names
+          await setDoc(ref, { name: user.displayName, email: user.email, joinedAt: new Date(), hasCustomName: true });
+          localStorage.setItem('displayName', user.displayName);
+          showMsg('✅ Login successful! Redirecting...', 'green');
+          setTimeout(() => window.location.href = 'index.html', 700);
+        } else {
+          // Email/password users don't have display names - ask for name
+          await setDoc(ref, { email: user.email, joinedAt: new Date(), hasCustomName: false });
+          nameContainer.style.display = 'block';
+          loginForm.style.display = 'none';
+          googleBtn.style.display = 'none';
+          showMsg('Welcome! Please enter your name to complete setup.', 'blue');
+        }
+      } else {
+        // Existing user
+        const userData = snap.data();
+        if (!userData.name || !userData.hasCustomName) {
+          // User exists but doesn't have a proper name
+          nameContainer.style.display = 'block';
+          loginForm.style.display = 'none';
+          googleBtn.style.display = 'none';
+          showMsg('Please enter your name to continue.', 'blue');
+        } else {
+          localStorage.setItem('displayName', userData.name);
+          showMsg('✅ Login successful! Redirecting...', 'green');
+          setTimeout(() => window.location.href = 'index.html', 700);
+        }
+      }
+    }
+
+    // Save name for users who didn't have it
+    saveNameBtn.addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+      const name = nameInput.value.trim();
+      if (!name) {
+        showMsg('Please enter a valid name.', 'red');
+        return;
+      }
+      try {
+        const ref = doc(db, 'users', user.uid);
+        await setDoc(ref, { name, email: user.email, joinedAt: new Date(), hasCustomName: true }, { merge: true });
+        localStorage.setItem('displayName', name);
+        showMsg(`✅ Name saved as "${name}". Redirecting...`, 'green');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } catch (error) {
+        console.error('Error saving name:', error);
+        showMsg('Error saving name. Please try again.', 'red');
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

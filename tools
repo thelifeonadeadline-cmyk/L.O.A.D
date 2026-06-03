@@ -1,0 +1,554 @@
+ <section id="tools">
+    <h2>I’m tired of all the tips and tricks — we need action.</h2>
+    <p>From productivity to wellness — start using real tools that move your life forward. No fluff. Just focus.</p>
+
+    <!-- Timer Tool -->
+    <div class="timer-container">
+      <h1>🕒 Focus Session Timer</h1>
+      <p>Work with focus. Rest with intention.</p>
+
+      <div class="inputs">
+        <label>Focus Time (minutes):
+          <input type="number" id="focusMinutes" value="25" min="1" />
+        </label>
+        <label>Break Time (minutes):
+          <input type="number" id="breakMinutes" value="5" min="1" />
+        </label>
+      </div>
+
+      <div class="mode-display" id="mode">Focus Time</div>
+      <div class="timer-display" id="timer">25:00</div>
+
+      <div class="buttons">
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+
+      <p class="note">💡 Customize your session & get productive with purpose.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Life On A Deadline. Built with action.
+  </footer>
+
+  <script>
+    let timerInterval;
+    let timeLeft;
+    let isFocus = true;
+    let isRunning = false;
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      if (isRunning) return;
+
+      const focusMinutes = parseInt(document.getElementById('focusMinutes').value);
+      const breakMinutes = parseInt(document.getElementById('breakMinutes').value);
+
+      timeLeft = (isFocus ? focusMinutes : breakMinutes) * 60;
+      document.getElementById('mode').textContent = isFocus ? "Focus Time" : "Break Time";
+      updateTimerDisplay();
+
+      isRunning = true;
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          isFocus = !isFocus;
+          isRunning = false;
+          startTimer(); // Auto-start next mode
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      isFocus = true;
+      timeLeft = parseInt(document.getElementById('focusMinutes').value) * 60;
+      updateTimerDisplay();
+      document.getElementById('mode').textContent = "Focus Time";
+    }
+
+    window.onload = resetTimer;
+  </script>
+
+</body>
+</html>
+   
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf9f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .timer-container {
+    text-align: center;
+    background-color: #fffaf0;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .timer-display {
+    font-size: 5rem;
+    margin: 1rem 0;
+    font-weight: bold;
+  }
+  
+  .buttons button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1rem;
+    background-color: #f4d06f;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .buttons button:hover {
+    background-color: #ffeaa7;
+  }
+  
+  .note {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .inputs {
+    margin-bottom: 1rem;
+  }
+  
+  .inputs label {
+    display: block;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .inputs input {
+    padding: 6px;
+    width: 60px;
+    margin-left: 8px;
+  }
+  
+  .mode-display {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #4d4d4d;
+  }
+  
+  
+
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>L.O.A.D. | Life On A Deadline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+     
+  
+      nav {
+        background:#000000;
+        color: #fdfdfd;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+  
+      nav .logo {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: #ffffff;
+      }
+  
+      .hero video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+  
+      #tools {
+        padding: 2rem;
+        text-align: center;
+      }
+  
+      .timer-container {
+        text-align: center;
+        background-color: #fffaf0;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 2rem auto;
+      }
+  
+      .timer-display {
+        font-size: 5rem;
+        margin: 1rem 0;
+        font-weight: bold;
+      }
+  
+      .buttons button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        font-size: 1rem;
+        background-color: #f4d06f;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+  
+      .buttons button:hover {
+        background-color: #ffeaa7;
+      }
+  
+      .note {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+  
+      .inputs {
+        margin-bottom: 1rem;
+      }
+  
+      .inputs label {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+      }
+  
+      .inputs input {
+        padding: 6px;
+        width: 60px;
+        margin-left: 8px;
+      }
+  
+      .mode-display {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #4d4d4d;
+      }
+     
+  
+      h1 {
+        text-align: center;
+        color: #6A5ACD;
+      }
+  
+      form {
+        max-width: 500px;
+        margin: 2rem auto;
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+  
+      label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+  
+      input {
+        width: 100%;
+        padding: 0.6rem;
+        margin-top: 0.3rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+  
+      button {
+        margin-top: 1.5rem;
+        background-color: #6A5ACD;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+  
+      button:hover {
+        background-color: #00008B;
+      }
+  
+      .topic-list {
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+  
+      .topic-card {
+        background: #fff;
+        border-left: 6px solid #6A5ACD;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      }
+  
+      .summary {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 2rem;
+        color: #444;
+      }
+      input[type="date"] {
+      padding: 0.7rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+      }
+  
+      .planner {
+        max-width: 700px;
+        margin: 2rem auto;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+  
+      label {
+        font-weight: 600;
+        margin-top: 1rem;
+        display: block;
+      }
+  
+      input[type="text"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.3rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+  
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+  
+      button:hover {
+        background-color: #45a049;
+      }
+  
+      .meal-list {
+        margin-top: 2rem;
+      }
+  
+      .meal-item {
+        background-color: #eaffea;
+        padding: 1rem;
+        border-left: 6px solid #4CAF50;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
+  
+    </style>
+  </head>
+  <body>
+  
+    <nav>
+      <div class="logo">L.O.A.D.</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  
+    <div class="hero" id="hero">
+      <video autoplay loop muted>
+        <source src="lifestyle.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  
+    <section id="tools">
+     
+      <h1>🍽️ Meal & Snack Planner</h1>
+      <div class="planner">
+        <form id="mealForm">
+          <label for="meal">Meal or Snack:</label>
+          <input type="text" id="meal" placeholder="e.g. Breakfast - Oats and banana" required>
+    
+          <label for="time">Planned Time:</label>
+          <input type="text" id="time" placeholder="e.g. 8:00 AM" required>
+    
+          <button type="submit">Add to Planner</button>
+        </form>
+    
+        <div class="meal-list" id="mealList"></div>
+      </div>
+    
+        
+            <!-- Sleep Tracker -->
+            <section class="tool-section" id="sleep-tracker">
+              <div class="tool-container">
+                <h2>😴 Sleep Tracker</h2>
+                <p>Track your rest and build better sleep habits.</p>
+            
+                <form id="sleepForm">
+                  <label>Sleep Time:
+                    <input type="time" id="sleepTime" required>
+                  </label>
+                  <label>Wake Time:
+                    <input type="time" id="wakeTime" required>
+                  </label>
+                  <button type="submit">Log Sleep</button>
+                </form>
+            
+                <div id="sleepLog">
+                  <h3>Sleep Log</h3>
+                  <ul id="logList"></ul>
+                </div>
+              </div>
+            </section>
+            
+        <h1>Priority Task List</h1>
+  
+  <form id="taskForm">
+    <label for="taskName">Task Name:</label>
+    <input type="text" id="taskName" required>
+  
+    <label for="priority">Priority:</label>
+    <select id="priority">
+      <option value="high">🔴 High</option>
+      <option value="medium">🟡 Medium</option>
+      <option value="low">🟢 Low</option>
+    </select>
+  
+    <button type="submit">Add Task</button>
+  </form>
+  
+  <section class="self-care-builder">
+      <h2>🧴 Self-Care Routine Builder</h2>
+      <p>Create a personalized self-care routine that fits your lifestyle.</p>
+    
+      <form id="selfCareForm">
+        <label for="timeOfDay">Time of Day:</label>
+        <select id="timeOfDay">
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="evening">Evening</option>
+        </select>
+    
+        <label for="careType">Type of Self-Care:</label>
+        <select id="careType">
+          <option value="physical">Physical</option>
+          <option value="emotional">Emotional</option>
+          <option value="mental">Mental</option>
+          <option value="spiritual">Spiritual</option>
+          <option value="social">Social</option>
+        </select>
+    
+        <label for="customTask">Custom Task:</label>
+        <input type="text" id="customTask" placeholder="e.g., Journal for 10 min" />
+    
+        <button type="button" onclick="addSelfCareTask()">Add to Routine</button>
+      </form>
+    
+      <div id="routineDisplay">
+        <h3>Your Routine:</h3>
+        <ul id="routineList"></ul>
+        <button onclick="downloadRoutine()">Download Routine</button>
+      </div>
+    </section>
+  <div class="schedule" id="schedule"></div>
+  </section>
+  <div class="journal-container">
+      <h1>🙏 Gratitude Journal</h1>
+      <p>Write one thing you're grateful for today:</p>
+      <textarea id="entry" rows="5" placeholder="Today, I’m grateful for..."></textarea>
+      <button onclick="saveEntry()">Save Entry</button>
+      <p class="entry-status" id="status"></p>
+    </div>
+       
+    <footer>
+      &copy; 2025 Life On A Deadline. Built with action.
+    </footer>
+  
+    <script src="javascript.js">
+      const today = new Date().toISOString().split('T')[0];
+  
+  function saveEntry() {
+    const entry = document.getElementById('entry').value.trim();
+    const status = document.getElementById('status');
+  
+    if (!entry) {
+      status.textContent = "Please write something you're grateful for.";
+      status.style.color = 'red';
+      return;
+    }
+  
+    if (localStorage.getItem('gratitude-' + today)) {
+      status.textContent = "You've already written a gratitude entry for today. Come back tomorrow!";
+      status.style.color = 'orange';
+      return;
+    }
+  
+    localStorage.setItem('gratitude-' + today, entry);
+    status.textContent = "Your gratitude has been saved for today. 💛";
+    status.style.color = 'green';
+    document.getElementById('entry').value = '';
+  }
+    </script>
+  </body>
+  </html>
+  
+
+
+
+
+
+

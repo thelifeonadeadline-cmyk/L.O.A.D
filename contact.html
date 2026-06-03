@@ -1,0 +1,309 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback | Life On A Deadline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 4rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #5d49da;
+      margin-bottom: 1.5rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 900px;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+  
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      display: none;
+      background-color: #060507;
+      padding: 1rem;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 0.5rem 0;
+      text-decoration: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .sidebar {
+        display: block;
+      }
+    }
+  </style>
+  <script type="module" src="firebase-config.js"></script>
+
+</head>
+<body>
+  <nav>
+    <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Study</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+ <div class="header-spacer"></div> <!-- Pushes content down -->
+  <!-- Sidebar for Mobile -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html" onclick="toggleSidebar()">Home</a>
+    <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+    <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+    <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+    <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+    <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+    <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+    <div id="mobileAuthArea"></div>
+    <li id="navUser"></li>
+  </div>
+
+  <div class="container">
+    <h2>We'd love your feedback!</h2>
+    <p style="text-align: center;">Let us know how we can improve your experience. Your opinion matters!</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe3cqlj4xacQvxSCcEe7zQzKowJIRXxeZC30HCmpGXn15CC1Q/viewform?embedded=true" allowfullscreen>Loading…</iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 Life On A Deadline. Built with action.
+  </footer>
+
+  <script>
+   //Nav
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+  }
+
+  </script>
+  <script type="module">
+  // Import ALL necessary Firebase services from your config file
+  import { auth, db } from './firebase-config.js'; 
+  // No need to import app or analytics here unless you're specifically using them in this script block.
+  // getAnalytics is already called in firebase-config.js.
+
+  // Import specific Firestore functions needed for operations
+  import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  // Import onAuthStateChanged for authentication state listening
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  onAuthStateChanged(auth, async (user) => { // Make the callback async
+    if (user) {
+      console.log("Logged in as:", user.email);
+      // User is signed in, so let's check if their profile exists in Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        // If the user document doesn't exist, create it (e.g., for a new signup)
+        try {
+          await setDoc(userDocRef, {
+            email: user.email,
+            joinedAt: new Date(),
+            // Add any other default user profile data here
+          });
+          console.log("New user profile created in Firestore for:", user.email);
+        } catch (e) {
+          console.error("Error creating user profile in Firestore:", e);
+        }
+      } else {
+        console.log("User profile already exists in Firestore.");
+        // You can also update 'lastLoggedIn' here if needed
+        // await updateDoc(userDocRef, { lastLoggedIn: new Date() });
+      }
+
+    } else {
+      console.log("No user logged in");
+      // Handle logged out state, e.g., redirect to login page
+    }
+  });
+
+  // You can now use `auth` and `db` to interact with Firebase for other purposes too
+  // For example, if you wanted to fetch some data from Firestore when the page loads
+  async function fetchSomeData() {
+    // Example: get a specific document from a collection named 'appInfo'
+    const appInfoDocRef = doc(db, "appInfo", "general");
+    const appInfoSnap = await getDoc(appInfoDocRef);
+
+    if (appInfoSnap.exists()) {
+      console.log("App Info:", appInfoSnap.data());
+    } else {
+      console.log("No app info document found!");
+    }
+  }
+
+  // You could call this function when the page loads or based on some user interaction
+  // fetchSomeData();
+
+</script>
+<script type="module">
+  import { auth, db } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+  const navUser = document.getElementById("navUser");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      let displayName = user.email.split("@")[0];
+
+      // Try to get user data from Firestore
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, { email: user.email, name: displayName, joinedAt: new Date() });
+        } else {
+          displayName = userDocSnap.data().name || displayName;
+        }
+      } catch (err) {
+        console.error("Firestore fetch error:", err);
+      }
+
+      // Update UI
+      authArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+      navUser.textContent = displayName;
+
+      // Logout buttons
+      document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+      document.getElementById("mobileLogoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+    } 
+    else {
+      // Guest View
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+      navUser.textContent = "";
+    }
+  });
+</script>
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+   background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  cursor: pointer;
+">
+  💬 Chat with<br>L.O.A.D Ai
+</button>
+
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatScriptLoaded = false;
+
+  onAuthStateChanged(auth, (user) => {
+    chatBtn.onclick = () => {
+      if (user) {
+        if (!chatScriptLoaded) {
+          // Load Chatbase config
+          window.chatbaseConfig = {
+            chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+            welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+            theme: {
+              buttonBackgroundColor: "#6A0DAD",
+              buttonTextColor: "#ffffff"
+            }
+          };
+
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.defer = true;
+          document.body.appendChild(script);
+
+          chatScriptLoaded = true;
+
+          // Hide button after 1 second
+          setTimeout(() => {
+            chatBtn.style.display = 'none';
+          }, 1000);
+        } else {
+          // Toggle chat if already loaded
+          const bubble = document.querySelector('.chatbase-bubble');
+          if (bubble) bubble.click();
+        }
+      } else {
+        // User is not logged in
+        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+      }
+    };
+  });
+</script>
+
+
+ 
+
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title>My Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+       
+           
+        footer {
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    position: relative;
+    left: 0;
+}
+
+       
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 2px;
+        }
+        .blog-post {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        .blog-post h2 {
+            color: #333;
+        }
+        .blog-post p {
+            color: black;
+        }
+		.p1 {
+  font-family: "Cursive",Lucida Handwriting;
+}
+
+		 /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 30px 20px;
+            background-color:beige;
+        }
+
+        .cta h3 {
+            font-size: 1.8em;
+        }
+
+        .cta a {
+            text-decoration: none;
+            background-color: #4a5568;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .cta a:hover {
+            background-color: #2d3748;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+	* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+p{
+    font-size: 20px;
+}
+    </style>
+   <script type="module" src="firebase-config.js"></script>
+ 
+</head>
+<body>
+  
+  <!-- Navigation Bar -->
+ <nav>
+ <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Productivity</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+ <div class="header-spacer"></div> <!-- Pushes content down -->
+  <!-- Sidebar for Mobile -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html" onclick="toggleSidebar()">Home</a>
+    <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+    <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+    <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+    <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+    <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+    <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+    <div id="mobileAuthArea"></div>
+    <li id="navUser"></li>
+  </div>
+
+<header>
+  <img src="Vlog.png" style=width:100%>
+</header>
+    <div class="container" id="home">
+        <div class="blog-post">
+            <h2 class="p1">Heyyyy there...</h2>
+            <p>My name is <b>Nyasha Unami Zuva</b>, and I’m the founder of Life On A Deadline — a digital space dedicated to helping students stay productive, organized, and inspired. As a student balancing academics, personal goals, and everyday responsibilities, I understand how overwhelming life can get. That’s why I created this platform: to offer tools and support for managing your time, building self-discipline, and staying focused — even when deadlines pile up.</p>
+            <h2>Vision for Life On A Deadline</h2>
+			<p>My long-term goal is to grow Life On A Deadline into a go-to platform that empowers students around the world to take control of their lives through smart systems and self-management tools. I hope to expand the site with more interactive resources, collaborate with experts, and eventually turn it into a community that makes productivity feel less lonely and more achievable.
+
+            </p>
+         <section class="cta">
+        <h3 class="p1">In love with me yet, Show me then</h3>
+        <a href="https://www.instagram.com/afro_queen_11" target="_blank">Follow Me on Instagram</a>
+    </section>
+    <img src="nyasha.png" style="width: 100%;">
+     <section class="cta">
+        <h3 class="p1">Stalk Me By...</h3>
+        <a href="https://www.youtube.com/@afro_queen_11" target="_blank">Subscribing to my Youtube Channel</a>
+    </section>
+    <h2> Contact Me</h2>
+    <p> nyauzuva@gmail.com</p>
+    
+    
+		</div>
+       <!----<div class="blog-post">
+            <h2 >This is sooo 2021-2024 Look Book</h2>
+           <div class="row">
+  <div class="column">
+    <img src="covidgirl.jpg" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="me2021.jpg" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="thegirl.jpg" alt="Mountains" style="width:100%">
+  </div>
+</div>
+<p> Never really saw myself as a fashion type of girlie but one thing is for sure...</p>
+
+<div class="row">
+  <div class="column">
+    <img src="zuva.jpg" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="class.jpg" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="nyasha2.jpg" alt="Mountains" style="width:100%">
+  </div>
+</div>
+       
+<p> I love trying different styles and all, so guess what... </p>
+	
+	<div class="row">
+  <div class="column">
+    <img src="beauty.jpg" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="2021.jpg" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="afro.jpg" alt="Mountains" style="width:100%">
+  </div>
+</div>
+<p> you are gonna join me, love it hate it thats up to you but one thing is for sure I'm going to share with you this journey </p>
+        </div>
+    </div>
+-->
+   </div>
+ 
+<script>
+    //Nav
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+  </script>
+  <script type="module">
+  // Import ALL necessary Firebase services from your config file
+  import { auth, db } from './firebase-config.js'; 
+  // No need to import app or analytics here unless you're specifically using them in this script block.
+  // getAnalytics is already called in firebase-config.js.
+
+  // Import specific Firestore functions needed for operations
+  import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  // Import onAuthStateChanged for authentication state listening
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  onAuthStateChanged(auth, async (user) => { // Make the callback async
+    if (user) {
+      console.log("Logged in as:", user.email);
+      // User is signed in, so let's check if their profile exists in Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        // If the user document doesn't exist, create it (e.g., for a new signup)
+        try {
+          await setDoc(userDocRef, {
+            email: user.email,
+            joinedAt: new Date(),
+            // Add any other default user profile data here
+          });
+          console.log("New user profile created in Firestore for:", user.email);
+        } catch (e) {
+          console.error("Error creating user profile in Firestore:", e);
+        }
+      } else {
+        console.log("User profile already exists in Firestore.");
+        // You can also update 'lastLoggedIn' here if needed
+        // await updateDoc(userDocRef, { lastLoggedIn: new Date() });
+      }
+
+    } else {
+      console.log("No user logged in");
+      // Handle logged out state, e.g., redirect to login page
+    }
+  });
+
+  // You can now use `auth` and `db` to interact with Firebase for other purposes too
+  // For example, if you wanted to fetch some data from Firestore when the page loads
+  async function fetchSomeData() {
+    // Example: get a specific document from a collection named 'appInfo'
+    const appInfoDocRef = doc(db, "appInfo", "general");
+    const appInfoSnap = await getDoc(appInfoDocRef);
+
+    if (appInfoSnap.exists()) {
+      console.log("App Info:", appInfoSnap.data());
+    } else {
+      console.log("No app info document found!");
+    }
+  }
+
+  // You could call this function when the page loads or based on some user interaction
+  // fetchSomeData();
+
+</script>
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+
+  function setLogoutHandlers() {
+    document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => location.href = "login.html");
+    });
+
+    document.getElementById("mobileLogoutBtn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        toggleSidebar();
+        location.href = "login.html";
+      });
+    });
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const username = user.email.split('@')[0];
+      authArea.innerHTML = `<span>Welcome, ${username}!</span> <a href="#" id="logoutBtn">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span>Welcome, ${username}!</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+    } else {
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / 
+                                   <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+    }
+    setLogoutHandlers();
+  });
+</script>
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+   background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  cursor: pointer;
+">
+  💬 Chat with<br>L.O.A.D Ai
+</button>
+
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatScriptLoaded = false;
+
+  onAuthStateChanged(auth, (user) => {
+    chatBtn.onclick = () => {
+      if (user) {
+        if (!chatScriptLoaded) {
+          // Load Chatbase config
+          window.chatbaseConfig = {
+            chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+            welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+            theme: {
+              buttonBackgroundColor: "#6A0DAD",
+              buttonTextColor: "#ffffff"
+            }
+          };
+
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.defer = true;
+          document.body.appendChild(script);
+
+          chatScriptLoaded = true;
+
+          // Hide button after 1 second
+          setTimeout(() => {
+            chatBtn.style.display = 'none';
+          }, 1000);
+        } else {
+          // Toggle chat if already loaded
+          const bubble = document.querySelector('.chatbase-bubble');
+          if (bubble) bubble.click();
+        }
+      } else {
+        // User is not logged in
+        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+      }
+    };
+  });
+</script>
+
+</body>
+</html>
+
+ 
+</body>
+<footer>
+    &copy; 2025 Life On A Deadline. Built with action.
+  </footer>
+</html>

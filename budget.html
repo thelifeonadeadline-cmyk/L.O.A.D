@@ -1,0 +1,633 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>L.O.A.D. | Life On A Deadline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+ 
+
+/* Responsive tweaks for smaller screens */
+@media (max-width: 768px) {
+  .hero {
+    padding: 1rem;
+    background-position: top;
+  }
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+}
+
+    .tracker-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      color: #6A5ACD;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 1rem;
+      width: 100%;
+      background-color: #6A5ACD;
+      color: white;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .progress-bar {
+      margin-top: 1.5rem;
+      background-color: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 20px;
+      background-color: #6A5ACD;
+      width: 0%;
+      text-align: center;
+      color: white;
+      font-size: 0.8rem;
+    }
+    #expenseCategorizer {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+#expenseForm label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+#expenseForm input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#expenseForm button {
+  margin-top: 1.5rem;
+  background-color: #6A5ACD;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#expenseForm button:hover {
+  background-color: #483D8B;
+}
+
+#expenseSummary ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+#expenseSummary li {
+  margin-bottom: 1rem;
+}
+
+/* Budget */
+body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f6f6f6;
+    }
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #6A5ACD;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #00008B;
+    }
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .total-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .balance {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    /* Spread Sheet */
+    .balance-sheet {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .balance-sheet h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .expense-inputs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .expense-inputs input,
+  .expense-inputs button {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .expense-inputs button {
+    background-color: #6A5ACD;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .expense-inputs .reset-btn {
+    background-color: #d9534f;
+  }
+
+  .sheet-table {
+    margin-top: 1rem;
+  }
+
+  .sheet-header,
+  .sheet-footer,
+  .expense-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .sheet-header {
+    font-weight: bold;
+    background-color: #f5f5f5;
+  }
+
+  .sheet-footer {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    background-color: #8b8ccf;
+  }
+  .floating-chat-btn {
+  width: auto !important;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #6a0dad, #c74aac);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+  </style>
+  <script type="module" src="firebase-config.js"></script>
+
+</head>
+<body>
+    
+   <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">L.O.A.D.</div>
+    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productivity.html">Study</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="fitness.html">Fitness</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="aboutme.html">About Me</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li id="authArea"></li>
+    </ul>
+  </nav>
+
+  <!-- Sidebar for Mobile -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="index.html" onclick="toggleSidebar()">Home</a>
+    <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+    <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+    <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+    <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+    <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+    <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+    <div id="mobileAuthArea"></div>
+    <li id="navUser"></li>
+  </div>
+  <div class="header-spacer"></div> 
+  <header>
+    <img src="budget.png"style="width: 100%;">
+</header>
+
+<h1 style="font-family: Lucida Console, Courier New, monospace;">Own Your Finances, Own Your Freedom</h1>
+  <p>
+    Financial freedom starts with smart choices. This section helps you manage your money with purpose—from tracking expenses to planning your savings—so you can stress less and live more.
+  </p>
+
+
+
+<div class="balance-sheet">
+  <h2>📊 Student Budget Balance Sheet</h2>
+
+  <label for="sheetAllowance">Total Allowance (R):</label>
+  <input type="number" id="sheetAllowance" placeholder="e.g., 1500" min="0" />
+
+  <div class="expense-inputs">
+    <input type="text" id="sheetExpenseName" placeholder="Expense name (e.g., Food)" />
+    <input type="number" id="sheetExpenseAmount" placeholder="Amount (R)" min="0" />
+    <button onclick="addSheetExpense()">Add Expense</button>
+    <button onclick="resetSheetBudget()" class="reset-btn">Reset Budget</button>
+  </div>
+
+  <div class="sheet-table">
+    <div class="sheet-header">
+      <span>Item</span>
+      <span>Amount (R)</span>
+    </div>
+    <div id="sheetExpenseList"></div>
+    <div class="sheet-footer">
+      <strong>Remaining Balance:</strong>
+      <span id="sheetBalance">R0.00</span>
+    </div>
+  </div>
+</div>
+
+<!-- 💰 Savings Goal Tracker -->
+<div class="tracker-container">
+  <h2>Savings Goal Tracker</h2>
+
+  <label for="goal">Savings Goal (R):</label>
+  <input type="number" id="goal" placeholder="e.g. 2000" />
+
+  <label for="saved">Amount Saved So Far (R):</label>
+  <input type="number" id="saved" placeholder="e.g. 500" />
+
+  <button onclick="updateProgress()">Update Progress</button>
+
+  <div class="progress-bar">
+    <div class="progress" id="progressText">0%</div>
+  </div>
+</div>
+
+<!-- 💸 Expense Categorizer -->
+<section class="tool-container" id="expenseCategorizer">
+  <h2>💸 Expense Categorizer</h2>
+  <form id="expenseForm">
+    <label>Category:</label>
+    <input type="text" id="categoryInput" required />
+
+    <label>Amount:</label>
+    <input type="number" id="amountInput" required />
+
+    <label>Description:</label>
+    <input type="text" id="descInput" required />
+
+    <button type="submit">Add Expense</button>
+  </form>
+
+  <div id="expenseSummary">
+    <h3>Expense Summary</h3>
+    <ul id="categoryList"></ul>
+  </div>
+</section>
+
+<script>
+  // === Budget Planner ===
+  // LocalStorage setup
+  let sheetAllowance = parseFloat(localStorage.getItem("sheetAllowance")) || 0;
+  let sheetExpenses = JSON.parse(localStorage.getItem("sheetExpenses")) || [];
+
+  const allowanceInput = document.getElementById("sheetAllowance");
+  const expenseList = document.getElementById("sheetExpenseList");
+  const balanceDisplay = document.getElementById("sheetBalance");
+
+  // Restore values on load
+  allowanceInput.value = sheetAllowance;
+  renderSheetExpenses();
+  updateSheetBalance();
+
+  // Update stored allowance
+  allowanceInput.addEventListener("input", () => {
+    sheetAllowance = parseFloat(allowanceInput.value) || 0;
+    localStorage.setItem("sheetAllowance", sheetAllowance);
+    updateSheetBalance();
+  });
+
+  function addSheetExpense() {
+    const name = document.getElementById("sheetExpenseName").value.trim();
+    const amount = parseFloat(document.getElementById("sheetExpenseAmount").value);
+
+    if (!name || isNaN(amount) || amount <= 0) {
+      alert("Please enter valid expense details.");
+      return;
+    }
+
+    sheetExpenses.push({ name, amount });
+    localStorage.setItem("sheetExpenses", JSON.stringify(sheetExpenses));
+    renderSheetExpenses();
+    updateSheetBalance();
+
+    // Reset inputs
+    document.getElementById("sheetExpenseName").value = "";
+    document.getElementById("sheetExpenseAmount").value = "";
+  }
+
+  function renderSheetExpenses() {
+    expenseList.innerHTML = "";
+    sheetExpenses.forEach((expense, index) => {
+      const item = document.createElement("div");
+      item.classList.add("expense-item");
+      item.innerHTML = `
+        <span>${expense.name}</span>
+        <span>R${expense.amount.toFixed(2)} 
+          <button onclick="removeSheetExpense(${index})" style="background:none;border:none;color:#d9534f;cursor:pointer;">&#x2716;</button>
+        </span>
+      `;
+      expenseList.appendChild(item);
+    });
+  }
+
+  function removeSheetExpense(index) {
+    sheetExpenses.splice(index, 1);
+    localStorage.setItem("sheetExpenses", JSON.stringify(sheetExpenses));
+    renderSheetExpenses();
+    updateSheetBalance();
+  }
+
+  function updateSheetBalance() {
+    const totalSpent = sheetExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+    const remaining = sheetAllowance - totalSpent;
+    balanceDisplay.textContent = `R${remaining.toFixed(2)}`;
+  }
+
+  function resetSheetBudget() {
+    if (confirm("Are you sure you want to reset your budget?")) {
+      localStorage.removeItem("sheetAllowance");
+      localStorage.removeItem("sheetExpenses");
+      sheetExpenses = [];
+      sheetAllowance = 0;
+      allowanceInput.value = "";
+      renderSheetExpenses();
+      updateSheetBalance();
+    }
+  }
+  // === Goal Tracker ===
+  function updateProgress() {
+    const goal = parseFloat(document.getElementById("goal").value);
+    const saved = parseFloat(document.getElementById("saved").value);
+
+    if (!goal || goal <= 0 || saved < 0) {
+      alert("Please enter valid numbers.");
+      return;
+    }
+
+    let percent = Math.min((saved / goal) * 100, 100);
+    const progress = document.getElementById("progressText");
+    progress.style.width = percent + "%";
+    progress.textContent = Math.round(percent) + "%";
+  }
+
+  // === Expense Categorizer ===
+  const categorizedExpenses = {};
+  const expenseForm = document.getElementById("expenseForm");
+  const categoryList = document.getElementById("categoryList");
+
+  if (expenseForm) {
+    expenseForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const category = document.getElementById("categoryInput").value.trim();
+      const amount = parseFloat(document.getElementById("amountInput").value);
+      const description = document.getElementById("descInput").value.trim();
+
+      if (!category || !amount || !description) return;
+
+      if (!categorizedExpenses[category]) categorizedExpenses[category] = [];
+      categorizedExpenses[category].push({ amount, description });
+
+      updateCategoryList();
+      expenseForm.reset();
+    });
+  }
+
+  function updateCategoryList() {
+    if (!categoryList) return;
+    categoryList.innerHTML = "";
+    let grandTotal = 0;
+
+    for (const category in categorizedExpenses) {
+      const total = categorizedExpenses[category].reduce((sum, e) => sum + e.amount, 0);
+      grandTotal += total;
+      const listItem = document.createElement("li");
+      const itemsHTML = categorizedExpenses[category]
+        .map(e => `<li>${e.description}: R${e.amount}</li>`)
+        .join("");
+      listItem.innerHTML = `<strong>${category}</strong>: R${total.toFixed(2)}<ul>${itemsHTML}</ul>`;
+      categoryList.appendChild(listItem);
+    }
+
+    const totalItem = document.createElement("li");
+    totalItem.innerHTML = `<strong>Grand Total:</strong> R${grandTotal.toFixed(2)}`;
+    totalItem.style.marginTop = "1rem";
+    totalItem.style.fontWeight = "bold";
+    categoryList.appendChild(totalItem);
+  }
+
+  // === Sidebar Toggle ===
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) {
+      sidebar.classList.toggle("active");
+    }
+  }
+  // Financial Goals Integration
+  function updateGoal() {
+  const goal = parseFloat(document.getElementById("goalTarget").value);
+  const saved = parseFloat(document.getElementById("goalSaved").value);
+
+  if (isNaN(goal) || goal <= 0 || isNaN(saved) || saved < 0) {
+    alert("Please enter valid goal and saved amounts.");
+    return;
+  }
+
+  const remaining = Math.max(goal - saved, 0);
+  const percent = Math.min((saved / goal) * 100, 100);
+
+  const progressBar = document.getElementById("goalProgress");
+  progressBar.style.width = percent + "%";
+  progressBar.textContent = Math.round(percent) + "%";
+
+  document.getElementById("goalRemaining").textContent = `R${remaining.toFixed(2)}`;
+}
+
+</script>
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn" class="floating-chat-btn">
+  💬 Chat with<br>L.O.A.D Ai
+</button>
+
+
+
+<script type="module">
+  import { auth, db } from './firebase-config.js';
+  import {
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import {
+    doc,
+    setDoc,
+    getDoc
+  } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatScriptLoaded = false;
+
+  const navUser = document.getElementById("navUser");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      let displayName = user.email.split("@")[0];
+
+      // Try to get user data from Firestore
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, { email: user.email, name: displayName, joinedAt: new Date() });
+        } else {
+          displayName = userDocSnap.data().name || displayName;
+        }
+      } catch (err) {
+        console.error("Firestore fetch error:", err);
+      }
+
+      // Update UI
+      authArea.innerHTML = `<span style="color:white; font-weight:bold;">${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span style="color:white; font-weight:bold;"> ${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+      navUser.textContent = displayName;
+
+      // Logout buttons
+      document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+      document.getElementById("mobileLogoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+      });
+
+      // Hide fake chat button if logged in
+      chatBtn.style.display = "none";
+    } 
+    else {
+      // Guest View
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+      navUser.textContent = "";
+
+      // Chat button logic
+      chatBtn.addEventListener("click", () => {
+        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+      });
+    }
+  });
+
+  // Chatbase actual loader (once logged in)
+  function loadChatbase() {
+    if (!chatScriptLoaded) {
+      window.chatbaseConfig = {
+        chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+        welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
+        theme: {
+          buttonBackgroundColor: "#6A0DAD",
+          buttonTextColor: "#ffffff"
+        }
+      };
+
+      const script = document.createElement("script");
+      script.src = "https://www.chatbase.co/embed.min.js";
+      script.defer = true;
+      document.body.appendChild(script);
+      chatScriptLoaded = true;
+    }
+  }
+</script>
