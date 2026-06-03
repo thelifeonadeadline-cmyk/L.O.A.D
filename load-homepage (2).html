@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>L.O.A.D. | Life On A Deadline</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"
+
+pasted
+
+make the picture is the background photo on the hero in the code I will see it  when I put the code on my code
+
+Jun 2
+Got it — you want the picture as the hero background like your original code does it (background-image: url('BossLady.jpg')), not embedded. I'll rebuild the redesigned homepage using that approach so it works when you drop it into your site folder alongside BossLady.jpg.
+
+
+Write final clean homepage with BossLady.jpg as CSS background-image
+Write final clean homepage with BossLady.jpg as CSS background-image
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>L.O.A.D. | Life On A Deadline</title> <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300
+
+pasted
+
+make the wording in the hero more visible dont add a background color make the text bloder and seeable since the pic is white
+
+7:22 PM
+The hero text needs to pop off the photo without a dark overlay — I'll make it bold, large, and add a subtle text shadow so it reads clearly against any background.
+
+
+Edited 3 files, read a file
+Edited 3 files, read a file
+Done — no background overlay added. Here's what makes the text pop now:
+
+Title — bumped to font-weight: 600 (bold) and larger, plus a layered text-shadow that creates a subtle dark halo effect around each letter so it reads on both light and dark parts of the photo
+Subtitle — also font-weight: 600 with full white color and shadow, instead of the previous semi-transparent white
+Badge — stronger white text with a more opaque purple-tinted backdrop
+Stats — bolder numbers and labels with shadows so they stay readable
+Drop it in your folder alongside BossLady.jpg and it should look sharp. Want anything else adjusted?
+
+
+Load homepage
+Code · HTML 
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>L.O.A.D. | Life On A Deadline</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"
+
+pasted
+
+lets keep this type of hero
+
+7:26 PM
+Got it — keep your original hero style: centered, full background-image, with the dark overlay (::before). I'll just upgrade the typography and styling to match the new design system.
+
+
+Edited 2 files, viewed a file
+Edited 2 files, viewed a file
+Now fix the hero HTML to be centered like the original — badge centered, actions centered, stats centered:
+
+
+Edited 4 files, viewed a file
+Edited 4 files, viewed a file
+Now update the hero HTML to match — centered, no left-aligned div wrapper:
+
+
+Viewed 2 files
+Viewed 2 files
+The hero HTML is already clean and centered — the CSS fix is all that was needed. Also add the tagline text from your original since you liked it:
+
+
+Edited a file, read a file
+Edited a file, read a file
+Done! The hero is now exactly like your original — BossLady.jpg full screen, centered content, dark overlay (rgba(0,0,0,0.52)) so all the text pops clearly. I also brought back your original taglines:
+
+"L.O.A.Ding into your full potential."
+"Cause if you're not living, what are you doing?"
+Drop this index.html into your site folder alongside BossLady.jpg and styles.css and it should work perfectly. Want me to work on any of the other pages next?
+
+
+Load homepage
+Code · HTML 
+
+You are out of free messages until 12:20 AM
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+
+
+raw
+Load homepage · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>L.O.A.D. | Life On A Deadline</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  :root {
+    --ink:        #1a1630;
+    --purple:     #4b2aad;
+    --purple-mid: #6a48cc;
+    --purple-lt:  #7c5ccc;
+    --blue:       #2563c4;
+    --blue-lt:    #3b7de8;
+    --muted:      #6b6880;
+    --border:     rgba(106,72,204,0.15);
+    --border-lt:  rgba(106,72,204,0.08);
+  }
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: #ffffff;
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+ 
+  a { color: inherit; text-decoration: none; }
+ 
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+  }
+ 
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+ 
+  .nav-links {
+    display: flex; gap: 2.2rem; list-style: none;
+  }
+ 
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.25s;
+  }
+ 
+  .nav-links a:hover { color: var(--ink); }
+ 
+  .nav-cta {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    border: 0.5px solid var(--purple-lt);
+    border-radius: 2px;
+    color: var(--purple-lt);
+    transition: background 0.25s, color 0.25s;
+  }
+ 
+  .nav-cta:hover { background: var(--purple-lt); color: #fff; }
+ 
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 9rem 2rem 5rem;
+    background-image: url('BossLady.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.52);
+    z-index: 0;
+  }
+ 
+  .hero > * { position: relative; z-index: 1; }
+ 
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 100px;
+    padding: 0.4rem 1.3rem;
+    margin-bottom: 2rem;
+    background: rgba(75,42,173,0.35);
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.7s ease both;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+ 
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #a78bfa;
+    box-shadow: 0 0 8px #a78bfa;
+  }
+ 
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(5rem, 10vw, 11rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+    text-shadow:
+      0 2px 8px rgba(0,0,0,0.55),
+      0 4px 24px rgba(0,0,0,0.4),
+      0 1px 2px rgba(0,0,0,0.8);
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+  }
+ 
+ .hero-title .line2 {
+    font-style: italic;
+    font-weight: 600;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    display: block;
+    text-shadow:
+      0 2px 8px rgba(0,0,0,0.55),
+      0 4px 24px rgba(0,0,0,0.4),
+      0 1px 2px rgba(0,0,0,0.8);
+}
+ 
+  .hero-sub {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6), 0 2px 16px rgba(0,0,0,0.45);
+  }
+ 
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+ 
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+ 
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+ 
+  .btn-outline-white {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    padding: 0.9rem 1.6rem;
+    border: 0.5px solid rgba(255,255,255,0.3);
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+ 
+  .btn-outline-white:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+ 
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 0.5px solid rgba(255,255,255,0.25);
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+ 
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+ 
+  .pillar-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+ 
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    padding: 1.1rem 0;
+    border-top: 0.5px solid var(--border-lt);
+    border-bottom: 0.5px solid var(--border-lt);
+    background: #f8f6ff;
+  }
+ 
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 26s linear infinite;
+    white-space: nowrap;
+  }
+ 
+  .marquee-track span {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+ 
+  .marquee-track .dot { color: var(--purple-lt); font-style: normal; }
+ 
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+ 
+  /* ─── SECTIONS WRAPPER ─── */
+  .section-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem;
+  }
+ 
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 1.2rem;
+  }
+ 
+  .section-eyebrow::before {
+    content: '';
+    width: 28px; height: 0.5px;
+    background: var(--purple-lt);
+  }
+ 
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+ 
+  .section-title em { font-style: italic; color: var(--purple-lt); }
+ 
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+ 
+  /* ─── TOOLS GRID ─── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(106,72,204,0.1);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+ 
+  .tool-card {
+    background: #fff;
+    padding: 2.2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s;
+  }
+ 
+  .tool-card:hover { background: #f8f6ff; }
+  .tool-card:hover .tc-arrow { transform: translate(3px,-3px); color: var(--purple-lt); }
+ 
+  .tc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+ 
+  .tc-icon {
+    width: 42px; height: 42px;
+    border-radius: 6px;
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+    background: rgba(75,42,173,0.05);
+  }
+ 
+  .tc-arrow { font-size: 1rem; color: var(--muted); transition: transform 0.25s, color 0.25s; }
+ 
+  .tc-name { font-weight: 500; font-size: 1.05rem; letter-spacing: 0.02em; }
+ 
+  .tc-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.65; flex: 1; }
+ 
+  .tc-tag {
+    align-self: flex-start;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-lt);
+    border: 0.5px solid rgba(59,125,232,0.25);
+    padding: 0.22rem 0.6rem;
+    border-radius: 2px;
+  }
+ 
+  /* ─── PLANNER BANNER ─── */
+  .planner-banner {
+    margin-top: 1px;
+    background: #f8f6ff;
+    border-left: 2px solid var(--purple-mid);
+    padding: 2rem 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s;
+  }
+ 
+  .planner-banner:hover { background: #f0ecff; }
+ 
+  .pb-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 0.35rem;
+  }
+ 
+  .pb-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+ 
+  .pb-desc { font-size: 0.88rem; color: var(--muted); margin-top: 0.3rem; }
+ 
+  .pb-new {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+ 
+  /* ─── AI CARD ─── */
+  .ai-section { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem 7rem; }
+ 
+  .ai-card {
+    background: linear-gradient(135deg, rgba(75,42,173,0.05) 0%, rgba(37,99,196,0.04) 100%);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 3.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+ 
+  .ai-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+ 
+  .ai-card h2 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--purple-lt), var(--blue-lt));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+ 
+  .ai-card p { font-size: 1.05rem; color: var(--muted); max-width: 500px; line-height: 1.8; }
+ 
+  /* ─── STEPS ─── */
+  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+ 
+  .step {
+    padding: 2rem 1.5rem;
+    border: 0.5px solid var(--border-lt);
+    border-radius: 6px;
+    background: #fff;
+    transition: border-color 0.3s;
+  }
+ 
+  .step:hover { border-color: var(--border); }
+ 
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(106,72,204,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+ 
+  .step-title { font-size: 1rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+ 
+  .step-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+ 
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 0.5px solid var(--border-lt);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+ 
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+ 
+  .footer-copy { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--muted); opacity: 0.6; }
+ 
+  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+ 
+  .footer-links a {
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+ 
+  .footer-links a:hover { color: var(--ink); }
+ 
+  /* ─── FLOATING CHAT BTN ─── */
+  #customChatBtn {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 6px 20px rgba(75,42,173,0.3);
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    line-height: 1.4;
+  }
+ 
+  #customChatBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(75,42,173,0.4);
+  }
+ 
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 8rem 2rem 4rem; align-items: center; text-align: center; }
+    .hero-actions { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .ai-card { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+ 
+  @media (max-width: 600px) {
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-title { font-size: clamp(3.5rem, 14vw, 5rem); }
+    .section-wrap { padding: 4rem 1.25rem; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .ai-section { padding: 0 1.25rem 4rem; }
+    .ai-card { padding: 2rem 1.5rem; }
+    .planner-banner { flex-direction: column; align-items: flex-start; }
+    .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">L.O.A.D.</div>
+  <ul class="nav-links">
+    <li><a href="productivity.html">Study</a></li>
+    <li><a href="lifestyle.html">Lifestyle</a></li>
+    <li><a href="fitness.html">Fitness</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="planner.html">Planner</a></li>
+    <li><a href="aboutme.html">About</a></li>
+    <li><a href="contact.html">Feedback</a></li>
+    <li id="authArea"></li>
+  </ul>
+  <a href="dashboard.html" class="nav-cta">Dashboard</a>
+</nav>
+ 
+<!-- Sidebar for Mobile -->
+<div class="sidebar" id="sidebar">
+  <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+  <a href="index.html" onclick="toggleSidebar()">Home</a>
+  <a href="productivity.html" onclick="toggleSidebar()">Study</a>
+  <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
+  <a href="fitness.html" onclick="toggleSidebar()">Fitness</a>
+  <a href="budget.html" onclick="toggleSidebar()">Budget</a>
+  <a href="aboutme.html" onclick="toggleSidebar()">About Me</a>
+  <a href="contact.html" onclick="toggleSidebar()">Feedback</a>
+  <a href="dashboard.html" onclick="toggleSidebar()">Dashboard</a>
+  <div id="mobileAuthArea"></div>
+</div>
+ 
+<!-- HERO — BossLady.jpg as background -->
+<section class="hero">
+  <div class="hero-badge">For university students who move with purpose</div>
+  <h1 class="hero-title">
+    Life On A<br>
+    <span class="line2">Deadline.</span>
+  </h1>
+  <p class="hero-sub">L.O.A.Ding into your full potential.<br><span style="font-size:0.95rem; opacity:0.85;">Cause if you're not living, what are you doing?</span></p>
+  <div class="hero-actions">
+    <a href="dashboard.html" class="btn-primary">Open Dashboard →</a>
+    <a href="#tools" class="btn-outline-white">Explore Tools</a>
+  </div>
+  <div class="hero-stats">
+    <div class="pillar">
+      <div class="pillar-num">5</div>
+      <div class="pillar-label">Sections</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div class="pillar-label">Dashboard</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">AI</div>
+      <div class="pillar-label">Powered</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- Personalized Welcome -->
+<section style="text-align:center; padding: 2rem; font-size: 1.4rem; font-weight: 600; color: var(--purple);">
+  <h2 id="heroWelcome"></h2>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Study Smarter</span><span class="dot"> · </span>
+    <span>Budget Better</span><span class="dot"> · </span>
+    <span>Move Your Body</span><span class="dot"> · </span>
+    <span>Live Intentionally</span><span class="dot"> · </span>
+    <span>No Fluff. Just Focus.</span><span class="dot"> · </span>
+    <span>L.O.A.D. Into Your Potential</span><span class="dot"> · </span>
+    <span>Built for Students</span><span class="dot"> · </span>
+    <span>Study Smarter</span><span class="dot"> · </span>
+    <span>Budget Better</span><span class="dot"> · </span>
+    <span>Move Your Body</span><span class="dot"> · </span>
+    <span>Live Intentionally</span><span class="dot"> · </span>
+    <span>No Fluff. Just Focus.</span><span class="dot"> · </span>
+    <span>L.O.A.D. Into Your Potential</span><span class="dot"> · </span>
+    <span>Built for Students</span><span class="dot"> · </span>
+  </div>
+</div>
+ 
+<!-- TOOLS -->
+<div class="section-wrap" id="tools">
+  <div class="section-eyebrow">Your toolkit</div>
+  <h2 class="section-title">Everything you need,<br><em>one place.</em></h2>
+  <p class="section-sub">Each section is built around action, not advice. Pick a tool and start in under 30 seconds.</p>
+ 
+  <div class="tools-grid">
+    <a href="productivity.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">📚</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Study & Peer Tutoring</div>
+      <div class="tc-desc">Time-blocking templates, study planners, and focus tools built for your busiest exam seasons.</div>
+      <span class="tc-tag">Productivity</span>
+    </a>
+    <a href="lifestyle.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">🌿</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Lifestyle</div>
+      <div class="tc-desc">Self-care check-ins, daily routines, and balance resources so you don't burn out mid-semester.</div>
+      <span class="tc-tag">Wellness</span>
+    </a>
+    <a href="fitness.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">🏋️</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Fitness</div>
+      <div class="tc-desc">Log workouts, track your energy, and stay committed to your physical wellness — even during finals.</div>
+      <span class="tc-tag">Health</span>
+    </a>
+    <a href="budget.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">💸</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Budget</div>
+      <div class="tc-desc">Social media and fast food want your money. Let's keep it where it belongs — in your account.</div>
+      <span class="tc-tag">Finance</span>
+    </a>
+    <a href="dashboard.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">⚡</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Dashboard</div>
+      <div class="tc-desc">Your central command. See everything, access anything, start immediately.</div>
+      <span class="tc-tag">Overview</span>
+    </a>
+    <a href="contact.html" class="tool-card">
+      <div class="tc-top"><div class="tc-icon">💬</div><span class="tc-arrow">↗</span></div>
+      <div class="tc-name">Feedback</div>
+      <div class="tc-desc">Help shape what L.O.A.D. becomes. Share what you need and we'll build it.</div>
+      <span class="tc-tag">Community</span>
+    </a>
+  </div>
+ 
+  <a href="planner.html" class="planner-banner">
+    <div>
+      <div class="pb-label">Featured</div>
+      <div class="pb-title">2026 Planner</div>
+      <div class="pb-desc">Plan your entire year with clarity, structure, and intention. Stop reacting — own your schedule.</div>
+    </div>
+    <div class="pb-new">New for 2026 →</div>
+  </a>
+</div>
+ 
+<!-- AI CARD -->
+<div class="ai-section">
+  <div class="ai-card">
+    <div>
+      <div class="section-eyebrow" style="margin-bottom:1rem;">AI-powered</div>
+      <h2>Meet <em>L.O.A.D. AI</em></h2>
+      <p>Your personal student assistant. Ask it anything — from study strategies to budget breakdowns to how to survive a 9am after a late night.</p>
+    </div>
+    <a href="#" id="aiChatTrigger" class="btn-primary" style="white-space:nowrap; align-self:center;">Chat Now →</a>
+  </div>
+</div>
+ 
+<!-- HOW IT WORKS -->
+<div class="section-wrap">
+  <div class="section-eyebrow">How it works</div>
+  <h2 class="section-title">Four steps.<br><em>Zero excuses.</em></h2>
+  <p class="section-sub">Getting started takes less time than scrolling for 30 seconds.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Pick a section</div>
+      <div class="step-desc">Study, budget, fitness, lifestyle — start with whatever needs attention right now.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Use the tool</div>
+      <div class="step-desc">No lengthy setup. Open, engage, and start making progress immediately.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Ask L.O.A.D. AI</div>
+      <div class="step-desc">Need personalised help? The AI is always one tap away, in every section.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Stay consistent</div>
+      <div class="step-desc">Come back daily. Small actions compound. That's the entire point of this.</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">L.O.A.D.</div>
+  <span class="footer-copy">© 2026 Life On A Deadline. Built with action.</span>
+  <ul class="footer-links">
+    <li><a href="aboutme.html">About</a></li>
+    <li><a href="contact.html">Feedback</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+</footer>
+ 
+<!-- Floating AI Chat Button -->
+<button id="customChatBtn">💬 Chat with<br>L.O.A.D. AI</button>
+ 
+<!-- Sidebar Toggle -->
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('active');
+  }
+</script>
+ 
+<!-- Firebase Auth + Firestore -->
+<script type="module">
+  import { auth, db } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+ 
+  const authArea = document.getElementById("authArea");
+  const mobileAuthArea = document.getElementById("mobileAuthArea");
+  const heroWelcome = document.getElementById("heroWelcome");
+  const chatBtn = document.getElementById("customChatBtn");
+  let chatLoaded = false;
+ 
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      let displayName = user.email.split("@")[0];
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, { email: user.email, name: displayName, joinedAt: new Date() });
+        } else {
+          displayName = userDocSnap.data().name || displayName;
+        }
+      } catch (err) { console.error("Firestore error:", err); }
+ 
+      authArea.innerHTML = `<span style="font-weight:500; color: var(--purple);">Hi, ${displayName}</span> &nbsp;<a href="#" id="logoutBtn" style="font-size:0.8rem; color:var(--muted);">Logout</a>`;
+      mobileAuthArea.innerHTML = `<span style="font-weight:500;">Hi, ${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+      heroWelcome.textContent = `Welcome back, ${displayName} 👋`;
+ 
+      document.getElementById("logoutBtn").addEventListener("click", async (e) => { e.preventDefault(); await signOut(auth); });
+      document.getElementById("mobileLogoutBtn").addEventListener("click", async (e) => { e.preventDefault(); await signOut(auth); });
+ 
+      const launchChat = () => {
+        if (!chatLoaded) {
+          window.chatbaseConfig = {
+            chatbotId: "czT4oi2tu5sm0RW2n0-iC",
+            welcomeMessage: `Welcome back, ${displayName}! What can I help you with today?`,
+            theme: { buttonBackgroundColor: "#6A0DAD", buttonTextColor: "#ffffff" }
+          };
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.defer = true;
+          document.body.appendChild(script);
+          chatLoaded = true;
+          setTimeout(() => chatBtn.style.display = 'none', 1200);
+        } else {
+          const bubble = document.querySelector('.chatbase-bubble');
+          if (bubble) bubble.click();
+        }
+      };
+ 
+      if (chatBtn) chatBtn.onclick = launchChat;
+      const aiTrigger = document.getElementById("aiChatTrigger");
+      if (aiTrigger) aiTrigger.addEventListener("click", (e) => { e.preventDefault(); launchChat(); });
+ 
+    } else {
+      authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
+      mobileAuthArea.innerHTML = `<a href="login.html" onclick="toggleSidebar()">Login</a> / <a href="signup.html" onclick="toggleSidebar()">Sign Up</a>`;
+      heroWelcome.textContent = "";
+      if (chatBtn) chatBtn.onclick = () => alert("👋 Please log in to chat with the L.O.A.D. Assistant.");
+      const aiTrigger = document.getElementById("aiChatTrigger");
+      if (aiTrigger) aiTrigger.addEventListener("click", (e) => { e.preventDefault(); alert("👋 Please log in to chat with the L.O.A.D. Assistant."); });
+    }
+  });
+</script>
+ 
+</body>
+</html>
+ 
