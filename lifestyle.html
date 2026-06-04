@@ -1,27 +1,293 @@
-<!DOCTYPE html> 
+﻿<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>L.O.A.D. | Life On A Deadline</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
   <style>
-   
+    :root {
+      --lifestyle-accent: #d4b483;
+      --lifestyle-soft: #f8f5ef;
+      --lifestyle-dark: #2f2a24;
+    }
+
+    /* Lifestyle Hero Section */
+    .lifestyle-hero {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      padding: calc(var(--load-nav-height) + 3rem) clamp(1.5rem, 7vw, 6rem) 3rem;
+      background-image: url('lifestylebanner.png');
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .lifestyle-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.15) 100%);
+    }
+
+    .lifestyle-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lifestyle-hero-inner {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .lifestyle-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(212,180,131,0.38);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      padding: 0.38rem 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .lifestyle-hero-title {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 600;
+      line-height: 0.95;
+      color: #fff !important;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      margin: 0 0 1rem;
+      text-align: left;
+    }
+
+    .lifestyle-hero-title em {
+      display: block;
+      font-style: italic;
+      color: var(--lifestyle-accent);
+    }
+
+    .lifestyle-hero-sub {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
+      max-width: 600px;
+      line-height: 1.7;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+      text-align: left;
+    }
+
+    /* Lifestyle Intro Section */
+    .lifestyle-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 0;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lifestyle-accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .eyebrow::before, .eyebrow::after {
+      content: '';
+      width: 22px; 
+      height: 0.5px;
+      background: var(--lifestyle-accent);
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      text-align: center;
+      margin: 0 0 0.6rem;
+      color: var(--load-ink);
+    }
+
+    .section-heading em { 
+      font-style: italic; 
+      color: var(--lifestyle-accent); 
+    }
+
+    .section-sub {
+      color: var(--load-muted);
+      font-size: 1rem;
+      max-width: 560px;
+      line-height: 1.8;
+      margin: 0 auto;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2.8rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--load-border);
+      border-radius: var(--load-radius-lg);
+      box-shadow: var(--load-shadow-soft);
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--load-border-strong);
+      box-shadow: var(--load-shadow);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .feature-title {
+      color: var(--load-ink);
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-copy {
+      color: var(--load-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Tools Section */
+    .tools-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    /* Tool Containers */
+    .tool-box,
+    .planner,
+    .self-care-builder,
+    .journal-container {
+      background: #fff !important;
+      border: 1px solid var(--load-border) !important;
+      border-radius: var(--load-radius-lg) !important;
+      box-shadow: var(--load-shadow-soft) !important;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .tool-box h1,
+    .tool-box h2,
+    .planner h1,
+    .self-care-builder h2,
+    .journal-container h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      color: var(--load-ink);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin: 0 0 0.4rem;
+      text-align: center;
+    }
+
+    .tool-box p,
+    .planner p,
+    .self-care-builder p,
+    .journal-container p {
+      color: var(--load-muted);
+      font-size: 0.95rem;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* Sleep Tracker Specific */
+    .sleep-flex {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .sleep-tool {
+      flex: 1 1 55%;
+      background-color: var(--load-surface-soft);
+      padding: 1.5rem;
+      border-radius: var(--load-radius-lg);
+    }
+
+    .sleep-text {
+      flex: 1 1 40%;
+      background-color: var(--load-surface-soft);
+      padding: 1.5rem;
+      border-radius: var(--load-radius-lg);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
 /* Ensure image looks good on small screens */
 @media (max-width: 600px) {
-  .hero {
-    padding: 1rem;
-    background-position: center top;
+  .lifestyle-hero {
+    padding: calc(var(--load-nav-height) + 2rem) 1.25rem 3rem;
+    background-position: center right;
+    min-height: 58vh;
   }
 
-  .hero h1 {
-    font-size: 1.8rem;
+  .lifestyle-hero-title {
+    font-size: clamp(3rem, 14vw, 5rem);
   }
 
-  .hero p {
+  .lifestyle-hero-sub {
     font-size: 1rem;
+  }
+
+  .lifestyle-section,
+  .tools-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-box,
+  .planner,
+  .self-care-builder,
+  .journal-container {
+    padding: 2rem 1.25rem;
+  }
+
+  .sleep-flex {
+    flex-direction: column;
   }
 }
 /* --- Sleep Tracker Section --- */
@@ -123,7 +389,7 @@
 <div class="header-spacer"></div> 
   <!-- Sidebar for Mobile -->
   <div class="sidebar" id="sidebar">
-    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="javascript:void(0)" onclick="toggleSidebar()">âœ• Close</a>
     <a href="index.html" onclick="toggleSidebar()">Home</a>
     <a href="productivity.html" onclick="toggleSidebar()">Study</a>
     <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
@@ -141,119 +407,224 @@
 
   </div>
 
-  <header>
- <img src="lifestylebanner.png" style=width:100% >
-  </header>
-  <h1 style="font-family: Lucida Console, Courier New, monospace;">Balance Is a Form of Strength</h1>
-  <p>
-    Life isn’t just about deadlines—it’s also about balance. This section helps you care for yourself with intention, build meaningful routines, and create space for reflection and joy in everyday moments.
-  </p>
-  
- 
-  </p>
-  <div class="planner">
-    <h1>🍽️ Meal & Snack Planner</h1>
-    <p>Create a custom daily self-care routine with personalized tasks for physical, emotional, mental, or social well-being. Keep your wellness a priority.
-  
-    <form id="mealForm">
-      <label for="meal">Meal or Snack:</label>
-      <input type="text" id="meal" placeholder="e.g. Breakfast - Oats and banana" required>
+  <!-- PAGE HERO -->
+  <section class="lifestyle-hero">
+    <div class="lifestyle-hero-inner">
+      <div class="lifestyle-hero-badge">🌿 LIFESTYLE TOOLS</div>
+      <h1 class="lifestyle-hero-title">Live Well.<br><em>Lead Better.</em></h1>
+      <p class="lifestyle-hero-sub">Balance your habits, mindset and environment to create a life that fuels your goals.</p>
+    </div>
+  </section>
+  <!-- LIFESTYLE INTRO -->
+  <section class="lifestyle-section">
+    <div class="eyebrow">LIFESTYLE TOOLS</div>
+    <h2 class="section-heading">Create Better Habits.<br><em>Live More Intentionally.</em></h2>
+    <p class="section-sub">Small routines shape extraordinary lives.</p>
 
-      <label for="time">Planned Time:</label>
-      <input type="text" id="time" placeholder="e.g. 8:00 AM" required>
-
-      <button type="submit">Add to Planner</button>
-    </form>
-
-    <div class="meal-list" id="mealList"></div>
-  </div>
-  <hr style="border: none; height: 2px; background-color: #ccc;">
-
-
-  <section class="tool-section" id="sleep-tracker">
-    <div class="tool-container">
-      <h2>😴 Plan Your Sleep</h2>
-  
-      <div class="sleep-flex">
-        <!-- Left: Sleep Tool -->
-        <div class="sleep-tool">
-          <p>Track your rest and build better sleep habits.</p>
-  
-          <form id="sleepForm">
-            <label>Sleep Time:
-              <input type="time" id="sleepTime" required>
-            </label>
-            <label>Wake Time:
-              <input type="time" id="wakeTime" required>
-            </label>
-            <button type="submit">Log Sleep</button>
-          </form>
-  
-          <div id="sleepLog">
-            <h3>Sleep Log</h3>
-            <ul id="logList"></ul>
-          </div>
-        </div>
-  
-        <!-- Right: Description Text -->
-        <div class="sleep-text">
-          <p>
-            Progress requires rest. This tool helps you plan your sleep and bedtime routine
-            so you can recharge and stay efficient. Prioritize rest as part of your productivity.
-          </p>
-        </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🍽</div>
+        <div class="feature-title">Meal Planner</div>
+        <p class="feature-copy">Plan your meals and snacks with intention.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">😴</div>
+        <div class="feature-title">Sleep Tracker</div>
+        <p class="feature-copy">Track your rest and build better sleep habits.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧴</div>
+        <div class="feature-title">Self-Care Builder</div>
+        <p class="feature-copy">Create personalized wellness routines.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🙏</div>
+        <div class="feature-title">Gratitude Journal</div>
+        <p class="feature-copy">Cultivate gratitude and mindfulness.</p>
       </div>
     </div>
   </section>
-  
-  <hr style="border: none; height: 2px; background-color: #ccc;">
-  <section class="self-care-builder">
-    <h2>🧴 Self-Care Routine Builder</h2>
-    <p>Create a personalized self-care routine that fits your lifestyle.</p>
-  
-    <form id="selfCareForm">
-      <label for="timeOfDay">Time of Day:</label>
-      <select id="timeOfDay">
-        <option value="morning">Morning</option>
-        <option value="afternoon">Afternoon</option>
-        <option value="evening">Evening</option>
-      </select>
-  
-      <label for="careType">Type of Self-Care:</label>
-      <select id="careType">
-        <option value="physical">Physical</option>
-        <option value="emotional">Emotional</option>
-        <option value="mental">Mental</option>
-        <option value="spiritual">Spiritual</option>
-        <option value="social">Social</option>
-      </select>
-  
-      <label for="customTask">Custom Task:</label>
-      <input type="text" id="customTask" placeholder="e.g., Journal for 10 min" />
-  
-      <button type="button" onclick="addSelfCareTask()">Add to Routine</button>
-    </form>
-  
-    <div id="routineDisplay">
-      <h3>Your Routine:</h3>
-      <ul id="routineList"></ul>
-      <button onclick="downloadRoutine()">Download Routine</button>
-    </div>
-  </section>
-  <hr style="border: none; height: 2px; background-color: #ccc;">
-  <div class="journal-container">
-    <h1>🙏 Gratitude Journal</h1>
-    <p>Write one thing you're grateful for today:</p>
-    <textarea id="entry" rows="5" placeholder="Today, I’m grateful for..."></textarea>
-    <button onclick="saveEntry()">Save Entry</button>
-    <p class="entry-status" id="status"></p>
+
+ <!-- TOOLS SECTION -->
+
+<div class="tools-section">
+
+  <p class="section-intro">
+    Life isn't just about deadlines—it's also about balance. This section helps you care for yourself with intention, build meaningful routines, and create space for reflection, gratitude, and joy in everyday life.
+  </p>
+
+  <!-- Meal Planner -->
+
+  <div class="planner tool-box" id="meal-planner-tool">
+    <h2>🍽 Meal & Snack Planner</h2>
+
+```
+<p>
+  Plan your meals and snacks throughout the day to stay energized,
+  organized, and intentional about your nutrition.
+</p>
+
+<form id="mealForm">
+  <label for="meal">Meal or Snack:</label>
+  <input
+    type="text"
+    id="meal"
+    placeholder="e.g. Breakfast - Oats and Banana"
+    required
+  >
+
+  <label for="time">Planned Time:</label>
+  <input
+    type="text"
+    id="time"
+    placeholder="e.g. 8:00 AM"
+    required
+  >
+
+  <button type="submit">Add to Planner</button>
+</form>
+
+<div class="meal-list" id="mealList"></div>
+```
+
   </div>
-  
-  <footer>
-    &copy; 2025 Life On A Deadline. Built with action.
-  </footer>
-  <script>
-   
+
+  <hr>
+
+  <!-- Sleep Tracker -->
+
+  <section class="tool-box" id="sleep-tracker">
+    <h2>😴 Sleep Tracker</h2>
+
+```
+<div class="sleep-flex">
+
+  <div class="sleep-tool">
+    <p>Track your rest and build healthier sleep habits.</p>
+
+    <form id="sleepForm">
+      <label>
+        Sleep Time:
+        <input type="time" id="sleepTime" required>
+      </label>
+
+      <label>
+        Wake Time:
+        <input type="time" id="wakeTime" required>
+      </label>
+
+      <button type="submit">Log Sleep</button>
+    </form>
+
+    <div id="sleepLog">
+      <h3>Sleep Log</h3>
+      <ul id="logList"></ul>
+    </div>
+  </div>
+
+  <div class="sleep-text">
+    <p>
+      Rest is one of the foundations of a productive and healthy life.
+      Use this tool to plan your sleep schedule, improve consistency,
+      and give your body the recovery it needs.
+    </p>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <hr>
+
+  <!-- Self-Care Builder -->
+
+  <section class="tool-box self-care-builder">
+    <h2>🧴 Self-Care Routine Builder</h2>
+
+```
+<p>
+  Create a personalized self-care routine that supports your physical,
+  emotional, mental, spiritual, and social wellbeing.
+</p>
+
+<form id="selfCareForm">
+
+  <label for="timeOfDay">Time of Day:</label>
+  <select id="timeOfDay">
+    <option value="morning">Morning</option>
+    <option value="afternoon">Afternoon</option>
+    <option value="evening">Evening</option>
+  </select>
+
+  <label for="careType">Type of Self-Care:</label>
+  <select id="careType">
+    <option value="physical">Physical</option>
+    <option value="emotional">Emotional</option>
+    <option value="mental">Mental</option>
+    <option value="spiritual">Spiritual</option>
+    <option value="social">Social</option>
+  </select>
+
+  <label for="customTask">Custom Task:</label>
+  <input
+    type="text"
+    id="customTask"
+    placeholder="e.g. Journal for 10 minutes"
+  >
+
+  <button type="button" onclick="addSelfCareTask()">
+    Add to Routine
+  </button>
+
+</form>
+
+<div id="routineDisplay">
+  <h3>Your Routine</h3>
+  <ul id="routineList"></ul>
+
+  <button onclick="downloadRoutine()">
+    Download Routine
+  </button>
+</div>
+```
+
+  </section>
+
+  <hr>
+
+  <!-- Gratitude Journal -->
+
+  <div class="journal-container tool-box">
+
+```
+<h2>🙏 Gratitude Journal</h2>
+
+<p>
+  Take a moment to reflect on something you're grateful for today.
+</p>
+
+<textarea
+  id="entry"
+  rows="5"
+  placeholder="Today, I'm grateful for..."
+></textarea>
+
+<button onclick="saveEntry()">
+  Save Entry
+</button>
+
+<p class="entry-status" id="status"></p>
+```
+
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Life On A Deadline. Built with action.
+</footer>
+<script>
 
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -377,7 +748,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-   background: linear-gradient(135deg, #6a0dad, #c74aac);
+   background: linear-gradient(135deg, #4b2aad, #7c5ccc);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -387,7 +758,7 @@
   z-index: 9999;
   cursor: pointer;
 ">
-  💬 Chat with<br>L.O.A.D Ai
+  ðŸ’¬ Chat with<br>L.O.A.D Ai
 </button>
 
 <script type="module">
@@ -406,7 +777,7 @@
             chatbotId: "czT4oi2tu5sm0RW2n0-iC",
             welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
             theme: {
-              buttonBackgroundColor: "#6A0DAD",
+              buttonBackgroundColor: "#4b2aad",
               buttonTextColor: "#ffffff"
             }
           };
@@ -429,7 +800,7 @@
         }
       } else {
         // User is not logged in
-        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+        alert("ðŸ‘‹ Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up ðŸ’œ");
       }
     };
   });

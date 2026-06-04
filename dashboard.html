@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>L.O.A.D. — Dashboard</title>
+  <title>L.O.A.D. â€” Dashboard</title>
 
   <!-- Fonts + Chart.js -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Your firebase-config.js must export `auth`, `db`, `storage` -->
@@ -23,7 +22,7 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"Poppins",sans-serif;
+      font-family:"Outfit",sans-serif;
       background:var(--bg);
       display:flex;
       color:#111;
@@ -98,13 +97,15 @@
       .streak-card{flex-direction:column;align-items:flex-start}
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
   <!-- MOBILE HEADER -->
   <div class="mobile-header">
-    <span class="hamburger" onclick="openSidebar()">☰</span>
+    <span class="hamburger" onclick="openSidebar()">â˜°</span>
     <strong>L.O.A.D.</strong>
   </div>
 
@@ -144,7 +145,7 @@
     <!-- Header -->
     <section class="header">
       <div class="header-text">
-        <h1 id="hiUser">Hi, User ✨</h1>
+        <h1 id="hiUser">Hi, User âœ¨</h1>
         <p>Your journey matters. Keep going.</p>
       </div>
 
@@ -158,7 +159,7 @@
     <!-- STREAK CARD -->
     <div class="streak-card">
       <div class="streak-left">
-        <h2 id="streakTitle">🔥 0-Day Streak!</h2>
+        <h2 id="streakTitle">ðŸ”¥ 0-Day Streak!</h2>
         <p id="streakSubtitle">Use at least *two* tools today to build your streak.</p>
       </div>
       <div class="streak-right" id="streakNumber">0 days</div>
@@ -167,23 +168,23 @@
     <!-- QUICK STATS -->
     <section class="stats-grid">
       <div class="card">
-        <h3>📚 Study</h3>
+        <h3>ðŸ“š Study</h3>
         <div id="studyStats">0 sessions</div>
       </div>
       <div class="card">
-        <h3>🌱 Lifestyle</h3>
+        <h3>ðŸŒ± Lifestyle</h3>
         <div id="lifeStats">0 routines</div>
       </div>
       <div class="card">
-        <h3>💪 Fitness</h3>
+        <h3>ðŸ’ª Fitness</h3>
         <div id="fitStats">0 workouts</div>
       </div>
       <div class="card">
-        <h3>💰 Budget</h3>
+        <h3>ðŸ’° Budget</h3>
         <div id="budgetStats">0 entries</div>
       </div>
       <div class="card">
-        <h3>🔥 Productivity Score</h3>
+        <h3>ðŸ”¥ Productivity Score</h3>
         <div id="prodScore">0 pts</div>
       </div>
     </section>
@@ -235,7 +236,7 @@
       }
       const data = snap.data();
 
-      hiUser.textContent = `Hi, ${user.email.split("@")[0]} ✨`;
+      hiUser.textContent = `Hi, ${user.email.split("@")[0]} âœ¨`;
 
       // show stored profile photo (if present), else keep default local image path
       if (data.profilePhoto) profilePhoto.src = data.profilePhoto;
@@ -249,7 +250,7 @@
       // fetch streak summary via streak.js (authoritative)
       try {
         const summary = await getUserStreakSummary(uid);
-        streakTitle.textContent = `🔥 ${summary.streak}-Day Streak!`;
+        streakTitle.textContent = `ðŸ”¥ ${summary.streak}-Day Streak!`;
         streakNumber.textContent = `${summary.streak} days`;
         prodScore.textContent = `${summary.productivityScore} pts`;
       } catch (err) {
@@ -346,3 +347,4 @@
 
 </body>
 </html>
+

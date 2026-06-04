@@ -1,169 +1,512 @@
-<!DOCTYPE html> 
+﻿<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>L.O.A.D. | Life On A Deadline</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
-  <style>
-h1, h2 {
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  color: #483D8B;
-  margin-top: 2rem;
-}
+    <style>
+    :root {
+      --fitness-ink: #1a1630;
+      --fitness-purple: #4b2aad;
+      --fitness-blue: #2563c4;
+      --fitness-lavender: #7c5ccc;
+      --fitness-muted: #6b6880;
+      --fitness-border: rgba(106,72,204,0.15);
+      --fitness-soft: #f8f6ff;
+    }
 
-#workout-timer {
-  padding: 2rem;
-  text-align: center;
-}
+    body {
+      background: #ffffff;
+      color: var(--fitness-ink);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.65;
+    }
 
-.timer-box {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 16px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
+    .fitness-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      padding: calc(var(--load-nav-height) + 3rem) clamp(1.5rem, 7vw, 6rem) 3rem;
+      background-image: url('workout.png');
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
 
-.timer-display {
-  font-size: 4rem;
-  font-weight: bold;
-  margin: 1rem 0;
-  color: #6A5ACD;
-}
+    .fitness-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.52);
+    }
 
-.timer-buttons button {
-  padding: 10px 20px;
-  margin: 0 0.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #6A5ACD;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.timer-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+    .fitness-hero > * {
+      position: relative;
+      z-index: 1;
+    }
 
+    .fitness-hero-inner {
+      width: 100%;
+      max-width: 600px;
+    }
 
-.timer-buttons button:hover {
-  background-color: #483D8B;
-}
+    .fitness-hero-badge,
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
 
-.note {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 1rem;
-}
-
-#progress-logger {
-  padding: 2rem;
-  background: #f7f9fc;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  max-width: 600px;
-  margin: 2rem auto;
-}
-
-#progressForm label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-#progressForm input,
-#progressForm textarea {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-#logList {
-  margin-top: 1.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-#logList li {
-  background: #fff;
-  border-left: 4px solid #6A5ACD;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-}
-
-#fitness-challenge {
-  padding: 2rem;
-  background: #e7f5ff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  max-width: 600px;
-  margin: 2rem auto;
-}
-
-.days-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 1rem;
-}
-
-.day-box {
-  width: 40px;
-  height: 40px;
-  background: #d3d3d3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  user-select: none;
-}
-
-.day-box.completed {
-  background: #6A5ACD;
-  color: white;
-}
-.delete-btn{
-  background-color: rgb(226, 58, 58);
-}
-/* ----------- Responsive Adjustments ----------- */
-
-@media (max-width: 480px) {
-  .timer-buttons {
+   .fitness-hero {
     display: flex;
+    justify-content: center;
+    align-items: flex-start; /* pushes content toward left side */
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .timer-buttons button {
-    width: 100%;
-    max-width: 200px;
-  }
+    text-align: left;
+    padding-left: 8%;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    padding: 1rem;
-    background-position: top;
-  }
+.fitness-hero-badge {
+    color: #fff;
+    background: rgba(75,42,173,0.38);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    padding: 0.38rem 1rem;
+    margin-bottom: 1.4rem;
+    align-self: flex-start;
 }
 
+.fitness-hero-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 600;
+    line-height: 0.95;
+    color: #fff !important;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    margin: 0 0 1rem;
+    max-width: 600px;
+    text-align: left;
+}
 
+.fitness-hero-title em {
+    display: block;
+    font-style: italic;
+    color: #fff;
+}
 
+.fitness-hero-sub {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.88);
+    max-width: 600px;
+    line-height: 1.7;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    text-align: left;
+}
+
+    .fitness-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 0;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--fitness-lavender);
+      margin-bottom: 0.8rem;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: '';
+      width: 22px;
+      height: 0.5px;
+      background: var(--fitness-lavender);
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      text-align: center;
+      margin: 0 0 0.6rem;
+      color: var(--fitness-ink);
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--fitness-lavender);
+    }
+
+    .section-sub {
+      color: var(--fitness-muted);
+      font-size: 1rem;
+      max-width: 560px;
+      line-height: 1.8;
+      margin: 0 auto;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.8rem;
+    }
+
+    .feature-card,
+    .timer-box,
+    #progress-logger,
+    #fitness-challenge {
+      background: #fff;
+      border: 1px solid var(--load-border);
+      border-radius: var(--load-radius-lg);
+      box-shadow: var(--load-shadow-soft);
+    }
+
+    .feature-card {
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover,
+    .timer-box:hover,
+    #progress-logger:hover,
+    #fitness-challenge:hover {
+      transform: translateY(-4px);
+      border-color: var(--load-border-strong);
+      box-shadow: var(--load-shadow);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .feature-title {
+      color: var(--fitness-ink);
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-copy {
+      color: var(--fitness-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .tools-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    #workout-timer,
+    #progress-logger,
+    #fitness-challenge {
+      padding: 0;
+      text-align: center;
+      max-width: none;
+      margin: 0 0 2rem;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .timer-box,
+    #progress-logger,
+    #fitness-challenge {
+      padding: 2.5rem 2rem;
+    }
+
+    .tool-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .timer-box {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .timer-box h2,
+    #progress-logger h2,
+    #fitness-challenge h2 {
+      font-family: 'Cormorant Garamond', serif !important;
+      color: var(--fitness-ink);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin: 0 0 0.4rem;
+      text-align: center;
+    }
+
+    #progress-logger p,
+    #fitness-challenge p,
+    .note {
+      color: var(--fitness-muted);
+      font-size: 0.95rem;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+
+    .timer-display {
+      width: 220px;
+      height: 220px;
+      margin: 1.8rem auto 2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--load-purple), var(--load-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      box-shadow: 0 12px 40px rgba(75,42,173,0.28);
+    }
+
+    .timer-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .timer-buttons button,
+    #progressForm button,
+    #challengeForm button,
+    #resetChallenge {
+      min-height: 42px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 0;
+      border: none;
+      border-radius: 999px !important;
+      background: linear-gradient(135deg, var(--load-purple), var(--load-blue)) !important;
+      color: #fff !important;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(75,42,173,0.22);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .timer-buttons button:hover,
+    #progressForm button:hover,
+    #challengeForm button:hover,
+    #resetChallenge:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    #progressForm,
+    #challengeForm {
+      max-width: 560px;
+      margin: 1.6rem auto 2rem;
+      text-align: left;
+    }
+
+    #progressForm label,
+    #challengeForm label {
+      display: block;
+      margin-top: 1rem;
+      color: var(--fitness-ink);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    #progressForm input,
+    #progressForm textarea,
+    #challengeForm input {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      margin-top: 0.35rem;
+      border: 1px solid var(--load-border-strong);
+      border-radius: 999px !important;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    #progressForm textarea {
+      min-height: 120px;
+      border-radius: 18px !important;
+      resize: vertical;
+    }
+
+    #logList {
+      margin-top: 1.5rem;
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    #logList li,
+    .block {
+      background: var(--load-surface-soft) !important;
+      border-left: 3px solid var(--load-purple) !important;
+      border-radius: 6px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 0.6rem;
+      color: var(--fitness-ink);
+      box-shadow: none !important;
+    }
+
+    #fitness-challenge {
+      background: linear-gradient(135deg, rgba(75,42,173,0.05), rgba(37,99,196,0.04));
+    }
+
+    .days-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 1.2rem auto;
+    }
+
+    .day-box {
+      width: 42px;
+      height: 42px;
+      background: var(--load-surface-soft);
+      border: 1px solid var(--load-border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--fitness-ink);
+      font-weight: 700;
+      user-select: none;
+    }
+
+    .day-box.completed {
+      background: linear-gradient(135deg, var(--load-purple), var(--load-blue));
+      color: white;
+    }
+
+    #resetChallenge {
+      background: #d9534f !important;
+      margin-top: 1rem;
+    }
+
+    .delete-btn {
+      background-color: rgb(226, 58, 58);
+    }
+
+    footer {
+      width: 100%;
+      border-top: 1px solid rgba(106,72,204,0.12);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--fitness-ink);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fitness-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--fitness-ink);
+    }
+
+    @media (max-width: 900px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .fitness-hero {
+        min-height: 58vh;
+        padding: calc(var(--load-nav-height) + 2rem) 1.25rem 3rem;
+        background-position: center right;
+      }
+
+      .fitness-hero-title {
+        font-size: clamp(3rem, 14vw, 5rem);
+      }
+
+      .fitness-hero-sub {
+        font-size: 1rem;
+      }
+
+      .fitness-section,
+      .tools-section {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .timer-box,
+      #progress-logger,
+      #fitness-challenge {
+        padding: 2rem 1.25rem;
+      }
+
+      .timer-display {
+        width: min(220px, 72vw);
+        height: min(220px, 72vw);
+        font-size: 2.5rem;
+      }
+
+      .timer-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .timer-buttons button,
+      #progressForm button,
+      #challengeForm button,
+      #resetChallenge {
+        width: 100%;
+      }
+    }
   </style>
   <script type="module" src="firebase-config.js"></script>
 
@@ -191,7 +534,7 @@ h1, h2 {
 <div class="header-spacer"></div> 
   <!-- Sidebar for Mobile -->
   <div class="sidebar" id="sidebar">
-    <a href="javascript:void(0)" onclick="toggleSidebar()">✕ Close</a>
+    <a href="javascript:void(0)" onclick="toggleSidebar()"> Close</a>
     <a href="index.html" onclick="toggleSidebar()">Home</a>
     <a href="productivity.html" onclick="toggleSidebar()">Study</a>
     <a href="lifestyle.html" onclick="toggleSidebar()">Lifestyle</a>
@@ -208,16 +551,44 @@ h1, h2 {
 
 
   </div>
+  <!-- PAGE HERO -->
+  <section class="fitness-hero">
+    <div class="fitness-hero-inner">
+      <div class="fitness-hero-badge">&#127947; FITNESS TOOLS</div>
+      <h1 class="fitness-hero-title">Strong Body.<br><em>Sharper Mind.</em></h1>
+      <p class="fitness-hero-sub">Build discipline, track progress, and stay accountable to your goals.</p>
+    </div>
+  </section>
 
-  <header>
-    <img src="workout.png" style="width: 100%;">
-  </header>
-  <h1 style="font-family: Lucida Console, Courier New, monospace;">Strong Body, Sharper Mind</h1>
-  <p>
-    Staying active boosts more than just your body—it strengthens your focus, energy, and confidence too. This section offers simple, customizable tools to help you plan, track, and stay motivated on your fitness journey.
-  </p>
+  <!-- FITNESS INTRO -->
+  <section class="fitness-section">
+    <div class="eyebrow">FITNESS TOOLS</div>
+    <h2 class="section-heading">Build Consistency.<br><em>Not Excuses.</em></h2>
+    <p class="section-sub">Small actions repeated daily create extraordinary results.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#127947;</div>
+        <div class="feature-title">Workout Timer</div>
+        <p class="feature-copy">Track every second of your session.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128200;</div>
+        <div class="feature-title">Progress Logger</div>
+        <p class="feature-copy">Measure your growth over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127937;</div>
+        <div class="feature-title">Challenge Tracker</div>
+        <p class="feature-copy">Stay accountable and build streaks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <div class="tools-section">
   
- <!---- <h1>🏋️ Workout Planner</h1>
+ <!---- <h1>ðŸ‹ï¸ Workout Planner</h1>
   
 <p class="center-text">Drag and drop your plan for each day.Cause as we all know<b> Failing to plan is planning to fail.</b></p>
 
@@ -261,7 +632,7 @@ h1, h2 {
   </div>-->
   <section id="workout-timer">
     <div class="timer-box">
-      <h2>⏱ Workout Timer</h2>
+      <h2>Workout Timer</h2>
       <div class="timer-display" id="workoutDisplay">00:00</div>
       <div class="timer-buttons">
         <button onclick="startWorkoutTimer()">Start</button>
@@ -274,7 +645,7 @@ h1, h2 {
   </section>
   <section id="progress-logger" class="tool-section">
     <div class="tool-container">
-      <h2>📈 Progress Logger</h2>
+      <h2>Progress Logger</h2>
       <p>Track your workout progress and wins over time.</p>
   
       <form id="progressForm">
@@ -288,13 +659,13 @@ h1, h2 {
         
       </form>
   
-      <h3>📋 Your Progress</h3>
+      <h3>‹ Your Progress</h3>
       <ul id="logList"></ul>
     </div>
   </section>
   <section id="fitness-challenge" class="tool-section">
     <div class="tool-container">
-      <h2>🏁 Fitness Challenge Tracker</h2>
+      <h2>Fitness Challenge Tracker</h2>
       <p>Set your challenge and stay accountable day by day.</p>
   
       <form id="challengeForm">
@@ -312,14 +683,11 @@ h1, h2 {
         <div id="daysContainer" class="days-grid"></div>
         <p><strong>Completed: <span id="completedCount">0</span> days</strong></p>
       </div>
-      <button id="resetChallenge">🔄 Reset Challenge</button>
+      <button id="resetChallenge">ðŸ”„ Reset Challenge</button>
 
     </div>
   </section>
-  
-  
-
-  
+  </div>
   <script>
   // ------------- DRAG AND DROP HANDLERS -------------
 function allowDrop(e) {
@@ -338,7 +706,7 @@ function drop(e) {
 
   // Add delete button to dropped item
   const deleteBtn = document.createElement('button');
-  deleteBtn.innerHTML = "🗑️";
+  deleteBtn.innerHTML = "ðŸ—‘ï¸";
   deleteBtn.className = "delete-btn";
   deleteBtn.onclick = () => workoutItem.remove();
 
@@ -636,7 +1004,7 @@ document.getElementById('resetChallenge').addEventListener('click', () => {
   position: fixed;
   bottom: 20px;
   right: 20px;
-   background: linear-gradient(135deg, #6a0dad, #c74aac);
+   background: linear-gradient(135deg, #4b2aad, #7c5ccc);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -646,7 +1014,7 @@ document.getElementById('resetChallenge').addEventListener('click', () => {
   z-index: 9999;
   cursor: pointer;
 ">
-  💬 Chat with<br>L.O.A.D Ai
+  Chat with<br>L.O.A.D Ai
 </button>
 
 <script type="module">
@@ -665,7 +1033,7 @@ document.getElementById('resetChallenge').addEventListener('click', () => {
             chatbotId: "czT4oi2tu5sm0RW2n0-iC",
             welcomeMessage: "Welcome to L.O.A.D! What can I help you improve today?",
             theme: {
-              buttonBackgroundColor: "#6A0DAD",
+              buttonBackgroundColor: "#4b2aad",
               buttonTextColor: "#ffffff"
             }
           };
@@ -688,15 +1056,25 @@ document.getElementById('resetChallenge').addEventListener('click', () => {
         }
       } else {
         // User is not logged in
-        alert("👋 Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up 💜");
+        alert("ðŸ‘‹ Hey loves, you need a free account to chat with the L.O.A.D Assistant. Please log in or sign up ðŸ’œ");
       }
     };
   });
 </script>
-
-
-</body>
-<footer>
-    &copy; 2025 Life On A Deadline. Built with action.
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">L.O.A.D.</div>
+    <span style="font-size:0.8rem; opacity:0.6;">© 2026 Life On A Deadline. Built with action.</span>
+    <ul class="footer-links">
+      <li><a href="aboutme.html">About</a></li>
+      <li><a href="contact.html">Feedback</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
   </footer>
+</body>
 </html>
+
+
+
+
+

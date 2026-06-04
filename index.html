@@ -1,4 +1,4 @@
-
+﻿
 
 <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>L.O.A.D. | Life On A Deadline</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"
 
@@ -220,12 +220,12 @@ Load homepage · HTML
     box-shadow: 0 0 8px #a78bfa;
   }
  
-  .hero-title {
+ .hero-title {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
     font-size: clamp(5rem, 10vw, 11rem);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
     color: #ffffff;
     margin-bottom: 1.5rem;
     animation: fadeUp 0.7s 0.1s ease both;
@@ -233,8 +233,7 @@ Load homepage · HTML
       0 2px 8px rgba(0,0,0,0.55),
       0 4px 24px rgba(0,0,0,0.4),
       0 1px 2px rgba(0,0,0,0.8);
-    -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
-  }
+}
  
  .hero-title .line2 {
     font-style: italic;
@@ -549,7 +548,7 @@ Load homepage · HTML
     font-family: 'Cormorant Garamond', serif;
     font-size: 3rem;
     font-weight: 300;
-    color: rgba(106,72,204,0.15);
+    color: rgba(51, 7, 183, 0.15);
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -560,24 +559,23 @@ Load homepage · HTML
  
   /* ─── FOOTER ─── */
   footer {
-    border-top: 0.5px solid var(--border-lt);
-    padding: 2.5rem 3rem;
+    width: 100%;
+    border-top: 1px solid rgba(106,72,204,0.12);
+    padding: 3rem 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
- 
+    background: linear-gradient(
+        180deg,
+        #cccaca 0%,
+        #f8f6ff 100%
+    );
+}
   .footer-logo {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 1.2rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
- 
+    font-size: 1.5rem;
+    font-weight: 600;
+}
   .footer-copy { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--muted); opacity: 0.6; }
  
   .footer-links { display: flex; gap: 1.8rem; list-style: none; }
@@ -647,6 +645,7 @@ Load homepage · HTML
     .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
   }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
  
@@ -828,7 +827,9 @@ Load homepage · HTML
     </div>
   </div>
 </div>
- 
+</div>
+</div>
+ </body>
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">L.O.A.D.</div>

@@ -1,244 +1,426 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>L.O.A.D. | Life On A Deadline</title>
-
-  <!-- Fonts + Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    /* Hero video */
-    .hero video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Peer tutor layout */
-    .peer-tutor-wrapper {
-      display: flex;
-      gap: 2rem;
-      margin: 1.5rem 0;
-      padding: 1rem;
-    }
-
-    .side-nav {
-      flex: 0 0 220px;
-      background: #f8f9ff;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .side-nav h2 {
-      color: #4b0082;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .side-nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .side-nav ul li a {
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .peer-tutor-content {
-      flex: 1;
-    }
-
-    .peer-dropdown-wrapper {
-      display: none;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .peer-dropdown {
-      width: 100%;
-      max-width: 400px;
-      padding: 0.6rem 1rem;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    /* Tool containers */
-    /* Timer & Tools styles */
-    .timer-container,
-    .topic-container {
-      flex: 1 1 450px;
-      background: linear-gradient(135deg, #d5fdee, #e7d7f9);
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      margin-bottom: 2rem;
-    }
-
-    .mode-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .mode-buttons button {
-      padding: 0.6rem 1.4rem;
-      border: none;
-      border-radius: 9999px;
-      background: #f1f5f9;
-      color: #333;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .mode-buttons button.active {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
-    }
-
-    .timer-circle {
-      position: relative;
-      width: 260px;
-      height: 260px;
-      margin: 0 auto 2rem;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #ac8df5);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      animation: pulse-glow 2s infinite;
-    }
-
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 0px rgba(99, 102, 241, 0.7); }
-      50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.9); }
-      100% { box-shadow: 0 0 0px rgba(99, 102, 241, 0.7); }
-    }
-
-    .mode-display {
-      font-size: 1.2rem;
-      font-weight: 500;
-      opacity: 0.9;
-      margin-bottom: 0.5rem;
-    }
-
-    .timer-display {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .buttons button {
-      padding: 0.7rem 1.6rem;
-      border: none;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, #6366f1, #bca0fe);
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-
-    .buttons button:hover { opacity: 0.85; }
-    .buttons button:nth-child(2) { background: #f1f5f9; color: #333; border: 1px solid #d1d5db; }
-
-    form {
-      max-width: 500px;
-      margin: 2rem auto;
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    label { display: block; margin-top: 1rem; font-weight: bold; }
-    input, select { width: 100%; padding: 0.6rem; margin-top: 0.3rem; border: 1px solid #ccc; border-radius: 8px; }
-
-    h1, h2 { text-align: center; color: #000; }
-
-    .topic-list, .task-list, .schedule { max-width: 600px; margin: 2rem auto; }
-    .summary { text-align: center; font-weight: bold; margin-top: 1rem; color: #444; }
-
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    /* Mobile nav */
-    nav ul {
-      display: flex;
-    }
-
-    .menu-icon {
-      display: none;
-    }
-
-    @media (max-width: 991px) {
-      .peer-tutor-wrapper {
-        display: block;
-      }
-      .side-nav {
-        display: none;
-      }
-      .peer-dropdown-wrapper {
-        display: block;
-      }
-      .buttons {
-        flex-direction: column;
-      }
-      .buttons button {
-        width: 80%;
-        margin: 0 auto;
-      }
-      nav ul {
-        display: none;
-        flex-direction: column;
-      }
-      nav ul.active {
-        display: flex;
-      }
-      .menu-icon {
-        display: block;
-      }
-    }
-  </style>
-
-  <script type="module" src="firebase-config.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Study & Peer Tutoring | L.O.A.D.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+ 
+  /* ── PAGE HERO ── */
+  .page-hero {
+    position: relative;
+    min-height: 52vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--load-nav-height) + 3rem) 2rem 3rem;
+    background-image: url('Study.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+ 
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.52);
+  }
+ 
+  .page-hero > * { position: relative; z-index: 1; }
+ 
+  .page-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(75,42,173,0.38);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    padding: 0.38rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+ 
+  .page-hero-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 600;
+    line-height: 0.95;
+    color: #fff !important;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+  }
+ 
+  .page-hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, #c4b5fd, #93c5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+ 
+  .page-hero-sub {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.88);
+    max-width: 520px;
+    line-height: 1.7;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  }
+ 
+  /* ── SECTION LABELS ── */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--load-lavender);
+    margin-bottom: 0.8rem;
+  }
+ 
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 22px; height: 0.5px;
+    background: var(--load-lavender);
+  }
+ 
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.05;
+    text-align: center;
+    margin-bottom: 0.6rem;
+    color: var(--load-ink);
+  }
+ 
+  .section-heading em { font-style: italic; color: var(--load-lavender); }
+ 
+  /* ── PEER TUTOR SECTION ── */
+  .tutor-section {
+    background: var(--load-surface-soft);
+    border-top: 1px solid var(--load-border);
+    border-bottom: 1px solid var(--load-border);
+    padding: 4rem 2rem;
+  }
+ 
+  .tutor-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+ 
+  .tutor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+ 
+  .tutor-card {
+    background: #fff;
+    border: 1px solid var(--load-border);
+    border-radius: var(--load-radius-lg);
+    padding: 1.8rem 1.4rem;
+    text-decoration: none;
+    color: var(--load-ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    box-shadow: var(--load-shadow-soft);
+  }
+ 
+  .tutor-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--load-border-strong);
+    box-shadow: var(--load-shadow);
+  }
+ 
+  .tutor-card-icon { font-size: 1.8rem; }
+ 
+  .tutor-card-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--load-ink);
+  }
+ 
+  .tutor-card-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--load-lavender);
+    background: var(--load-surface-soft);
+    padding: 0.22rem 0.7rem;
+    border-radius: 999px;
+    margin-top: auto;
+  }
+ 
+  .tutor-card-coming {
+    font-size: 0.78rem;
+    color: var(--load-muted);
+    font-style: italic;
+  }
+ 
+  /* ── TOOL SECTIONS ── */
+  .tools-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+ 
+  /* countdown */
+  .countdown-card {
+    background: linear-gradient(135deg, rgba(75,42,173,0.05), rgba(37,99,196,0.04));
+    border: 1px solid var(--load-border);
+    border-radius: var(--load-radius-lg);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+ 
+  .countdown-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    color: var(--load-ink);
+  }
+ 
+  .countdown-card p { color: var(--load-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+ 
+  .countdown-input-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .countdown-input-row input[type="date"] {
+    max-width: 240px;
+    border-radius: 999px !important;
+    text-align: center;
+    font-weight: 500;
+  }
+ 
+  #daysLeft {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--load-purple);
+    line-height: 1;
+    margin: 0.5rem 0 0.25rem;
+  }
+ 
+  #message { font-size: 0.95rem; color: var(--load-muted); }
+ 
+  /* timer */
+  .timer-card {
+    background: #fff;
+    border: 1px solid var(--load-border);
+    border-radius: var(--load-radius-lg);
+    box-shadow: var(--load-shadow-soft);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+ 
+  .timer-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    color: var(--load-ink);
+  }
+ 
+  .timer-card > p { color: var(--load-muted); font-size: 0.95rem; margin-bottom: 1.8rem; }
+ 
+  .mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+ 
+  .mode-buttons button {
+    min-height: 38px;
+    padding: 0.5rem 1.4rem;
+    background: var(--load-surface-soft) !important;
+    color: var(--load-muted) !important;
+    border-radius: 999px !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: none !important;
+    margin-top: 0;
+  }
+ 
+  .mode-buttons button.active {
+    background: linear-gradient(135deg, var(--load-purple), var(--load-blue)) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 16px rgba(75,42,173,0.22) !important;
+  }
+ 
+  .timer-circle {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--load-purple), var(--load-blue));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    animation: pulse-glow 2.5s infinite;
+    box-shadow: 0 12px 40px rgba(75,42,173,0.28);
+  }
+ 
+  @keyframes pulse-glow {
+    0%,100% { box-shadow: 0 12px 40px rgba(75,42,173,0.28); }
+    50%      { box-shadow: 0 12px 55px rgba(75,42,173,0.45); }
+  }
+ 
+  .mode-display { font-size: 0.95rem; font-weight: 500; opacity: 0.85; margin-bottom: 0.4rem; }
+  .timer-display { font-size: 2.8rem; font-weight: 700; letter-spacing: 0.04em; }
+ 
+  .timer-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 1.5rem auto 0;
+    text-align: left;
+  }
+ 
+  .timer-inputs label { font-size: 0.82rem; font-weight: 600; margin-top: 0; }
+  .timer-inputs input { border-radius: 999px !important; text-align: center; }
+ 
+  /* tools grid — tasks + topics */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+ 
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+ 
+  .tool-box {
+    background: #fff;
+    border: 1px solid var(--load-border);
+    border-radius: var(--load-radius-lg);
+    box-shadow: var(--load-shadow-soft);
+    padding: 2rem 1.6rem;
+  }
+ 
+  .tool-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+    color: var(--load-ink);
+  }
+ 
+  .tool-box > p { font-size: 0.88rem; color: var(--load-muted); margin-bottom: 1.2rem; }
+ 
+  .tool-box label { font-size: 0.82rem; font-weight: 600; margin-top: 0.8rem; color: var(--load-ink); }
+  .tool-box input, .tool-box select { border-radius: 999px !important; font-size: 0.9rem; }
+ 
+  .task-card {
+    background: var(--load-surface-soft);
+    border-left: 3px solid var(--load-purple);
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+ 
+  .task-card .delete-btn {
+    background: transparent !important;
+    color: #d9534f !important;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    min-height: auto;
+    margin-top: 0;
+    padding: 0;
+    box-shadow: none !important;
+  }
+ 
+  .priority-high  { border-left-color: #d9534f !important; }
+  .priority-medium{ border-left-color: #f0ad4e !important; }
+  .priority-low   { border-left-color: #28a745 !important; }
+ 
+  /* time block scheduler */
+  .scheduler-card {
+    background: #fff;
+    border: 1px solid var(--load-border);
+    border-radius: var(--load-radius-lg);
+    box-shadow: var(--load-shadow-soft);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+ 
+  .scheduler-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+    color: var(--load-ink);
+  }
+ 
+  .scheduler-card > p { font-size: 0.88rem; color: var(--load-muted); margin-bottom: 1.5rem; }
+ 
+  .scheduler-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 0.8rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .scheduler-form label { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; display: block; }
+  .scheduler-form input { border-radius: 999px !important; }
+ 
+  .block {
+    background: var(--load-surface-soft) !important;
+    border-left: 3px solid var(--load-lavender) !important;
+    border-radius: 6px !important;
+    padding: 0.8rem 1.2rem !important;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    box-shadow: none !important;
+  }
+ 
+  @media (max-width: 650px) {
+    .scheduler-form { grid-template-columns: 1fr; }
+    .page-hero-title { font-size: clamp(3rem, 14vw, 5rem); }
+  }
+</style>
+<script type="module" src="firebase-config.js"></script>
 </head>
-
 <body>
-
-<!-- NAVIGATION -->
+ 
+<!-- NAV -->
 <nav>
   <div class="logo">L.O.A.D.</div>
   <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
@@ -254,8 +436,8 @@
     <li id="authArea"></li>
   </ul>
 </nav>
-<div class="header-spacer"></div> 
-<!-- MOBILE SIDEBAR -->
+ 
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <a onclick="toggleSidebar()">✕ Close</a>
   <a href="index.html">Home</a>
@@ -269,193 +451,310 @@
   <div id="mobileAuthArea"></div>
   <li id="navUser"></li>
 </div>
-
-<!-- HERO -->
-  <header>
-    <img src="Study.png"style="width: 100%;">
-</header>
-
-<!-- PEER TUTOR SECTION -->
-<section class="peer-tutor-wrapper">
-  <aside class="side-nav">
-    <h2>Find Your Perfect Peer Tutor</h2>
-    <ul>
-      <li><a href="Tutoring.html">Botswana Accountancy College (BAC)</a></li>
-      <li><a href="#">University of Botswana (UB)</a></li>
-      <li><a href="#">BUIST</a></li>
-    </ul>
-  </aside>
-
-  <div class="peer-tutor-content">
-    <div class="peer-dropdown-wrapper">
-      <h2 style="color:#4b0082;">Find Your Perfect Peer Tutor</h2>
-      <select class="peer-dropdown" onchange="location=this.value;">
-        <option>Select University</option>
-        <option value="Tutoring.html">Botswana Accountancy College (BAC)</option>
-      </select>
+ 
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-badge">📚 Study Tools</div>
+  <h1 class="page-hero-title">Study &<br><em>Peer Tutoring</em></h1>
+  <p class="page-hero-sub">Tools that actually help you take action — not just read about it.</p>
+</section>
+ 
+<!-- PEER TUTOR -->
+<div class="tutor-section">
+  <div class="tutor-inner">
+    <div class="eyebrow">Find support</div>
+    <h2 class="section-heading">Find Your Perfect<br><em>Peer Tutor</em></h2>
+    <p class="section-sub">Connect with tutors from your institution and get real academic support.</p>
+    <div class="tutor-grid">
+      <a href="Tutoring.html" class="tutor-card">
+        <div class="tutor-card-icon">🎓</div>
+        <div class="tutor-card-name">Botswana Accountancy College</div>
+        <div class="tutor-card-label">BAC — Available</div>
+      </a>
+      <div class="tutor-card" style="opacity:0.6; cursor:default;">
+        <div class="tutor-card-icon">🏛️</div>
+        <div class="tutor-card-name">University of Botswana</div>
+        <div class="tutor-card-coming">Coming soon</div>
+      </div>
+      <div class="tutor-card" style="opacity:0.6; cursor:default;">
+        <div class="tutor-card-icon">💻</div>
+        <div class="tutor-card-name">BUIST</div>
+        <div class="tutor-card-coming">Coming soon</div>
+      </div>
     </div>
   </div>
-
-
+</div>
+ 
 <!-- TOOLS -->
-<section id="tools">
-  <h2>Effective study methods include more than just tips — they require tools that help you take action.</h2>
-  <p><b>I created these tools because I was tired of just hearing advice — I wanted something that actually helps.</b></p>
-
+<div class="tools-section">
+ 
+  <div class="eyebrow" style="margin-bottom:0.8rem;">Study tools</div>
+  <h2 class="section-heading" style="margin-bottom:3rem;">Work smarter,<br><em>not harder.</em></h2>
+ 
   <!-- REVISION COUNTDOWN -->
-  <h1>Revision Countdown</h1>
-  <input type="date" id="examDate" />
-  <div id="daysLeft">Enter your exam date ⏳</div>
-  <div id="message"></div>
-
-  <!-- TIMER TOOL -->
-  <div class="timer-container">
-    <h1>🕒 Focus Session Timer</h1>
-    <p>Work with focus. Rest with intention.</p>
-
-    <div class="mode-buttons">
-      <button id="focusModeBtn" class="active">Focus</button>
-      <button id="breakModeBtn">Break</button>
+  <div class="countdown-card">
+    <h3>⏳ Revision Countdown</h3>
+    <p>Set your exam date and stay ahead of the deadline.</p>
+    <div class="countdown-input-row">
+      <input type="date" id="examDate" />
     </div>
-
+    <div id="daysLeft">Enter your exam date above</div>
+    <div id="message"></div>
+  </div>
+ 
+  <!-- FOCUS TIMER -->
+  <div class="timer-card">
+    <h3>🕑 Focus Session Timer</h3>
+    <p>Work with focus. Rest with intention.</p>
+    <div class="mode-buttons">
+      <button id="focusModeBtn" class="active" onclick="setMode('focus')">Focus</button>
+      <button id="breakModeBtn" onclick="setMode('break')">Break</button>
+    </div>
     <div class="timer-circle">
       <div class="mode-display" id="mode">Focus Time</div>
       <div class="timer-display" id="timer">25:00</div>
     </div>
-
-    <div class="buttons">
+    <div class="hero-actions" style="margin-bottom:1rem;">
       <button onclick="startTimer()">▶ Start</button>
-      <button onclick="pauseTimer()">⏸ Pause</button>
-      <button onclick="resetTimer()">⟲ Reset</button>
+      <button onclick="pauseTimer()" style="background: var(--load-surface-soft) !important; color: var(--load-ink) !important; box-shadow: none !important;">⏸ Pause</button>
+      <button onclick="resetTimer()" style="background: var(--load-surface-soft) !important; color: var(--load-ink) !important; box-shadow: none !important;">↺ Reset</button>
     </div>
-
-    <div class="inputs">
-      <label>Focus Time (minutes):
+    <div class="timer-inputs">
+      <div>
+        <label>Focus (min)</label>
         <input type="number" id="focusMinutes" value="25" min="1" />
-      </label>
-      <label>Break Time (minutes):
+      </div>
+      <div>
+        <label>Break (min)</label>
         <input type="number" id="breakMinutes" value="5" min="1" />
-      </label>
+      </div>
     </div>
   </div>
-
-  <audio id="alarmSound"
-    src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"
-    preload="auto"></audio>
-
-  <!-- PRIORITY TASK LIST -->
-  <h1>Priority Task List</h1>
-  <form id="taskForm">
-    <label>Task Name:</label>
-    <input type="text" id="taskName" required>
-
-    <label>Priority:</label>
-    <select id="priority">
-      <option value="high">🔴 High</option>
-      <option value="medium">🟡 Medium</option>
-      <option value="low">🟢 Low</option>
-    </select>
-
-    <button type="submit">Add Task</button>
-  </form>
-  <div id="taskList"></div>
-
-  <!-- TOPIC ALLOCATOR -->
-  <div class="topic-container">
-    <h1>Topic Allocator</h1>
-    <form id="topicForm">
-      <label>Topic Name:</label>
-      <input type="text" id="topic" required>
-
-      <label>Time to Study (minutes):</label>
-      <input type="number" id="time" required>
-
-      <label>Marks in Exam:</label>
-      <input type="number" id="marks" required>
-
-      <button type="submit">Add Topic</button>
-    </form>
-
-    <div id="topicList"></div>
-    <p id="totalTimeDisplay" class="summary"></p>
+ 
+  <audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" preload="auto"></audio>
+ 
+  <!-- TASKS + TOPICS -->
+  <div class="two-col">
+ 
+    <!-- Priority Task List -->
+    <div class="tool-box">
+      <h3>Priority Task List</h3>
+      <p>Add tasks and rank them by urgency.</p>
+      <form id="taskForm">
+        <label>Task Name</label>
+        <input type="text" id="taskName" placeholder="e.g. Read Chapter 4" required />
+        <label>Priority</label>
+        <select id="priority">
+          <option value="high">🔴 High</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="low">🟢 Low</option>
+        </select>
+        <button type="submit">Add Task</button>
+      </form>
+      <div id="taskList"></div>
+    </div>
+ 
+    <!-- Topic Allocator -->
+    <div class="tool-box">
+      <h3>Topic Allocator</h3>
+      <p>Assign study time by exam marks weighting.</p>
+      <form id="topicForm">
+        <label>Topic Name</label>
+        <input type="text" id="topic" placeholder="e.g. Macroeconomics" required />
+        <label>Time to Study (minutes)</label>
+        <input type="number" id="time" placeholder="60" required />
+        <label>Marks in Exam</label>
+        <input type="number" id="marks" placeholder="20" required />
+        <button type="submit">Add Topic</button>
+      </form>
+      <div id="topicList"></div>
+      <p id="totalTimeDisplay" style="font-weight:700; color:var(--load-purple); margin-top:0.8rem; font-size:0.92rem;"></p>
+    </div>
+ 
   </div>
-
+ 
   <!-- TIME BLOCK SCHEDULER -->
-  <h1>Time Block Scheduler</h1>
-  <form id="timeBlockForm">
-    <label>Task:</label>
-    <input type="text" id="blockTask" required>
-
-    <label>Start Time:</label>
-    <input type="time" id="startTime" required>
-
-    <label>End Time:</label>
-    <input type="time" id="endTime" required>
-
-    <button type="submit">Add Block</button>
-  </form>
-
-  <div id="schedule"></div>
-</section>
-</section>
-<footer>© 2025 Life On A Deadline. Built with action.</footer>
-
-<!-- MAKE SURE THIS STAYS HERE -->
+  <div class="scheduler-card">
+    <h3>🗓 Time Block Scheduler</h3>
+    <p>Plan your day in focused blocks. Own your schedule.</p>
+    <div class="scheduler-form">
+      <div>
+        <label>Task</label>
+        <input type="text" id="blockTask" placeholder="e.g. Study Statistics" required />
+      </div>
+      <div>
+        <label>Start Time</label>
+        <input type="time" id="startTime" required />
+      </div>
+      <div>
+        <label>End Time</label>
+        <input type="time" id="endTime" required />
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button onclick="addBlockManual()" style="margin-top:0; width:100%; border-radius:999px !important;">Add Block</button>
+      </div>
+    </div>
+    <div id="schedule"></div>
+  </div>
+ 
+</div><!-- /tools-section -->
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">L.O.A.D.</div>
+  <span style="font-size:0.8rem; opacity:0.6;">© 2026 Life On A Deadline. Built with action.</span>
+  <ul class="footer-links">
+    <li><a href="aboutme.html">About</a></li>
+    <li><a href="contact.html">Feedback</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+</footer>
+ 
+<!-- FLOATING CHAT -->
+<button id="customChatBtn">💬 Chat with<br>L.O.A.D. AI</button>
+ 
+<!-- SCRIPTS -->
 <script type="module" src="javascript.js"></script>
-
+ 
 <script>
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('active');
 }
+ 
+function addBlockManual() {
+  const task = document.getElementById('blockTask').value.trim();
+  const start = document.getElementById('startTime').value;
+  const end = document.getElementById('endTime').value;
+  if (!task || !start || !end) return;
+  const div = document.createElement('div');
+  div.className = 'block';
+  div.innerHTML = `<span><strong>${start} – ${end}</strong> &nbsp; ${task}</span>
+    <button class="delete-btn" onclick="this.parentElement.remove()" style="background:transparent!important;color:#d9534f!important;border:none;cursor:pointer;min-height:auto;margin-top:0;padding:0;box-shadow:none!important;font-size:1rem;">✕</button>`;
+  document.getElementById('schedule').appendChild(div);
+  document.getElementById('blockTask').value = '';
+  document.getElementById('startTime').value = '';
+  document.getElementById('endTime').value = '';
+}
+ 
+// Timer
+let timerInterval, timeLeft = 25*60, isRunning = false, currentMode = 'focus';
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('focusModeBtn').classList.toggle('active', mode==='focus');
+  document.getElementById('breakModeBtn').classList.toggle('active', mode==='break');
+  resetTimer();
+}
+function startTimer() {
+  if (isRunning) return;
+  isRunning = true;
+  timerInterval = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval); isRunning = false;
+      document.getElementById('alarmSound').play();
+      return;
+    }
+    timeLeft--;
+    updateTimerDisplay();
+  }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); isRunning = false; }
+function resetTimer() {
+  clearInterval(timerInterval); isRunning = false;
+  const mins = currentMode === 'focus'
+    ? parseInt(document.getElementById('focusMinutes').value) || 25
+    : parseInt(document.getElementById('breakMinutes').value) || 5;
+  timeLeft = mins * 60;
+  document.getElementById('mode').textContent = currentMode === 'focus' ? 'Focus Time' : 'Break Time';
+  updateTimerDisplay();
+}
+function updateTimerDisplay() {
+  const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+  const s = String(timeLeft%60).padStart(2,'0');
+  document.getElementById('timer').textContent = `${m}:${s}`;
+}
+ 
+// Exam countdown
+document.getElementById('examDate').addEventListener('change', function() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const exam = new Date(this.value);
+  const diff = Math.ceil((exam - today) / (1000*60*60*24));
+  const el = document.getElementById('daysLeft');
+  const msg = document.getElementById('message');
+  if (diff < 0) { el.textContent = 'Exam has passed'; msg.textContent = ''; }
+  else if (diff === 0) { el.textContent = '0'; msg.textContent = "It's exam day! You've got this 💪"; }
+  else { el.textContent = diff; msg.textContent = `day${diff!==1?'s':''} until your exam`; }
+});
+ 
+// Task list
+document.getElementById('taskForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('taskName').value.trim();
+  const priority = document.getElementById('priority').value;
+  if (!name) return;
+  const div = document.createElement('div');
+  div.className = `task-card priority-${priority}`;
+  const icons = { high:'🔴', medium:'🟡', low:'🟢' };
+  div.innerHTML = `<span>${icons[priority]} ${name}</span>
+    <button class="delete-btn" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('taskList').appendChild(div);
+  document.getElementById('taskName').value = '';
+});
+ 
+// Topic allocator
+document.getElementById('topicForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const topic = document.getElementById('topic').value.trim();
+  const time = parseInt(document.getElementById('time').value);
+  const marks = parseInt(document.getElementById('marks').value);
+  if (!topic || !time || !marks) return;
+  const div = document.createElement('div');
+  div.className = 'task-card';
+  div.style.borderLeftColor = 'var(--load-lavender)';
+  div.innerHTML = `<span><strong>${topic}</strong> — ${time} min &nbsp;·&nbsp; ${marks} marks</span>
+    <button class="delete-btn" onclick="this.parentElement.remove(); updateTotal()">✕</button>`;
+  document.getElementById('topicList').appendChild(div);
+  document.getElementById('topic').value = '';
+  document.getElementById('time').value = '';
+  document.getElementById('marks').value = '';
+  updateTotal();
+});
+function updateTotal() {
+  const cards = document.querySelectorAll('#topicList .task-card');
+  let total = 0;
+  cards.forEach(c => {
+    const match = c.textContent.match(/(\d+) min/);
+    if (match) total += parseInt(match[1]);
+  });
+  document.getElementById('totalTimeDisplay').textContent = total > 0 ? `Total study time: ${total} minutes` : '';
+}
 </script>
-
-
-<!-- FIREBASE AUTH + UI -->
+ 
+<!-- FIREBASE AUTH -->
 <script type="module">
 import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
+ 
 const authArea = document.getElementById("authArea");
 const navUser = document.getElementById("navUser");
 const mobileAuthArea = document.getElementById("mobileAuthArea");
-
+ 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     let displayName = user.email.split("@")[0];
-
-    // Load or create Firestore profile
     try {
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
-
       if (!snap.exists()) {
-        await setDoc(ref, {
-          email: user.email,
-          name: displayName,
-          joinedAt: new Date(),
-        });
-      } else {
-        displayName = snap.data().name || displayName;
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
-    authArea.innerHTML = `<span>${displayName}</span> <a href="#" id="logoutBtn">Logout</a>`;
-    mobileAuthArea.innerHTML = `<span>${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
+        await setDoc(ref, { email: user.email, name: displayName, joinedAt: new Date() });
+      } else { displayName = snap.data().name || displayName; }
+    } catch(e) { console.error(e); }
+    authArea.innerHTML = `<span style="font-weight:600; color:var(--load-purple);">Hi, ${displayName}</span> &nbsp;<a href="#" id="logoutBtn" style="font-size:0.8rem;">Logout</a>`;
+    mobileAuthArea.innerHTML = `<span style="font-weight:600;">${displayName}</span><br><a href="#" id="mobileLogoutBtn">Logout</a>`;
     navUser.textContent = displayName;
-
-    document.getElementById("logoutBtn").onclick = async (e) => {
-      e.preventDefault();
-      await signOut(auth);
-    };
-
-    document.getElementById("mobileLogoutBtn").onclick = async (e) => {
-      e.preventDefault();
-      await signOut(auth);
-    };
-
+    document.getElementById("logoutBtn").onclick = async(e) => { e.preventDefault(); await signOut(auth); };
+    document.getElementById("mobileLogoutBtn").onclick = async(e) => { e.preventDefault(); await signOut(auth); };
   } else {
     authArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
     mobileAuthArea.innerHTML = `<a href="login.html">Login</a> / <a href="signup.html">Sign Up</a>`;
@@ -463,51 +762,24 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 </script>
-
+ 
 <!-- CHATBASE -->
-<button id="customChatBtn" style="
-  position: fixed; bottom: 20px; right: 20px;
-  background: linear-gradient(135deg,#6a0dad,#c74aac);
-  color:white; border:none; padding:12px 20px;
-  border-radius:30px; font-size:14px; cursor:pointer; z-index:9999;">
-  💬 Chat with<br>L.O.A.D AI
-</button>
-
 <script type="module">
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-
 let loaded = false;
 const btn = document.getElementById("customChatBtn");
-
 onAuthStateChanged(auth, (user) => {
   btn.onclick = () => {
-    if (!user) {
-      alert("Please log in to use the L.O.A.D AI Assistant 💜");
-      return;
-    }
-
+    if (!user) { alert("Please log in to use the L.O.A.D AI Assistant 💜"); return; }
     if (!loaded) {
-      window.chatbaseConfig = {
-        chatbotId: "czT4oi2tu5sm0RW2n0-iC",
-        welcomeMessage: "Welcome to L.O.A.D! How can I help you today?"
-      };
-
-      const s = document.createElement("script");
-      s.src = "https://www.chatbase.co/embed.min.js";
-      s.defer = true;
-      document.body.appendChild(s);
-
-      loaded = true;
-      setTimeout(() => btn.style.display = "none", 1000);
-
-    } else {
-      const bubble = document.querySelector(".chatbase-bubble");
-      if (bubble) bubble.click();
-    }
+      window.chatbaseConfig = { chatbotId: "czT4oi2tu5sm0RW2n0-iC", welcomeMessage: "Welcome to L.O.A.D! How can I help you today?" };
+      const s = document.createElement("script"); s.src = "https://www.chatbase.co/embed.min.js"; s.defer = true; document.body.appendChild(s);
+      loaded = true; setTimeout(() => btn.style.display = "none", 1000);
+    } else { const bubble = document.querySelector(".chatbase-bubble"); if (bubble) bubble.click(); }
   };
 });
 </script>
-
+ 
 </body>
 </html>
